@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Keychain 浅析 | LvCode&#39;s Blog</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="LvCode's Blog">
+    <meta name="author" content="Lv Qiang">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="LvCode&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">LvCode's Blog</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/lvcode" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="https://weibo.com/1759677427/profile?rightmod=1&wvr=6&mod=personinfo" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-01-11T05:51:37.000Z" itemprop="datePublished">
+          2018-01-11
+      </time>
+    
+</span>
+                <h1>Keychain 浅析</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h3 id="什么是Keychain"><a href="#什么是Keychain" class="headerlink" title="什么是Keychain?"></a>什么是Keychain?</h3><p>根据苹果的介绍，iOS设备中的Keychain是一个安全的存储容器，可以用来为不同应用保存敏感信息比如用户名，密码，网络密码，认证令牌。苹果自己用keychain来保存Wi-Fi网络密码，VPN凭证等等。它是一个在所有app之外的sqlite数据库。</p>
+<p>如果我们手动把自己的私密信息加密，然后通过写文件保存在本地，再从本地取出不仅麻烦，而且私密信息也会随着App的删除而丢失。iOS的Keychain能完美的解决这些问题。并且从iOS 3.0开始，Keychain还支持跨程序分享。这样就极大的方便了用户。省去了很多要记忆密码的烦恼。</p>
+<h3 id="Structure-of-a-Keychain"><a href="#Structure-of-a-Keychain" class="headerlink" title="Structure of a Keychain"></a>Structure of a Keychain</h3><p>Keychain内部可以保存很多的信息。每条信息作为一个单独的keychain item，keychain item一般为一个字典，每条keychain item包含一条data和很多attributes。举个例子，一个用户账户就是一条item，用户名可以作为一个attribute , 密码就是data。 keychain虽然是可以保存15000条item,每条50个attributes，但是苹果工程师建议最好别放那么多，存几千条密码，几千字节没什么问题。</p>
+<p>Keychain 可以包含任意数量的 keychain item。每一个 keychain item 包含数据和一组属性。对于一个需要保护的 keychain item，比如密码或者私钥（用于加密或者解密的string字节）数据是加密的，会被 keychain 保护起来的；对于无需保护的 keychain item，例如，证书，数据未被加密。</p>
+<p>跟keychain item有关系的取决于item的类型；应用程序中最常用的是网络密码（Internet passwrods）和普通的密码。正如你所想的，网络密码像安全域（security domain）、协议、和路径等一些属性。在OSX中，当keychain被锁的时候加密的item没办法访问，如果你想要该问被锁的item，就会弹出一个对话框，需要你输入对应keychain的密码。当然，未有密码的keychain你可以随时访问。但在iOS中，你只可以访问你自已的keychain items;</p>
+<pre><code>
+extern CFTypeRef kSecClassGenericPassword
+extern CFTypeRef kSecClassInternetPassword
+extern CFTypeRef kSecClassCertificate
+extern CFTypeRef kSecClassKey
+extern CFTypeRef kSecClassIdentity OSX_AVAILABLE_STARTING(MAC_10_7, __IPHONE_2_0);
+</code></pre>
+
+<h3 id="Keychain的特点"><a href="#Keychain的特点" class="headerlink" title="Keychain的特点"></a>Keychain的特点</h3><ul>
+<li>数据并不存放在App的Sanbox中，即使删除了App，资料依然保存在keychain中。如果重新安装了app，还可以从keychain获取数据。</li>
+<li>keychain的数据可以用过group方式，让程序可以在App间共享。不过得要相同TeamID</li>
+<li>keychain的数据是经过加密的</li>
+</ul>
+<h3 id="Keychain的使用"><a href="#Keychain的使用" class="headerlink" title="Keychain的使用"></a>Keychain的使用</h3><p>大多数iOS应用需要用到Keychain， 都用来添加一个密码，修改一个已存在Keychain item或者取回密码。Keychain提供了以下的操作</p>
+<ul>
+<li>SecItemAdd 添加一个item</li>
+<li>SecItemUpdate 更新已存在的item</li>
+<li>SecItemCopyMatching 搜索一个已存在的item</li>
+<li>SecItemDelete 删除一个keychain item</li>
+</ul>
+<h5 id="根据特定的Service创建一个用于操作KeyChain的Dictionary"><a href="#根据特定的Service创建一个用于操作KeyChain的Dictionary" class="headerlink" title="根据特定的Service创建一个用于操作KeyChain的Dictionary"></a>根据特定的Service创建一个用于操作KeyChain的Dictionary</h5><pre><code>
+
++ (NSMutableDictionary *)keyChainQueryDictionaryWithService:(NSString *)service{
+NSMutableDictionary *keyChainQueryDictaionary = [[NSMutableDictionary alloc]init];
+[keyChainQueryDictaionary setObject:(id)kSecClassGenericPassword forKey:(id)kSecClass];
+[keyChainQueryDictaionary setObject:service forKey:(id)kSecAttrService];
+[keyChainQueryDictaionary setObject:service forKey:(id)kSecAttrAccount];
+return keyChainQueryDictaionary;
+}
+
+</code></pre>
+
+<h5 id="添加数据"><a href="#添加数据" class="headerlink" title="添加数据"></a>添加数据</h5><pre><code>
+
++ (BOOL)addData:(id)data forService:(NSString *)service{
+NSMutableDictionary *keychainQuery = [self keyChainQueryDictionaryWithService:service];
+SecItemDelete((CFDictionaryRef)keychainQuery);
+[keychainQuery setObject:[NSKeyedArchiver archivedDataWithRootObject:data] forKey:(id)kSecValueData];
+OSStatus status= SecItemAdd((CFDictionaryRef)keychainQuery, NULL);
+if (status == noErr) {
+return YES;
+}
+return NO;
+}
+
+</code></pre>
+
+<h5 id="搜索数据"><a href="#搜索数据" class="headerlink" title="搜索数据"></a>搜索数据</h5><pre><code>
++ (id)queryDataWithService:(NSString *)service {
+id result;
+NSMutableDictionary *keyChainQuery = [self keyChainQueryDictionaryWithService:service];
+[keyChainQuery setObject:(id)kCFBooleanTrue forKey:(id)kSecReturnData];
+[keyChainQuery setObject:(id)kSecMatchLimitOne forKey:(id)kSecMatchLimit];
+CFDataRef keyData = NULL;
+if (SecItemCopyMatching((CFDictionaryRef)keyChainQuery, (CFTypeRef *)&keyData) == noErr) {
+@try {
+result = [NSKeyedUnarchiver  unarchiveObjectWithData:(__bridge NSData *)keyData];
+}
+@catch (NSException *exception) {
+NSLog(@"不存在数据");
+}
+@finally {
+
+}
+}
+if (keyData) {
+CFRelease(keyData);
+}
+return result;
+}
+
+</code></pre>
+
+<h5 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h5><pre><code>
++ (BOOL)updateData:(id)data forService:(NSString *)service{
+NSMutableDictionary *searchDictionary = [self keyChainQueryDictionaryWithService:service];
+
+if (!searchDictionary) {
+return NO;
+}
+
+NSMutableDictionary *updateDictionary = [[NSMutableDictionary alloc] init];
+[updateDictionary setObject:[NSKeyedArchiver archivedDataWithRootObject:data] forKey:(id)kSecValueData];
+OSStatus status = SecItemUpdate((CFDictionaryRef)searchDictionary,
+(CFDictionaryRef)updateDictionary);
+if (status == errSecSuccess) {
+return YES;
+}
+return NO;
+}
+
+</code></pre>
+
+<h5 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h5><pre><code>
++ (BOOL)deleteDataWithService:(NSString *)service{
+NSMutableDictionary *keyChainDictionary = [self keyChainQueryDictionaryWithService:service];
+OSStatus status = SecItemDelete((CFDictionaryRef)keyChainDictionary);
+if (status == noErr) {
+return YES;
+}
+return NO;
+}
+
+</code></pre>
+
+<h3 id="Keychain-共享数据"><a href="#Keychain-共享数据" class="headerlink" title="Keychain 共享数据"></a>Keychain 共享数据</h3><p>在工程中 Target -&gt; Capabilities -&gt; Keychain Groups。打开这个选项。</p>
+<p>Keychain通过provisioning profile来区分不同的应用，provisioning文件内含有应用的bundle id和添加的access groups。不同的应用是完全无法访问其他应用保存在Keychain的信息，除非指定了同样的access group。指定了同样的group名称后，不同的应用间就可以分享保存在Keychain内的信息。</p>
+<h3 id="Keychain-Access-Group的使用方法："><a href="#Keychain-Access-Group的使用方法：" class="headerlink" title="Keychain Access Group的使用方法："></a>Keychain Access Group的使用方法：</h3><ol>
+<li><p>首先要在Capabilities下打开工程的Keychain Sharing按钮。然后需要分享Keychain的不同应用添 加相同的Group名称。Xcode6以后Group可以随便命名，不需要加AppIdentifierPrefix前缀，并且Xcode会在以entitlements结尾的文件内自动添加所有Group名称，然后在每一个Group前自动加上$(AppIdentifierPrefix)前缀。虽然文档内提到还需要添加一个包含group的.plist文件，其实它和.entitlements文件是同样的作用，所以不需要重复添加。 但是每个不同的应用第一条Group最好以自己的bundleID命名，因为如果entitlements文件内已经有Keychain Access Groups数组后item的Group属性默认就为数组内的第一条Grop。</p>
+</li>
+<li><p>需要支持跨设备分享的Keychain item添加一条AccessGroup属性,不过代码里Group名称一定要加上AppIdentifierPrefix前缀。 [searchDictionary setObject:@“AppIdentifierPrefix.UC.testWriteKeychainSuit” forKey:(id)kSecAttrAccessGroup];如果要在app内部存私有的信息，group置为自己的bundleID即可，如果entitlements文件内没有指定Keychain Access Groups数组。那group也可以置为nil，这样默认也会以自己的bundleID作为Group。<br>3.</p>
+<h3 id="Keychain的安全性"><a href="#Keychain的安全性" class="headerlink" title="Keychain的安全性"></a>Keychain的安全性</h3></li>
+</ol>
+<p>Keychain内部的数据会自动加密。如果设备没有越狱并且不暴力破解，keychain确实很安全。但是越狱后的设备，keychain就很危险了。</p>
+<p>通过上面的一些信息我们已经知道访问keychain里面的数据需要和app一样的证书或者获得access group的名称。设备越狱后相当于对苹果做签名检查的地方打了个补丁，伪造一个证书的app也能正常使用，并且加上Keychain Dumper这些工具获取Keychain内的信息会非常容易。</p>
+<h3 id="使用keychain需要注意的问题"><a href="#使用keychain需要注意的问题" class="headerlink" title="使用keychain需要注意的问题"></a>使用keychain需要注意的问题</h3><ol>
+<li>当我们不支持Keychain Access Group，并且没有entitlement文件时，keychain默认以bundle id为group。如果我们在版本更新的时候改变了bundle id，那么新版本就访问不了旧版本的keychain信息了。解决办法是从一开始我们就打开KeychainSharing，添加Keychain Access Group，并且指定每条keychain Item的group，私有的信息就指定app的bundle id为它的group。</li>
+<li>代码内Access group名称一定要有AppIdentifierPrefix前缀。</li>
+<li>Keychain是基于数据库存储，不允许添加重复的条目。所以每条item都必须指定对应的唯一标识符也就是那些主要的key，如果Key指定不正确，可能会出现添加后查找不到的问题。</li>
+<li>kSecAttrSynchronizable也会作为主要的key之一。它的value值默认为No，如果之前添加的item此条属性为YES，在搜索，更新，删除的时候必须添加此条属性才能查找到之前添加的item。</li>
+<li>Kechain item字典内添加自定义key时会出现参数不合法的错误。</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>keychain 是一个很有用的工具，我们可以在保存密码或者证书的时候使用keychain，并且支持不同应用分享Keychain内的信息，或者支持iCloud备份跨设备分享，但是越狱版应用还是不建议使用</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2017/12/20/精装修验房注意事项汇总/">
+        精装修验房注意事项汇总 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Lv Qiang. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran</a></p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/lvcode" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://weibo.com/1759677427/profile?rightmod=1&wvr=6&mod=personinfo" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

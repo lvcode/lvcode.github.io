@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>开发技巧Tips | LvCode&#39;s Blog</title>
+  <title>Archives: 2018/2 | LvCode&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="post-template">
+<body class="home-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -166,53 +166,69 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      
-<section id="intro">
-    <div class="container">
-        <div class="row col-md-offset-2">
-            <div class="col-md-8">
-    			<span class="post-meta">
-      <time datetime="2018-01-25T09:27:25.000Z" itemprop="datePublished">
-          2018-01-25
-      </time>
-    
-</span>
-                <h1>开发技巧Tips</h1>
+      <!-- ============================ Hero Image =========================== -->
+
+<section id="hero" class="scrollme">
+    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                    <div>
+                        
+                        <h2></h2>
+                        <p></p>
+                        
+                        <h2></h2>
+                        <p></p>
+                        
+
+                    </div>
+                </div>
             </div>
+            <!-- // .col-md-12 -->
         </div>
-        <div class="col-md-8 col-md-offset-2">
-      		<h3 id="1、继承自UIScrollView-键盘"><a href="#1、继承自UIScrollView-键盘" class="headerlink" title="1、继承自UIScrollView 键盘"></a>1、继承自UIScrollView 键盘</h3><p>typedef NS_ENUM(NSInteger, UIScrollViewKeyboardDismissMode) {<br>UIScrollViewKeyboardDismissModeNone,<br>UIScrollViewKeyboardDismissModeOnDrag,      // dismisses the keyboard when a drag begins  拖拽时隐藏键盘<br>UIScrollViewKeyboardDismissModeInteractive, // the keyboard follows the dragging touch off screen, and may be pulled upward again to cancel the dismiss  表示键盘可以随着手指下滑而移出屏幕。<br>} NS_ENUM_AVAILABLE_IOS(7_0);</p>
-<h4 id="例："><a href="#例：" class="headerlink" title="例："></a>例：</h4><p>tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;<br>其中keyboardDismissMode是UIScrollView的属性,</p>
-<h3 id="2、按钮图片和文字位置"><a href="#2、按钮图片和文字位置" class="headerlink" title="2、按钮图片和文字位置"></a>2、按钮图片和文字位置</h3><p>默认情况下，是图片在左，文字在右，垂直居中显示，如下图：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">button.titleEdgeInsets = UIEdgeInsetsZero;</span><br><span class="line">button.imageEdgeInsets = UIEdgeInsetsZero;</span><br></pre></td></tr></table></figure></p>
-<p>设置如下布局后，图片和文字都居中显示。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">button.titleEdgeInsets = UIEdgeInsetsMake(0, -button.imageView.frame.size.width, 0, 0);</span><br><span class="line">// button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -button.titleLabel.frame.size.width);</span><br><span class="line">// 由于iOS8中titleLabel的size为0，用上面这样设置有问题，修改一下即可</span><br><span class="line">button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -button.titleLabel.intrinsicContentSize.width);</span><br></pre></td></tr></table></figure></p>
-<p>如果想图片在上，文字在下，水平居中显示，则按下面设置即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">button.titleEdgeInsets = UIEdgeInsetsMake(0, -button.imageView.frame.size.width, -button.imageView.frame.size.height, 0);</span><br><span class="line">// button.imageEdgeInsets = UIEdgeInsetsMake(-button.titleLabel.frame.size.height, 0, 0, -button.titleLabel.frame.size.width);</span><br><span class="line">// 由于iOS8中titleLabel的size为0，用上面这样设置有问题，修改一下即可</span><br><span class="line">button.imageEdgeInsets = UIEdgeInsetsMake(-button.titleLabel.intrinsicContentSize.height, 0, 0, -button.titleLabel.intrinsicContentSize.width);</span><br></pre></td></tr></table></figure></p>
-<p>如果觉得图片和文字离的太近了，稍微分开一点：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CGFloat offset = 40.0f;</span><br><span class="line">button.titleEdgeInsets = UIEdgeInsetsMake(0, -button.imageView.frame.size.width, -button.imageView.frame.size.height-offset/2, 0);</span><br><span class="line">// button.imageEdgeInsets = UIEdgeInsetsMake(-button.titleLabel.frame.size.height-offset/2, 0, 0, -button.titleLabel.frame.size.width);</span><br><span class="line">// 由于iOS8中titleLabel的size为0，用上面这样设置有问题，修改一下即可</span><br><span class="line">button.imageEdgeInsets = UIEdgeInsetsMake(-button.titleLabel.intrinsicContentSize.height-offset/2, 0, 0, -button.titleLabel.intrinsicContentSize.width);</span><br></pre></td></tr></table></figure></p>
-<p>文字左对齐，图片右对齐<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">button.titleEdgeInsets = UIEdgeInsetsMake(0, -button.imageView.frame.size.width - button.frame.size.width + button.titleLabel.intrinsicContentSize.width, 0, 0);</span><br><span class="line">button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -button.titleLabel.frame.size.width - button.frame.size.width + button.imageView.frame.size.width);</span><br></pre></td></tr></table></figure></p>
-
-            <div class="clearfix"></div>
-            <hr class="nogutter">
-        </div>
-        <nav class="pagination" role="pagination">
-    
-    <a class="pull-left" href="/2018/02/27/基础知识点汇总/" style="float: left;">
-        ← “基础知识点汇总”
-    </a>
-    
-    
-    <a class="pull-right" href="/2018/01/16/有种问候是我想知道你过得不好/">
-        有种问候叫做知道你过得不好，我也就放心了 →
-    </a>
-    
-</nav>
-
-        <div class="duoshuo">
-
-
-</div>
+        <div class="herofade beige-dk"></div>
     </div>
 </section>
 
+<!-- Height spacing helper -->
+<div class="heightblock"></div>
+<!-- // End height spacing helper -->
 
+<!-- ============================ END Hero Image =========================== -->
+
+
+
+
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row boxes">
+                    
+                    
+                        
+                        
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
+                            
+                              <h4 class="title"><a href="/2018/02/27/基础知识点汇总/">“基础知识点汇总”</a></h4>
+                            
+                            <p><time datetime="2018-02-27T04:54:32.000Z"><a href="/2018/02/27/基础知识点汇总/">2018-02-27</a></time></p>
+                        </div>
+                    
+                </div>
+            </div>    
+        </div>
+    </div>
+</section> 
+
+<section id="statement">
+    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
+        <div class="row">
+            <p>~ 别拉，疼，我也是有底线的 ~</p>
+        </div>
+    </div>
+</section>
       
 <!-- ============================ Footer =========================== -->
 

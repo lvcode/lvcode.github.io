@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Archives: 2016 | LvCode&#39;s Blog</title>
+  <title>nonatomic的区别 | LvCode&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -166,108 +166,76 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2></h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p></p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/12/08/设计模式的七大原则/">设计模式的七大原则</a></h4>
-                            
-                            <p><time datetime="2016-12-08T06:47:00.000Z"><a href="/2016/12/08/设计模式的七大原则/">2016-12-08</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/03/06/nonatomic的区别/">nonatomic的区别</a></h4>
-                            
-                            <p><time datetime="2016-03-06T02:47:05.000Z"><a href="/2016/03/06/nonatomic的区别/">2016-03-06</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/02/27/基础知识点汇总/">基础知识点汇总</a></h4>
-                            
-                            <p><time datetime="2016-02-27T04:54:32.000Z"><a href="/2016/02/27/基础知识点汇总/">2016-02-27</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/02/06/KVC、KVO/">KVC、KVO</a></h4>
-                            
-                            <p><time datetime="2016-02-06T06:22:19.000Z"><a href="/2016/02/06/KVC、KVO/">2016-02-06</a></time></p>
-                        </div>
-                    
-                        
-                            </div><div class="row boxes">
-                            
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/01/10/多线程/">多线程</a></h4>
-                            
-                            <p><time datetime="2016-01-10T03:32:32.000Z"><a href="/2016/01/10/多线程/">2016-01-10</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-03-06T02:47:05.000Z" itemprop="datePublished">
+          2016-03-06
+      </time>
+    
+</span>
+                <h1>nonatomic的区别</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<p>在默认情况下，由于编译器所合成的方法会通过锁定机制确保其原子性（atomicity）。如果属性具备nonatomic特质，则不需要同步锁。<br>属性默认是atomic。<br>具备atomic特质的获取方法会通过锁定机制来确保其操作的原子性。<br>也就是说，如果两个线程同时读取一个属性，总能看到有效的属性值。<br>如果不加锁的话（或者说使用nonatomic语义），那么当其中一个线程正在改写某属性值的时候，另外一个线程也许会突然闯入，把尚未修改好的属性值读取出来。<br>一般iOS程序中，所有属性都声明为nonatomic。这样做的原因是：<br>在iOS中使用同步锁的开销比较大，这样会带来性能问题，一般情况下，并不要求属性必须是“原子的”，因为这并不能保证“线程安全”（thread safety），若要实现“线程安全”的操作，还需要采用更为深层的锁定机制才行。<br>例如：一个线程在连续多次读取某个属性值的过程中有别的线程在同时改写该值，那么即便将属性声明为atomic，也还是会读取到不同的属性值。</p>
+<p>因此，iOS程序一般都会使用nonatomic属性。但是在Mac OS X程序时， 使用atomic属性通常都不会有性能瓶颈</p>
+<p>因为看评论有人问了，所以补充个问题，就是atomic一定是线程安全的么，回答是NO ：</p>
+<p>nonatomic的内存管理语义是非原子性的，非原子性的操作本来就是线程不安全，而atomic的操作是原子性的，但并不意味着他就是线程安全的，它会增加正确的几率，能够更好的避免线程错误，但仍旧是不安全的。</p>
+<p>为了说atomic与nonatomic的本质区别其实也就是在setter方法上的操作不同：</p>
+<p>nonatomic的实现:</p>
+<ul>
+<li>(void)setCurrentImage:(UIImage *)currentImage<br>{<br>if (_currentImage != currentImage) {<br>[_currentImage release];<br>_currentImage = [currentImage retain];</li>
+</ul>
+<p>// do something<br>}<br>}</p>
+<ul>
+<li>(UIImage *)currentImage<br>{<br>return _currentImage;<br>}</li>
+</ul>
+<p>atomic的实现:</p>
+<ul>
+<li>(void)setCurrentImage:(UIImage *)currentImage<br>{<br>@synchronized(self) {<br>if (_currentImage != currentImage) {<br>[_currentImage release];<br>_currentImage = [currentImage retain];</li>
+</ul>
+<p>// do something<br>}<br>}<br>}</p>
+<ul>
+<li>(UIImage *)currentImage<br>{<br>@synchronized(self) {<br>return _currentImage;<br>}<br>}</li>
+</ul>
+<p>Using the @synchronized Directive<br>The @synchronized directive is a convenient way to create mutex locks on the fly in Objective-C code. The @synchronized directive does what any other mutex lock would do—it prevents different threads from acquiring the same lock at the same time. In this case, however, you do not have to create the mutex or lock object directly. Instead, you simply use any Objective-C object as a lock token, as shown in the following example:</p>
+<ul>
+<li>(void)myMethod:(id)anObj<br>{<br>@synchronized(anObj)<br>{<br>// Everything between the braces is protected by the @synchronized directive.<br>}<br>}<br>The object passed to the @synchronized directive is a unique identifier used to distinguish the protected block. If you execute the preceding method in two different threads, passing a different object for the anObj parameter on each thread, each would take its lock and continue processing without being blocked by the other. If you pass the same object in both cases, however, one of the threads would acquire the lock first and the other would block until the first thread completed the critical section.</li>
+</ul>
+<p>As a precautionary measure, the @synchronized block implicitly adds an exception handler to the protected code. This handler automatically releases the mutex in the event that an exception is thrown. This means that in order to use the @synchronized directive, you must also enable Objective-C exception handling in your code. If you do not want the additional overhead caused by the implicit exception handler, you should consider using the lock classes.</p>
+<p>For more information about the @synchronized directive, see The Objective-C Programming Language.</p>
+<p>当使用atomic时，虽然对属性的读和写是原子性的，但是仍然可能出现线程错误：当线程A进行写操作，这时其他线程的读或者写操作会因为等该操作而等待。当A线程的写操作结束后，B线程进行写操作，所有这些不同线程上的操作都将依次顺序执行——也就是说，如果一个线程正在执行 getter/setter，其他线程就得等待。如果有线程C在A线程读操作之前release了该属性，那么还会导致程序崩溃。所以仅仅使用atomic并不会使得线程安全，我们还要为线程添加lock来确保线程的安全。</p>
+<p>更准确的说应该是读写安全，但并不是线程安全的，因为别的线程还能进行读写之外的其他操作。线程安全需要开发者自己来保证。</p>
+<p>其实无论是否是原子性的只是针对于getter和setter而言，比如用atomic去操作一个NSMutableArray ，如果一个线程循环读数据，一个线程循环写数据，肯定会产生内存问题，这个就跟getter和setter就木有关系了。</p>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>~ 别拉，疼，我也是有底线的 ~</p>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2016/12/08/设计模式的七大原则/" style="float: left;">
+        ← 设计模式的七大原则
+    </a>
+    
+    
+    <a class="pull-right" href="/2016/02/27/基础知识点汇总/">
+        基础知识点汇总 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

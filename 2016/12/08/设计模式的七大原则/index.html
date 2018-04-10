@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Archives: 2016 | LvCode&#39;s Blog</title>
+  <title>设计模式的七大原则 | LvCode&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -166,108 +166,55 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2></h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p></p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/12/08/设计模式的七大原则/">设计模式的七大原则</a></h4>
-                            
-                            <p><time datetime="2016-12-08T06:47:00.000Z"><a href="/2016/12/08/设计模式的七大原则/">2016-12-08</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/03/06/nonatomic的区别/">nonatomic的区别</a></h4>
-                            
-                            <p><time datetime="2016-03-06T02:47:05.000Z"><a href="/2016/03/06/nonatomic的区别/">2016-03-06</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/02/27/基础知识点汇总/">基础知识点汇总</a></h4>
-                            
-                            <p><time datetime="2016-02-27T04:54:32.000Z"><a href="/2016/02/27/基础知识点汇总/">2016-02-27</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/02/06/KVC、KVO/">KVC、KVO</a></h4>
-                            
-                            <p><time datetime="2016-02-06T06:22:19.000Z"><a href="/2016/02/06/KVC、KVO/">2016-02-06</a></time></p>
-                        </div>
-                    
-                        
-                            </div><div class="row boxes">
-                            
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/01/10/多线程/">多线程</a></h4>
-                            
-                            <p><time datetime="2016-01-10T03:32:32.000Z"><a href="/2016/01/10/多线程/">2016-01-10</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-12-08T06:47:00.000Z" itemprop="datePublished">
+          2016-12-08
+      </time>
+    
+</span>
+                <h1>设计模式的七大原则</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="设计模式的七大原则"><a href="#设计模式的七大原则" class="headerlink" title="设计模式的七大原则"></a>设计模式的七大原则</h2><ol>
+<li>开闭原则 （open close principle）：开闭原则的意思是：对扩展开放，对修改关闭。</li>
+<li>里氏代换原则（liskov substitution principle）： 里氏代换原则是面向对象设计的基本原则之一。是对开闭原则的补充</li>
+<li>依赖倒转原则（dependence inversion principle）：这个原则是开闭原则的基础，具体内容：针对接口编程</li>
+<li>接口隔离原则（interface segregation principle）：这个原则的意思是：使用多个隔离接口，比使用单个接口要好，它还有另一个意思是：降低类之间的耦合度。由此可见，其实设计模式就是从大型软件架构出发、便于升级和维护的软件设计思想，它强调降低依赖，降低耦合。</li>
+<li>迪米特法则，又称最少知道原则（demeter principle）： 最少知道原则是指：一个实体应该尽少的与其他实体之间发生相互作用，使得系统功能模块相对独立。</li>
+<li>合成复用原则 ：合成复用原则是指：尽量使用合成／聚合的方式，而不是使用继承。</li>
+<li>单一职责原则（SRP：The Single Responsibility Principle）：不要存在多于一个导致类变更的原因，也就是说每个类应该实现单一的职责，否则就应该把类拆分。</li>
+</ol>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>~ 别拉，疼，我也是有底线的 ~</p>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/01/25/开发技巧Tips/" style="float: left;">
+        ← 开发技巧Tips
+    </a>
+    
+    
+    <a class="pull-right" href="/2016/03/06/nonatomic的区别/">
+        nonatomic的区别 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

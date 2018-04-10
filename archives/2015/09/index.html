@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>LvCode&#39;s Blog</title>
+  <title>Archives: 2015/9 | LvCode&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -196,146 +196,32 @@
 <!-- // End height spacing helper -->
 
 <!-- ============================ END Hero Image =========================== -->
-<!-- ============================ Content =========================== -->
 
-<section id="intro">
+
+
+
+<section id="services">
     <div class="container">
-        
         <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2016/02/06/KVC、KVO/">KVC、KVO</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-02-06T06:22:19.000Z" itemprop="datePublished">
-          2016-02-06
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p class="index-excerpt">
-                      
-                        概述由于ObjC主要基于Smalltalk进行设计，因此它有很多类似于Ruby、Python的动态特性，例如动态类型、动态加载、动态绑定等。今天我们着重介绍ObjC中的键值编码（KVC）、键值监听（KVO）特性：
-
-键值编码KVC
-键值监听KVO
-
-键值编码KVC我们知道C#中可以通过反射读写一个对象的属性，有时候这种方式特别方便。因为你可以利用字符串的方式动态控制一个对象。其实对于ObjC的语言特性，你根本不必进行任何操作就可以进行属
-                      
-                    </p>
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row boxes">
                     
-                    <p class="pull-right readMore">
-                        <a href="/2016/02/06/KVC、KVO/">Read More...</a>
-                    </p>
+                    
+                        
+                        
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
+                            
+                              <h4 class="title"><a href="/2015/09/10/多线程/">多线程</a></h4>
+                            
+                            <p><time datetime="2015-09-10T03:32:32.000Z"><a href="/2015/09/10/多线程/">2015-09-10</a></time></p>
+                        </div>
                     
                 </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
+            </div>    
         </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2015/09/10/多线程/">多线程</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2015-09-10T03:32:32.000Z" itemprop="datePublished">
-          2015-09-10
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p class="index-excerpt">
-                      
-                        iOS多线程在iOS中每个进程启动后都会建立一个主线程（UI线程），这个线程是其他线程的父线程。由于在iOS中除了主线程，其他子线程是独立于Cocoa Touch的，所以只有主线程可以更新UI界面（新版iOS中，使用其他线程更新UI可能也能成功，但是不推荐）。iOS中多线程使用并不复杂，关键是如何控制好各个线程的执行顺序、处理好资源竞争问题。常用的多线程开发有三种方式：
-1.NSThread
-2.NSOperation
-3.GCD
-NS
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2015/09/10/多线程/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2015/03/06/nonatomic的区别/">nonatomic的区别</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2015-03-06T02:47:05.000Z" itemprop="datePublished">
-          2015-03-06
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p class="index-excerpt">
-                      
-                        在默认情况下，由于编译器所合成的方法会通过锁定机制确保其原子性（atomicity）。如果属性具备nonatomic特质，则不需要同步锁。属性默认是atomic。具备atomic特质的获取方法会通过锁定机制来确保其操作的原子性。也就是说，如果两个线程同时读取一个属性，总能看到有效的属性值。如果不加锁的话（或者说使用nonatomic语义），那么当其中一个线程正在改写某属性值的时候，另外一个线程也许会突然闯入，把尚未修改好的属性值读取出来
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2015/03/06/nonatomic的区别/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2014/12/11/代码：注释类型/">代码：注释类型</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2014-12-11T07:10:10.000Z" itemprop="datePublished">
-          2014-12-11
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p class="index-excerpt">
-                      
-                        注释类型：123456789101112131415161、// MARK:~~~~~~~~~~~~~~~~~2、// TODO:如果代码中有该标识，说明在标识处有功能代码待编写，待实现的功能在说明中会简略说明。3、// FIXME:如果代码中有该标识，说明标识处代码需要修正，甚至代码是错误的，不能工作，需要修复，如何修正会在说明中简略说明。4、// !!!:it is empty at all here5、// ???:why pm 
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2014/12/11/代码：注释类型/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <nav class="pagination" role="pagination">
-          <a class="pull-left" href="/">← Newer Posts</a>
-          
-        </nav>
     </div>
-</section>
+</section> 
+
 <section id="statement">
     <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
         <div class="row">
@@ -343,8 +229,6 @@ NS
         </div>
     </div>
 </section>
-<!-- ============================ END Content =========================== -->
-
       
 <!-- ============================ Footer =========================== -->
 

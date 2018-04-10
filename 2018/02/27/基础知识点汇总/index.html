@@ -366,11 +366,16 @@
 <p>ARC(automatic reference counting)自动引用计数</p>
 <p>Garbage collection (垃圾回收)。但是iOS不支持垃圾回收, ARC作为LLVM3.0编译器的一项特性, 在iOS5.0 (Xcode4) 版本后推出的。</p>
 <p>ARC的判断准则, 只要没有强指针指向对象, 对象就会被释放.<br>iOS开发系列—Objective-C之内存管理</p>
+<h3 id="23-block"><a href="#23-block" class="headerlink" title="23.block"></a>23.block</h3><p>block可以访问外部变量么？<br>当block时，如果里面用到外部变量，会先把外部变量从栈区【以const的方式拷贝】到【堆区(block是对象，一般在堆区)】。因此可以访问外部变量的值，但是无法改变外部变量的值。<br>在block中能否定义新的变量?<br>可以,而且在block内部定义的变量是在【栈区】分配空间的<br>如何做到在block内修改外部变量？<br>【可以】可以用__block修饰外部变量</p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/04/10/多线程/" style="float: left;">
+        ← 多线程
+    </a>
     
     
     <a class="pull-right" href="/2018/01/25/开发技巧Tips/">

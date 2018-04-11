@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Archives: 2018/4 | LvCode&#39;s Blog</title>
+  <title>NSDateFormatter优化 | LvCode&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -166,69 +166,175 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2></h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p></p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2018/04/11/NSDateFormatter优化/">NSDateFormatter优化</a></h4>
-                            
-                            <p><time datetime="2018-04-11T03:22:31.000Z"><a href="/2018/04/11/NSDateFormatter优化/">2018-04-11</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-04-11T03:22:31.000Z" itemprop="datePublished">
+          2018-04-11
+      </time>
+    
+</span>
+                <h1>NSDateFormatter优化</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<p><em>*</em> 为什么要优化NSDateFormatter？</p>
+<p>今天逛论坛看到NSDateFormatte很耗性能，一查发现确有其事。</p>
+<p>下面是官方描述</p>
+<blockquote>
+<p>Creating a date formatter is not a cheap operation. If you are likely to use a formatter frequently, it is typically more efficient to cache a single instance than to create and dispose of multiple instances. One approach is to use a static variable</p>
+</blockquote>
+<p>优化方式有哪些？<br>a.延迟转换<br>即只有在UI需要使用转换结果时在进行转换。</p>
+<p>b.Cache in Memory<br>根据NSDateFormatter线程安全性，不同的iOS系统版本内存缓存如下：</p>
+<ul>
+<li>prior to iOS 7</li>
+</ul>
+<p>如果直接采用静态变量进行存储，那么可能就会存在线程安全问题，在iOS 7之前，NSDateFormatter是非线程安全的，因此可能就会有两条或以上的线程同时访问同一个日期格式化对象，从而导致App崩溃。</p>
+<pre><code>
++ (NSDateFormatter *)cachedDateFormatter {
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>~ 别拉，疼，我也是有底线的 ~</p>
+NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary];
+
+NSDateFormatter *dateFormatter = [threadDictionary objectForKey:@"cachedDateFormatter"];
+
+if (!dateFormatter) {
+
+dateFormatter = [[NSDateFormatter alloc] init];
+
+[dateFormatter setLocale:[NSLocale currentLocale]];
+
+[dateFormatter setDateFormat: @"YYYY-MM-dd HH:mm:ss"];
+
+[threadDictionary setObject:dateFormatter forKey:@"cachedDateFormatter"];
+
+}
+
+return dateFormatter;
+
+}
+</code></pre>
+
+<ul>
+<li>iOS 7 or later</li>
+</ul>
+<p>在iOS 7、macOS 10.9及以上系统版本，NSDateFormatter都是线程安全的，因此我们无需担心日期格式化对象在使用过程中被另外一条线程给修改，为了提高性能，我们还可以在上述代码块中进行简化（除去冗余部分）。</p>
+<pre><code>
+static NSDateFormatter *cachedDateFormatter = nil;
+
++ (NSDateFormatter *)cachedDateFormatter {
+
+// If the date formatters aren't already set up, create them and cache them for reuse.
+
+if (!dateFormatter) {
+
+dateFormatter = [[NSDateFormatter alloc] init];
+
+[dateFormatter setLocale:[NSLocale currentLocale]];
+
+[dateFormatter setDateFormat: @"YYYY-MM-dd HH:mm:ss"];
+
+}
+
+return dateFormatter;
+
+}
+</code></pre>
+
+<p>如果缓存了日期格式化或者是其他依赖于current locale的对象，那么我们应该监听NSCurrentLocaleDidChangeNotification通知，当current locale变化时及时更新被缓存的日期格式化对象。</p>
+<blockquote>
+<p>In theory you could use an auto-updating locale (autoupdatingCurrentLocale) to create a locale that automatically accounts for changes in the user’s locale settings. In practice this currently does not work with date formatters.</p>
+</blockquote>
+<h3 id="Apple-Threading-Programming-Guide"><a href="#Apple-Threading-Programming-Guide" class="headerlink" title="Apple Threading Programming Guide"></a>Apple Threading Programming Guide</h3><p>c.利用标准C语言库<br>如果时间日期格式是固定的，我们可以采用C语言中的strptime函数，这样更加简单高效。</p>
+<pre><code>
+- (NSDate *) easyDateFormatter{
+
+time_t t;
+
+struct tm tm;
+
+char *iso8601 = "2016-09-18";
+
+strptime(iso8601, "%Y-%m-%d", &tm);
+
+tm.tm_isdst = -1;
+
+tm.tm_hour = 0;//当tm结构体中的tm.tm_hour为负数，会导致mktime(&tm)计算错误
+
+/**
+
+//NSString *iso8601String = @"2016-09-18T17:30:08+08:00";
+
+//%Y-%m-%d [iso8601String cStringUsingEncoding:NSUTF8StringEncoding]
+
+{
+
+tm_sec = 0
+
+tm_min = 0
+
+tm_hour = 0
+
+tm_mday = 18
+
+tm_mon = 9
+
+tm_year = 116
+
+tm_wday = 2
+
+tm_yday = 291
+
+tm_isdst = 0
+
+tm_gmtoff = 28800
+
+tm_zone = 0x00007fd9b600c31c "CST"
+
+}
+
+ISO8601时间格式：2004-05-03T17:30:08+08:00 参考Wikipedia
+
+*/
+
+t = mktime(&tm);
+
+//http://pubs.opengroup.org/onlinepubs/9699919799/functions/mktime.html
+
+//secondsFromGMT: The current difference in seconds between the receiver and Greenwich Mean Time.
+
+return [NSDate dateWithTimeIntervalSince1970:t + [[NSTimeZone localTimeZone] secondsFromGMT]];
+
+}
+</code></pre>
+
+<p>相关资料：<br>Date Formate Patterns :</p>
+<p><img src="http://ww1.sinaimg.cn/large/68e28bf3ly1fq8kh40yd1j20yg0bhwgi.jpg" alt=""></p>
+<p><a href="http://www.gnu.org/software/libc/" target="_blank" rel="noopener">Standard C library</a></p>
+<p><a href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank" rel="noopener">ISO_8601</a></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2018/01/16/有种问候是我想知道你过得不好/">
+        有种问候叫做知道你过得不好，我也就放心了 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

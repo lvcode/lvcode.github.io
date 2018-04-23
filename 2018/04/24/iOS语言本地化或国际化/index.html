@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Archives: 2018/4 | LvCode&#39;s Blog</title>
+  <title>iOS语言本地化或国际化 | LvCode&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -166,87 +166,77 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2></h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p></p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2018/04/24/iOS语言本地化或国际化/">iOS语言本地化或国际化</a></h4>
-                            
-                            <p><time datetime="2018-04-23T16:39:08.000Z"><a href="/2018/04/24/iOS语言本地化或国际化/">2018-04-24</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2018/04/20/CocoaPods报错问题/">CocoaPods报错问题</a></h4>
-                            
-                            <p><time datetime="2018-04-20T01:55:33.000Z"><a href="/2018/04/20/CocoaPods报错问题/">2018-04-20</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2018/04/11/NSDateFormatter优化/">NSDateFormatter优化</a></h4>
-                            
-                            <p><time datetime="2018-04-11T03:22:31.000Z"><a href="/2018/04/11/NSDateFormatter优化/">2018-04-11</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-04-23T16:39:08.000Z" itemprop="datePublished">
+          2018-04-24
+      </time>
+    
+</span>
+                <h1>iOS语言本地化或国际化</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<h1 id="iOS语言本地化-国际化"><a href="#iOS语言本地化-国际化" class="headerlink" title="iOS语言本地化/国际化"></a>iOS语言本地化/国际化</h1><blockquote>
+<p></p><h3>开场白<h3><p></p>
+<p></p><h6>语言本地化，又叫做语言国际化。是指根据用户操作系统的语言设置，自动将应用程序的语言设置为和用户操作系统语言一致的语言。往往一些应用程序需要提供给多个国家的人群使用，或者一个国家有多种语言，这就要求应用程序所展示的文字、图片等信息，能够让讲不同语言的用户读懂、看懂。进而提出为同一个应用程序适配多种语言，也即是国际化。<h6><p></p>
+</h6></h6></h3></h3></blockquote>
+<ul>
+<li>配置需要国际化的语言</li>
+<li>App名称本地化</li>
+<li>代码中字符串本地化</li>
+<li>多人开发情况下的字符串本地化</li>
+<li>图片本地化</li>
+<li>查看/切换本地语言</li>
+<li>storyboard/xib本地化</li>
+</ul>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqmzrxtc2zj21ka10agte.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqmzsk894jj225s1cq12w.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqmzsr6pbtj225s1cqwpo.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn0qrp4roj21lw1cq15z.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn0qrmfiyj20nc0a6wg1.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn0qrq4cuj21lw1cqgzf.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn0qrq7eqj21lw1cqqh0.jpg" alt=""></p>
+<blockquote>
+<p>info.plist 中修改Bundle name即可设置各种语言下的App名字</p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn11z8qgaj22121cq4d1.jpg" alt=""></p>
+<blockquote>
+<p>main.storyboard 中的文本修改</p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1tvvsboj22121cq4g3.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1uu2qo7j21a417kmzf.jpg" alt=""></p>
+<h3 id="动态设置文本"><a href="#动态设置文本" class="headerlink" title="动态设置文本"></a>动态设置文本</h3><p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1fsbdrfj214k0t879m.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1fsck4mj213k0s0tcu.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1fscioxj22121cqgyo.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1fscrnaj22121cqdt8.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1kcfelbj22121cqws8.jpg" alt=""></p>
+<blockquote>
+<p>然后我们只需要在Localizable.strings下对应的文件中，分别以Key-Value的形式，为代码中每一个需要本地化的字符串赋值，如下图：</p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1vnabruj22121cq193.jpg" alt=""></p>
+<blockquote>
+<p>代码中使用方法  [NSLocalizedString(&lt;#T##key: String##String#&gt;, comment: &lt;#T##String#&gt;)]</p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn2buk2zhj21ng18o7e5.jpg" alt=""></p>
+<blockquote>
+<p>注意 文件名必须是 Localizable.strings 不然无法识别，上面截图有误 <img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn298sjihj22121cqne2.jpg" alt=""></p>
+</blockquote>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>~ 别拉，疼，我也是有底线的 ~</p>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2018/04/20/CocoaPods报错问题/">
+        CocoaPods报错问题 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

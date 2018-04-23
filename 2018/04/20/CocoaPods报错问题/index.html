@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Archives: 2018/4 | LvCode&#39;s Blog</title>
+  <title>CocoaPods报错问题 | LvCode&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -166,87 +166,56 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2></h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p></p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2018/04/24/iOS语言本地化或国际化/">iOS语言本地化或国际化</a></h4>
-                            
-                            <p><time datetime="2018-04-23T16:39:08.000Z"><a href="/2018/04/24/iOS语言本地化或国际化/">2018-04-24</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2018/04/20/CocoaPods报错问题/">CocoaPods报错问题</a></h4>
-                            
-                            <p><time datetime="2018-04-20T01:55:33.000Z"><a href="/2018/04/20/CocoaPods报错问题/">2018-04-20</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2018/04/11/NSDateFormatter优化/">NSDateFormatter优化</a></h4>
-                            
-                            <p><time datetime="2018-04-11T03:22:31.000Z"><a href="/2018/04/11/NSDateFormatter优化/">2018-04-11</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-04-20T01:55:33.000Z" itemprop="datePublished">
+          2018-04-20
+      </time>
+    
+</span>
+                <h1>CocoaPods报错问题</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="CocoaPods报错问题"><a href="#CocoaPods报错问题" class="headerlink" title="CocoaPods报错问题"></a>CocoaPods报错问题</h2><pre><code>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>~ 别拉，疼，我也是有底线的 ~</p>
+[!] The `PuHuaHospital [Release]` target overrides the `GCC_PREPROCESSOR_DEFINITIONS` build setting defined in `Pods/Target Support Files/Pods-PuHuaHospital/Pods-PuHuaHospital.release.xcconfig'. This can lead to problems with the CocoaPods installation
+- Use the `$(inherited)` flag, or
+- Remove the build settings from the target.
+
+</code></pre>
+
+
+<p>解决办法：<br>在Build Settings<br>Header Search Paths<br>Other Linker Flags<br>Preprocessor Macros<br>在这三个地方都加上$(inherited)，然后重新pod install就可以了。</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/04/24/iOS语言本地化或国际化/" style="float: left;">
+        ← iOS语言本地化或国际化
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/04/11/NSDateFormatter优化/">
+        NSDateFormatter优化 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

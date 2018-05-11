@@ -155,6 +155,188 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-iOS后台任务使用启蒙" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/12/iOS后台任务使用启蒙/">iOS后台任务使用启蒙</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/12/iOS后台任务使用启蒙/" class="archive-article-date">
+  	<time datetime="2018-05-11T16:39:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>故事是这样开始的，刚开始我一直想找可以延长App后台存活方法的，后来找到如下代码</p>
+</blockquote>
+<pre><code>
+//程序进入后台后继续运行10分钟
+UIApplication*   app = [UIApplication sharedApplication];
+__block    UIBackgroundTaskIdentifier bgTask;
+bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
+dispatch_async(dispatch_get_main_queue(), ^{
+if (bgTask != UIBackgroundTaskInvalid)
+{
+bgTask = UIBackgroundTaskInvalid;
+}
+});
+}];
+dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+dispatch_async(dispatch_get_main_queue(), ^{
+if (bgTask != UIBackgroundTaskInvalid)
+{
+bgTask = UIBackgroundTaskInvalid;
+}
+});
+});
+</code></pre>
+
+<p>使用中发现，App会在3分钟左右强制kill。经查询发现写法有问题。</p>
+<pre><code>
+UIBackgroundTaskIdentifier backgroundUpdateTask;
+
+long aa;
+
+NSTimer *_timer;
+
+- (void) didEnterBackground:(NSNotification *)notif{
+
+aa = 0;
+
+[self startTask];
+
+}
+
+- (void) startTask {
+
+_timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(go:) userInfo:nil repeats:YES];
+
+backgroundUpdateTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+DDLogInfo(@"bgTask expiration=============");
+[_timer invalidate];
+
+[[UIApplication sharedApplication] endBackgroundTask:backgroundUpdateTask];
+
+backgroundUpdateTask = UIBackgroundTaskInvalid;
+
+}];
+
+}
+
+-(void)go:(NSTimer *)tim {
+
+DDLogInfo(@"%@==%ld,%g ",[NSDate date],aa,[UIApplication sharedApplication].backgroundTimeRemaining);
+
+aa++;
+
+if (aa%10 == 0 || [UIApplication sharedApplication].backgroundTimeRemaining == 0) {
+
+[LocalNotificationManager postLocalNotificationAlertBody:s];
+
+}
+
+}
+
+</code></pre>
+
+<p>文档上说有10分钟的执行时间，但从打印的backgroundTimeRemaining时间来看，只有180秒。</p>
+<p>注意：测试此功能不能用Xcode直接debug运行，因为在调试器链接到app的进行的情况下，app是不会在后台被挂起的，也就是说即使backgroundTimeRemaining =0了，timer里的代码依然能够继续执行。</p>
+<p>所以要测试运行态的情况，要么用文件日志(总是要导出比较麻烦)，要么用本地通知来查看。</p>
+<p>2、是否能递归调用此方法来持续获得执行时间</p>
+<p>在beginBackgroundTaskWithExpirationHandler里最后再递归调用[self startTask];</p>
+<p>经尝试此方法无效，180秒超时后再次申请，会立刻回调超时的block，并且backgroundTimeRemaining时间一直都是0。</p>
+<p>并且由于一直不停的在递归创建和终止后台任务，当Expiration真正到来的时候，一个还有一个创建的任务没有关闭。从而导致违背begin和end成对调用的原则，app被系统强制kill。所以此方法不但不能延长执行时间，还会导致app在180秒后台执行时间到达后，被系统kill的情况。</p>
+<p>3、beginBackgroundTaskWithExpirationHandler多次被调用的情况</p>
+<p>didEnterBackground每次调用都会触发beginBackgroundTaskWithExpirationHandler来创建新的后台任务，并用backgroundUpdateTask保存任务id，但如果第一次的任务还没有endBackgroundTask之前，应用回到前台，然后再次进入后台，就会重新创建一个新的后台任务，并且backgroundUpdateTask之前保存的id会被覆盖，这就违背了beginBackgroundTaskWithExpirationHandler与endBackgroundTask成对调用的原因。因为前一个后台任务超时的block回调的时候，其实是end了后一个taskId对应的后台任务，并且把taskId赋值为UIBackgroundTaskInvalid。而后一个后台任务超时的block回调的时候，taskId已经变成了null，对其进行end调用已经无效了，所以相当于没有成对调用begin和end，导致的结果就是：后一个后台任务超时的时候，app被系统强制kill。</p>
+<p>所以每一次创建的后台任务都要有一个独立的变量来维护其taskId，如果只有一个后台任务，但是有重入的可能，那么应该在willEnterForeground回调中，把前一个后台任务进行endBackgroundTask操作，这样就不存在taskId被覆盖的问题了。或者是每次didEnterBackground的时候，检查taskId == UIBackgroundTaskInvalid，若不满足该条件，说明taskId已经引用了一个正在进行的后台任务，还没有完成，由于这个后台任务重进前台又切换回后台的情况下，backgroundTimeRemaining会被重置为180秒，所以在这种需求下，关闭前一个任务再重新建议一个相同的后台任务没有必要，所以应该直接</p>
+<pre><code>
+if(backgroundUpdateTask != UIBackgroundTaskInvalid){
+
+return;
+
+}
+</code></pre>
+4、后台任务expiration后，app被系统kill的问题
+
+按照文档里的说法，只要begin与end在真正expiration之前成对调用，就不会导致系统强制kill app，而是app从后台执行状态切换到suspend状态，但实际测试中，每次expiration之后，app都会被kill掉，根据是app从launch页面重新进入。但我在willTerminate通知里的回调中加了一个local notification，并没有触发这个本地通知。(从app switcher强制退出应用的时候会触发本地通知，说明本地通知有效)。只能认为是app从后台状态切换到suspend状态后，立刻被系统kill掉了，但不知道为什么会这样。
+
+5、参考另一个文章中的实现，可以在任务结束后不被kill
+
+参考
+
+[http://www.cnblogs.com/lyanet/archive/2013/03/26/2983079.html](http://www.cnblogs.com/lyanet/archive/2013/03/26/2983079.html)
+
+
+
+<pre><code>
+//程序进入后台后延长活动时间，一般180s内，添加这段代码是为了避免App推入后台，线程暂停，NSTime停止计时（验证码）。
+UIApplication* app = [UIApplication sharedApplication];
+__block UIBackgroundTaskIdentifier bgTask;
+bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
+dispatch_async(dispatch_get_main_queue(), ^{
+
+[[UIApplication sharedApplication] endBackgroundTask:bgTask];
+bgTask = UIBackgroundTaskInvalid;
+});
+}];
+
+</code></pre>
+
+<p>beginBackgroundTaskWithExpirationHandler 和 endBackgroundTask 是成对出现。</p>
+<p>beginBackgroundTaskWithName:expirationHandler:方法标识了一个后台任务的开始，并用过超时处理的回调来结束此任务。那么，超时时间具体是多少？可以通过UIApplication的只读属性backgroundTimeRemaining来获取当前后台任务执行的剩余时间，它不是具体的数字（大约180s内），而是iOS根据当前系统环境综合考量后估算出来的。然后执行expirationHandler回调完成一个后台任务的执行周期。</p>
+<p>当开启后台任务后，结束前block回调，回调中就要设置关闭后台任务的代码，比如缓存数据等等。并且调用endBackgroundTask。关闭后台任务，否则系统会任务后台任务超时仍未完成，系统直接kill app。导致再次打开挂起的App发现，应用得重新启动。</p>
+<p>之前的问题就因为没有调用endBackgroundTask 导致App提前kill。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/12/iOS后台任务使用启蒙/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-关于缓存的TIPS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -162,7 +344,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/10/关于缓存的TIPS/">关于缓存的TIPS</a>
+      <a class="article-title" href="/2018/05/10/关于缓存的TIPS/">关于HTTP缓存的TIPS</a>
     </h1>
   
 
@@ -1214,137 +1396,6 @@ return NO;
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/12/09/a文件解包、删除重复类/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS-程序-main-函数之前发生了什么" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/14/iOS-程序-main-函数之前发生了什么/">iOS 程序 main 函数之前发生了什么</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/14/iOS-程序-main-函数之前发生了什么/" class="archive-article-date">
-  	<time datetime="2017-10-14T02:35:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="我是前言"><a href="#我是前言" class="headerlink" title="我是前言"></a>我是前言</h2><p>一个 iOS App 的 main 函数位于 main.m 中，这是我们熟知的程序入口。但对 objc 了解更多之后发现，程序在进入我们的 main 函数前已经执行了很多代码，比如熟知的 + load 方法等。本文将跟随程序执行顺序，刨根问底，从 dyld 到 runtime ，看看 main 函数之前都发生了什么。</p>
-<h2 id="从dyld开始"><a href="#从dyld开始" class="headerlink" title="从dyld开始"></a>从dyld开始</h2><h3 id="动态链接库"><a href="#动态链接库" class="headerlink" title="动态链接库"></a>动态链接库</h3><p>iOS 中用到的所有系统 framework 都是动态链接的，类比成插头和插排，静态链接的代码在编译后的静态链接过程就将插头和插排一个个插好，运行时直接执行二进制文件；而动态链接需要在程序启动时去完成“插插销”的过程，所以在我们写的代码执行前，动态连接器需要完成准备工作。</p>
-<p>这个是在 Xcode 中看到的 Link 列表：<br><img src="http://ww1.sinaimg.cn/large/68e28bf3ly1fmg4nnux3mj20ze0bqwgh.jpg" alt=""><br>这些 framework 将会在动态链接过程中被加载，另外还有隐含 link 的 framework，可以测试出来：先找到可执行文件，我这里叫 TestMain 的工程，模拟器路径下找到 TestMain.app，可执行文件默认同名，再通过 otool命令：</p>
-<blockquote>
-<p>$ otool -L TestMain<br>-L 参数打印出所有 link 的 framework（去掉了版本信息如下）<br>TestMain:<br>/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics<br>/System/Library/Frameworks/UIKit.framework/UIKit<br>/System/Library/Frameworks/Foundation.framework/Foundation<br>/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation<br>/usr/lib/libobjc.A.dylib<br>/usr/lib/libSystem.dylib</p>
-</blockquote>
-<p>除了多了的CoreGraphics（被 UIKit 依赖）外，有两个默认添加的 lib：libobjc 即 objc 和 runtime，libSystem 中包含了很多系统级别 lib，列几个熟知的：</p>
-<ul>
-<li>libdispatch ( GCD )</li>
-<li>libsystem_c ( C语言库 )</li>
-<li>libsystem_blocks ( Block )</li>
-<li>libcommonCrypto ( 加密库，比如常用的 md5 函数 )</li>
-</ul>
-<p>这些 lib 都是dylib格式（如 windows 中的 dll ），系统使用动态链接有几点好处：</p>
-<ul>
-<li>代码共用：很多程序都动态链接了这些 lib，但它们在内存和磁盘中中只有一份</li>
-<li>易于维护：由于被依赖的 lib 是程序执行时才 link 的，所以这些 lib 很容易做更新，比如libSystem.dylib 是 libSystem.B.dylib 的替身，哪天想升级直接换成 libSystem.C.dylib 然后再替换替身就行了</li>
-<li>减少可执行文件体积：相比静态链接，动态链接在编译时不需要打进去，所以可执行文件的体积要小很多</li>
-</ul>
-<h3 id="dyld"><a href="#dyld" class="headerlink" title="dyld"></a>dyld</h3><p>dyld（the dynamic link editor），Apple 的动态链接器，系统 kernel 做好启动程序的初始准备后，交给 dyld 负责，援引并翻译<a href="https://www.mikeash.com/pyblog/friday-qa-2012-11-09-dyld-dynamic-linking-on-os-x.html" target="_blank" rel="noopener">《 Mike Ash 这篇 blog 》</a>对 dyld 作用顺序的概括：</p>
-<ol>
-<li>从 kernel 留下的原始调用栈引导和启动自己</li>
-<li>将程序依赖的动态链接库递归加载进内存，当然这里有缓存机制</li>
-<li>non-lazy 符号立即 link 到可执行文件，lazy 的存表里</li>
-<li>Runs static initializers for the executable</li>
-<li>找到可执行文件的 main 函数，准备参数并调用</li>
-<li>程序执行中负责绑定 lazy 符号、提供 runtime dynamic loading services、提供调试器接口</li>
-<li>程序main函数 return 后执行 static terminator</li>
-<li>某些场景下 main 函数结束后调 libSystem 的 _exit 函数</li>
-</ol>
-<p>得益于 dyld 是开源的，github 地址，我们可以从源码一探究竟。</p>
-<p>一切源于dyldStartup.s这个文件，其中用汇编实现了名为__dyld_start的方法，汇编太生涩，它主要干了两件事：</p>
-<ol>
-<li>调用dyldbootstrap::start()方法（省去参数）</li>
-<li>上个方法返回了 main 函数地址，填入参数并调用 main 函数</li>
-</ol>
-<p>这个步骤随手就能验证出来，设置一个符号断点断在_objc_init：<br><img src="http://ww1.sinaimg.cn/large/68e28bf3ly1fmg55iek9gj20go067wey.jpg" alt=""></p>
-<p>这个函数是runtime的初始化函数，后面会提到。程序运行在很早的时候断住，这时候看调用栈：</p>
-<p><img src="http://ww1.sinaimg.cn/large/68e28bf3ly1fmg5dbrg3rj20go0clac0.jpg" alt=""></p>
-<p>看到了栈底的dyldbootstrap::start()方法，继而调用了dyld::_main()方法，其中完成了刚才说的递归加载动态库过程，由于libSystem默认引入，栈中出现了libSystem_initializer的初始化方法。</p>
-<h3 id="ImageLoader"><a href="#ImageLoader" class="headerlink" title="ImageLoader"></a>ImageLoader</h3><p>当然这个 image 不是图片的意思，它大概表示一个二进制文件（可执行文件或 so 文件），里面是被编译过的符号、代码等，所以 ImageLoader 作用是将这些文件加载进内存，且每一个文件对应一个ImageLoader实例来负责加载。</p>
-<p>两步走：</p>
-<ol>
-<li>在程序运行时它先将动态链接的 image 递归加载 （也就是上面测试栈中一串的递归调用的时刻）</li>
-<li>再从可执行文件 image 递归加载所有符号<br>当然所有这些都发生在我们真正的main函数执行前。</li>
-</ol>
-<h3 id="runtime-与-load"><a href="#runtime-与-load" class="headerlink" title="runtime 与 +load"></a>runtime 与 +load</h3><p>刚才讲到 libSystem 是若干个系统 lib 的集合，所以它只是一个容器 lib 而已，而且它也是开源的，里面实质上就一个文件，init.c，由 libSystem_initializer 逐步调用到了 _objc_init，这里就是 objc 和 runtime 的初始化入口。</p>
-<p>除了 runtime 环境的初始化外，_objc_init中绑定了新 image 被加载后的 callback：</p>
-<blockquote>
-<p>dyld_register_image_state_change_handler(<br>dyld_image_state_bound, 1, &amp;map_images);<br>dyld_register_image_state_change_handler(<br>dyld_image_state_dependents_initialized, 0, &amp;load_images);</p>
-</blockquote>
-<p>可见 dyld 担当了 runtime 和 ImageLoader 中间的协调者，当新 image 加载进来后交由 runtime 大厨去解析这个二进制文件的符号表和代码。继续上面的断点法，断住神秘的 +load 函数：</p>
-<p><img src="http://ww1.sinaimg.cn/large/68e28bf3ly1fmg8sjcwgoj20j60b43zz.jpg" alt=""></p>
-<p>清楚的看到整个调用栈和顺序：</p>
-<ol>
-<li>dyld 开始将程序二进制文件初始化</li>
-<li>交由 ImageLoader 读取 image，其中包含了我们的类、方法等各种符号</li>
-<li>由于 runtime 向 dyld 绑定了回调，当 image 加载到内存后，dyld 会通知 runtime 进行处理</li>
-<li>runtime 接手后调用 map_images 做解析和处理，接下来 load_images 中调用 call_load_methods 方法，遍历所有加载进来的 Class，按继承层级依次调用 Class 的 +load 方法和其 Category 的 +load 方法<br>至此，可执行文件中和动态库所有的符号（Class，Protocol，Selector，IMP，…）都已经按格式成功加载到内存中，被 runtime 所管理，再这之后，runtime 的那些方法（动态添加 Class、swizzle 等等才能生效）</li>
-</ol>
-<h3 id="关于-load-方法的几个-QA"><a href="#关于-load-方法的几个-QA" class="headerlink" title="关于 +load 方法的几个 QA"></a>关于 +load 方法的几个 QA</h3><p>Q: 重载自己 Class 的 +load 方法时需不需要调父类？<br>A: runtime 负责按继承顺序递归调用，所以我们不能调 super</p>
-<p>Q: 在自己 Class 的 +load 方法时能不能替换系统 framework（比如 UIKit）中的某个类的方法实现<br>A: 可以，因为动态链接过程中，所有依赖库的类是先于自己的类加载的</p>
-<p>Q: 重载 +load 时需要手动添加 @autoreleasepool 么？<br>A: 不需要，在 runtime 调用 +load 方法前后是加了 objc_autoreleasePoolPush() 和 objc_autoreleasePoolPop() 的。</p>
-<p>Q: 想让一个类的 +load 方法被调用是否需要在某个地方 import 这个文件<br>A: 不需要，只要这个类的符号被编译到最后的可执行文件中，+load 方法就会被调用（Reveal SDK 就是利用这一点，只要引入到工程中就能工作）</p>
-<h3 id="简单总结"><a href="#简单总结" class="headerlink" title="简单总结"></a>简单总结</h3><p>整个事件由 dyld 主导，完成运行环境的初始化后，配合 ImageLoader 将二进制文件按格式加载到内存，<br>动态链接依赖库，并由 runtime 负责加载成 objc 定义的结构，所有初始化工作结束后，dyld 调用真正的 main 函数。<br>值得说明的是，这个过程远比写出来的要复杂，这里只提到了 runtime 这个分支，还有像 GCD、XPC 等重头的系统库初始化分支没有提及（当然，有缓存机制在，它们也不会玩命初始化），总结起来就是 main 函数执行之前，系统做了茫茫多的加载和初始化工作，但都被很好的隐藏了，我们无需关心。</p>
-<h3 id="孤独的-main-函数"><a href="#孤独的-main-函数" class="headerlink" title="孤独的 main 函数"></a>孤独的 main 函数</h3><p>当这一切都结束时，dyld 会清理现场，将调用栈回归，只剩下：<br><img src="http://ww1.sinaimg.cn/large/68e28bf3ly1fmg8v2vfqcj20fc02smx9.jpg" alt=""><br>孤独的 main 函数，看上去是程序的开始，确是一段精彩的终结</p>
-<p>References<br><a href="https://www.mikeash.com/pyblog/friday-qa-2012-11-09-dyld-dynamic-linking-on-os-x.html" target="_blank" rel="noopener">https://www.mikeash.com/pyblog/friday-qa-2012-11-09-dyld-dynamic-linking-on-os-x.html</a><br><a href="http://newosxbook.com/articles/DYLD.html" target="_blank" rel="noopener">http://newosxbook.com/articles/DYLD.html</a><br><a href="http://docstore.mik.ua/orelly/unix3/mac/ch05_02.htm" target="_blank" rel="noopener">http://docstore.mik.ua/orelly/unix3/mac/ch05_02.htm</a><br><a href="https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/dyld.1.html" target="_blank" rel="noopener">https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/dyld.1.html</a></p>
-<p><a href="http://blog.sunnyxx.com/2014/08/30/objc-pre-main/" target="_blank" rel="noopener">转载地址：iOS 程序 main 函数之前发生了什么
-</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/14/iOS-程序-main-函数之前发生了什么/">展开全文 >></a>
         </p>
       
 

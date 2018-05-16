@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://lvcode.github.io">
-  <title>LvCode&#39;s Blog</title>
+  <title>转载：FDStackView | LvCode&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一只在路上的iOS程序猿">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LvCode&#39;s Blog">
-<meta property="og:url" content="https://lvcode.github.io/index.html">
+  <meta name="description" content="转载：FDStackView —— Downward Compatible UIStackView (Part 1)| COMMENTS加入百度知道团队也有一段时间了，能跟@我就叫Sunny怎么了、@sinojerk等小伙伴一起工作生活是一种极赞的体验。在完成日常业务开发之余，我们也会进行一些技术研究项目，并将研究结果以开源的方式公布出来，自然我也成为了forkingdog开源小组的一员。近期我们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="转载：FDStackView">
+<meta property="og:url" content="https://lvcode.github.io/2018/05/16/转载：FDStackView/index.html">
 <meta property="og:site_name" content="LvCode&#39;s Blog">
-<meta property="og:description" content="一只在路上的iOS程序猿">
+<meta property="og:description" content="转载：FDStackView —— Downward Compatible UIStackView (Part 1)| COMMENTS加入百度知道团队也有一段时间了，能跟@我就叫Sunny怎么了、@sinojerk等小伙伴一起工作生活是一种极赞的体验。在完成日常业务开发之余，我们也会进行一些技术研究项目，并将研究结果以开源的方式公布出来，自然我也成为了forkingdog开源小组的一员。近期我们">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-16T03:40:03.053Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LvCode&#39;s Blog">
-<meta name="twitter:description" content="一只在路上的iOS程序猿">
+<meta name="twitter:title" content="转载：FDStackView">
+<meta name="twitter:description" content="转载：FDStackView —— Downward Compatible UIStackView (Part 1)| COMMENTS加入百度知道团队也有一段时间了，能跟@我就叫Sunny怎么了、@sinojerk等小伙伴一起工作生活是一种极赞的体验。在完成日常业务开发之余，我们也会进行一些技术研究项目，并将研究结果以开源的方式公布出来，自然我也成为了forkingdog开源小组的一员。近期我们">
   
     <link rel="alternative" href="/atom.xml" title="LvCode&#39;s Blog" type="application/atom+xml">
   
@@ -153,16 +154,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-转载：FDStackView" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-转载：FDStackView" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/16/转载：FDStackView/">转载：FDStackView</a>
+    <h1 class="article-title" itemprop="name">
+      转载：FDStackView
     </h1>
   
 
@@ -205,6 +204,27 @@
       
 
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -212,16 +232,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/16/转载：FDStackView/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://lvcode.github.io/2018/05/16/转载：FDStackView/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/16/UIStackView入门/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">UIStackView入门</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -241,1007 +320,14 @@
 
 
 
-
-  
-    <article id="ios-UIStackView入门" class="article article-type-ios  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/16/UIStackView入门/">UIStackView入门</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/16/UIStackView入门/" class="archive-article-date">
-  	<time datetime="2018-05-16T02:06:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>iOS 9: UIStackView入门</p>
-<p>本文由CocoaChina译者candeladiao翻译，欢迎参加我们的翻译活动。</p>
-<h2 id="原文：iOS-9-Getting-Started-with-UIStackView"><a href="#原文：iOS-9-Getting-Started-with-UIStackView" class="headerlink" title="原文：iOS 9: Getting Started with UIStackView"></a>原文：iOS 9: Getting Started with UIStackView</h2><p>同iOS以往每个迭代一样，iOS 9带来了很多新特性。UIKit框架每个版本都在改变，而在iOS 9比较特别的是UIStackView，它将从根本上改变开发者在iOS上创建用户界面的方式。本文将带你学习怎样使用UIStackView创建用户界面。</p>
-<p>本文假定你已经熟悉Auto Layout基础。不熟悉的可以先看看Auto Layout教程。要理解Stack View为何如此有用及它是如何起作用的，需要首先对Auto Layout有深入了解。</p>
-<ol>
-<li>实例预览</li>
-</ol>
-<p>我们将使用UIStackView模拟一个app评分提示。用户可以增加星星或者移除星星来打分。完成后看起来是这样。<br><a href="http://cc.cocimg.com/api/uploads/20150623/1435027220398746.png" target="_blank" rel="noopener"></a><br>先从GitHub下载样例工程并打开。在Main.Storyboard里有两个Stack View<br><a href="http://cc.cocimg.com/api/uploads/20150623/1435027282704488.png" target="_blank" rel="noopener"></a><br>我们将使用这两个Stack View来布局界面。开始编码前，让我们先看一下Stack View是如何工作的。</p>
-<ol>
-<li>UIStackView 概述</li>
-</ol>
-<p>Stack View的核心便是方便垂直或水平排布多个subview，如果你做过Android开发，那它和LinearLayout 控件非常相似。<br>Stack View最有用的就是它会自动为每个subview创建和添加Auto Layout constraints。当然你可以控制subview的大小和位置。可以通过选项配置subview的大小、排布以及彼此间的间距。<br>布局内容<br>打开Main.Storyboard，选择其中一个Stack View可以查看其选项，并选中一个Stack View。在 Attributes Inspector中，注意Stack View下面列出的选择。<br><a href="http://cc.cocimg.com/api/uploads/20150623/1435027330575371.png" target="_blank" rel="noopener"></a></p>
-<p>Axis表示Stack View的subview是水平排布还是垂直排布。Alignment控制subview对齐方式。Distribution定义subview的分布方式。Spacing 为subview间的最小间距。<br>把术语简化一下，你可这样理解：Alignment 用于控制X 和 Y值，而Distribution 用于控制高度和宽度。另两个值都会影响对齐。如果选中Baseline Relative将根据subview的基线调整垂直间距。如果选中Layout Margins Relative 将相对于标准边界空白来调整subview位置。<br>另一个需要记住的是，Stack View会被当成Container View。所以它是一个不会被渲染的UIView子类。它不像其他UIView子类一样，会被渲染到屏幕上。这也意味着设置其backgroundColor属性或重载drawRect:方法都不会产生任何效果。<br>subView和arrangedSubView<br>开始使用Stack View前，我们先看一下它的属性subViews和arrangedSubvies属性的不同。如果你想添加一个subview给Stack View管理，你应该调用addArrangedSubview:或insertArrangedSubview:atIndex: arrangedSubviews数组是subviews属性的子集。<br>要移除Stack View管理的subview，需要调用removeArrangedSubview:和removeFromSuperview。移除arrangedSubview只是确保Stack View不再管理其约束，而非从视图层次结构中删除，理解这一点非常重要。<br>现在我们对Stack View有一定了解，开始使用它。</p>
-<ol>
-<li>配置垂直布局的Stack View</li>
-</ol>
-<p>打开Main.Storyboard选择上面的Stack View。对Attributes Inspector作如下改变：<br>● Alignment 设为 Center<br>● Distribution 设为 Equal Spacing<br>● Spacing 设为 30<br>这告诉Stack View为subview添加约束，使其垂直居中并沿Stack View的轴线对称，然后为subview设置边距30。<br>如果subview大小和Stack View内容区不相符，将根据compression resistance priorities对subview进行拉伸或压缩。在运行时给Stack View添加subview也同样会如此。<br>布局有任何歧义Stack View都会根据subview在arrangedSubviews中index一步步回退去调整subview的大小，直至其刚好适应Stack View的大小。</p>
-<ol>
-<li>给Stack View添加垂直布局的Subview</li>
-</ol>
-<p>添加一个label，一个image view和一个button到上面的Stack View里。label在最上面，image view在中间，button在下面。添加完成后看起来是这样：<br><a href="http://cc.cocimg.com/api/uploads/20150623/1435027439562460.png" target="_blank" rel="noopener"></a></p>
-<p>接下来，我们要在Attributes Inspector里修改一下刚才添加的subview的属性。把label的文本秘诀成“How do you likeour app?”， Text Alignment选择Center 。image view的Image 输入“logo”， Content Mode选Aspect Fit。最后把button的Text 设置成“Add Star!”。<br>运行app。能看到我们只做了很少工作，但已经添加了三个能响应方向、size class等改变的subview。事实上你并不需手动添加任何约束。<br>当app运行时，点击Xcode窗口底部Debug View Hierarchy按钮可以进行实时视图调试<br><a href="http://cc.cocimg.com/api/uploads/20150623/1435027512407710.png" target="_blank" rel="noopener"></a><br>选择先前添加的任意一个subview。查看size inspector，我们注意到Stack View已经自动为其添加了约束。下图显示的是为button添加的约束<br><a href="http://cc.cocimg.com/api/uploads/20150623/1435027546248907.png" target="_blank" rel="noopener"></a></p>
-<ol>
-<li>添加五角星</li>
-</ol>
-<p>按钮事件还没和app界面关联，我们先关联起来。停止运行app，打开storyboard。创建一个名为addStar的IBAction 关联到按钮的Touch Up Inside事件。<br><a href="http://cc.cocimg.com/api/uploads/20150623/1435027576854683.png" target="_blank" rel="noopener"></a><br>addStar(_:)方法实现：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@IBAction func addStar(sender: AnyObject) &#123;</span><br><span class="line">    let starImgVw:<span class="built_in">UIImageView</span> = <span class="built_in">UIImageView</span>(image: <span class="built_in">UIImage</span>(named: <span class="string">"star"</span>))</span><br><span class="line">    <span class="keyword">self</span>.horizontalStackView.addArrangedSubview(starImgVw)</span><br><span class="line">    <span class="built_in">UIView</span>.animateWithDuration(<span class="number">0.25</span>, animations: &#123;</span><br><span class="line">        <span class="keyword">self</span>.horizontalStackView.layoutIfNeeded()</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>给水平布局的Stack View里的星星image添加动画。记住，由于Stack View自动为我们管理Auto Layout constraints，我们只能调用layoutIfNeeded来实现动画。<br>编译运行app，点击add star按钮。能看到最后结果却不尽人意。<br><a href="http://cc.cocimg.com/api/uploads/20150623/1435027618872997.png" target="_blank" rel="noopener"></a><br>选择下面的Stack View，查看Attributes Inspector会看到问题所在。由于Alignment 和Distribution 都设置成了Fill，Stack View 拉伸了星星以适应其大小。<br>这在添加更多的星星的时候会引起更多问题。我们希望星星居中显示，而不是被拉伸来适应Stack View的宽度。<br>修改Alignment 的值为Center ，修改Distribution 的值为Fill Equally。最后在addStar(_:)方法中设置image view的内容。<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@IBAction func addStar(sender: AnyObject) &#123;</span><br><span class="line">    let starImgVw:<span class="built_in">UIImageView</span> = <span class="built_in">UIImageView</span>(image: <span class="built_in">UIImage</span>(named: <span class="string">"star"</span>))</span><br><span class="line">    starImgVw.contentMode = .ScaleAspectFit</span><br><span class="line">    <span class="keyword">self</span>.horizontalStackView.addArrangedSubview(starImgVw)</span><br><span class="line">    <span class="built_in">UIView</span>.animateWithDuration(<span class="number">0.25</span>, animations: &#123;</span><br><span class="line">        <span class="keyword">self</span>.horizontalStackView.layoutIfNeeded()</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>运行app，点几次添加按钮，我们发现所有星星居中了。<br><a href="http://cc.cocimg.com/api/uploads/20150623/1435027704921191.png" target="_blank" rel="noopener"></a></p>
-<ol>
-<li>Stack View嵌套</li>
-</ol>
-<p>不能删除星星，我们的app评分什么用处不大。打开storyboard，添加一个水平布局的Stack View到上面的Stack View里。把它放置在logo之下，按钮之上。<br><a href="http://cc.cocimg.com/api/uploads/20150623/1435027786839852.png" target="_blank" rel="noopener"></a><br>把“Add Star!”按钮拖到新添加的Stack View里，再添加一个按钮到新的Stack View里。改变按钮的title为“Remove Star”，文本颜色设为red。预览如下：<br><a href="http://cc.cocimg.com/api/uploads/20150623/1435027795436834.png" target="_blank" rel="noopener"></a><br>在Attributes Inspector中编辑新Stack View的属性，改变如下：<br>● Alignment 设为 Center<br>● Distribution 设为 Equal Spacing<br>● Spacing 设为 10<br><a href="http://cc.cocimg.com/api/uploads/20150623/1435027836351375.png" target="_blank" rel="noopener"></a></p>
-<ol>
-<li>删除五角星</li>
-</ol>
-<p>为“Remove Star”按钮创建名为removeStar，事件类型为Touch Up Inside的IBAction响应方法。<br><a href="http://cc.cocimg.com/api/uploads/20150623/1435027880805497.png" target="_blank" rel="noopener"></a><br>removeAction(_:)实现：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@IBAction func removeStar(sender: AnyObject) &#123;</span><br><span class="line">    let star:<span class="built_in">UIView</span>? = <span class="keyword">self</span>.horizontalStackView.arrangedSubviews.last</span><br><span class="line">    <span class="keyword">if</span> let aStar = star &#123;</span><br><span class="line">        <span class="keyword">self</span>.horizontalStackView.removeArrangedSubview(aStar)</span><br><span class="line">        aStar.removeFromSuperview()</span><br><span class="line">        <span class="built_in">UIView</span>.animateWithDuration(<span class="number">0.25</span>, animations: &#123;</span><br><span class="line">            <span class="keyword">self</span>.horizontalStackView.layoutIfNeeded()</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>运行app，现在既可增加，也可删除了。改变模拟器方向或者旋转设备看看app会怎样调整其界面。我们并未添加一行约束就构建好了app的用户界面。<br>需要注意的是：removeStar(<em>:)里调用removeFromSuperview是把subview从视图层级中移除。再次调用removeArrangedSubview(</em>:)只是告诉Stack View不再需要管理subview的约束。而subview会一直保持在视图层级结构中直到调用removeFromSuperview把它移除。<br>结论<br>UIStackView类大大简化了用户界面开发。这是好事，特别是随着硬件的改变。使用UIStackView，减少了开发者为简单场景设置枯燥的约束，把繁杂的工作交给了UIKit。<br>如果对文中的任何知识点感兴趣，可以从 GitHub下载完整工程。</p>
-<p>注：由于UIStackView仅支持iOS9+，低版本无法使用，百度团队开源的FDStackView，可以在低版本中直接使用UIStackView，原理使用runtime运行时注入<br>链接：<a href="https://github.com/forkingdog/FDStackView" target="_blank" rel="noopener">FDStackView</a></p>
-<p>原文链接：<br><a href="https://code.tutsplus.com/tutorials/ios-9-getting-started-with-uistackview--cms-24193" target="_blank" rel="noopener">iOS 9: Getting Started with UIStackView</a><br>中文翻译：<br><a href="http://www.cocoachina.com/ios/20150623/12233.html" target="_blank" rel="noopener">iOS 9: UIStackView入门</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/16/UIStackView入门/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-博客知识点汇总" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/15/博客知识点汇总/">博客知识点汇总</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/15/博客知识点汇总/" class="archive-article-date">
-  	<time datetime="2018-05-15T07:31:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="GCD-详解"><a href="#GCD-详解" class="headerlink" title="GCD 详解"></a>GCD 详解</h3><p><a href="https://www.jianshu.com/p/2d57c72016c6" target="_blank" rel="noopener">iOS多线程：『GCD』详尽总结</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/15/博客知识点汇总/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS后台任务使用启蒙" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/12/iOS后台任务使用启蒙/">iOS后台任务使用启蒙</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/12/iOS后台任务使用启蒙/" class="archive-article-date">
-  	<time datetime="2018-05-11T16:39:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>故事是这样开始的，刚开始我一直想找可以延长App后台存活方法的，后来找到如下代码</p>
-</blockquote>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//程序进入后台后继续运行10分钟</span></span><br><span class="line">    <span class="built_in">UIApplication</span>*   app = [<span class="built_in">UIApplication</span> sharedApplication];</span><br><span class="line">    __block    <span class="built_in">UIBackgroundTaskIdentifier</span> bgTask;</span><br><span class="line">    bgTask = [app beginBackgroundTaskWithExpirationHandler:^&#123;</span><br><span class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        <span class="keyword">if</span> (bgTask != <span class="built_in">UIBackgroundTaskInvalid</span>) &#123;</span><br><span class="line">            bgTask = <span class="built_in">UIBackgroundTaskInvalid</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>), ^&#123;</span><br><span class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">    <span class="keyword">if</span> (bgTask != <span class="built_in">UIBackgroundTaskInvalid</span>) &#123;</span><br><span class="line">        bgTask = <span class="built_in">UIBackgroundTaskInvalid</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>使用中发现，App会在3分钟左右强制kill。经查询发现写法有问题。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">    <span class="built_in">UIBackgroundTaskIdentifier</span> backgroundUpdateTask;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">long</span> aa;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSTimer</span> *_timer;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>) didEnterBackground:(<span class="built_in">NSNotification</span> *)notif&#123;</span><br><span class="line"></span><br><span class="line">    aa = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    [<span class="keyword">self</span> startTask];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>) startTask &#123;</span><br><span class="line"></span><br><span class="line">    _timer = [<span class="built_in">NSTimer</span> scheduledTimerWithTimeInterval:<span class="number">1</span> target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(go:) userInfo:<span class="literal">nil</span> repeats:<span class="literal">YES</span>];</span><br><span class="line"></span><br><span class="line">    backgroundUpdateTask = [[<span class="built_in">UIApplication</span> sharedApplication] beginBackgroundTaskWithExpirationHandler:^&#123;</span><br><span class="line">    DDLogInfo(<span class="string">@"bgTask expiration============="</span>);</span><br><span class="line">    [_timer invalidate];</span><br><span class="line"></span><br><span class="line">    [[<span class="built_in">UIApplication</span> sharedApplication] endBackgroundTask:backgroundUpdateTask];</span><br><span class="line"></span><br><span class="line">    backgroundUpdateTask = <span class="built_in">UIBackgroundTaskInvalid</span>;</span><br><span class="line"></span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)go:(<span class="built_in">NSTimer</span> *)tim &#123;</span><br><span class="line"></span><br><span class="line">    DDLogInfo(<span class="string">@"%@==%ld,%g "</span>,[<span class="built_in">NSDate</span> date],aa,[<span class="built_in">UIApplication</span> sharedApplication].backgroundTimeRemaining);</span><br><span class="line"></span><br><span class="line">    aa++;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (aa%<span class="number">10</span> == <span class="number">0</span> || [<span class="built_in">UIApplication</span> sharedApplication].backgroundTimeRemaining == <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">        [LocalNotificationManager postLocalNotificationAlertBody:s];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>文档上说有10分钟的执行时间，但从打印的backgroundTimeRemaining时间来看，只有180秒。</p>
-<p>注意：测试此功能不能用Xcode直接debug运行，因为在调试器链接到app的进行的情况下，app是不会在后台被挂起的，也就是说即使backgroundTimeRemaining =0了，timer里的代码依然能够继续执行。</p>
-<p>所以要测试运行态的情况，要么用文件日志(总是要导出比较麻烦)，要么用本地通知来查看。</p>
-<p>2、是否能递归调用此方法来持续获得执行时间</p>
-<p>在beginBackgroundTaskWithExpirationHandler里最后再递归调用[self startTask];</p>
-<p>经尝试此方法无效，180秒超时后再次申请，会立刻回调超时的block，并且backgroundTimeRemaining时间一直都是0。</p>
-<p>并且由于一直不停的在递归创建和终止后台任务，当Expiration真正到来的时候，一个还有一个创建的任务没有关闭。从而导致违背begin和end成对调用的原则，app被系统强制kill。所以此方法不但不能延长执行时间，还会导致app在180秒后台执行时间到达后，被系统kill的情况。</p>
-<p>3、beginBackgroundTaskWithExpirationHandler多次被调用的情况</p>
-<p>didEnterBackground每次调用都会触发beginBackgroundTaskWithExpirationHandler来创建新的后台任务，并用backgroundUpdateTask保存任务id，但如果第一次的任务还没有endBackgroundTask之前，应用回到前台，然后再次进入后台，就会重新创建一个新的后台任务，并且backgroundUpdateTask之前保存的id会被覆盖，这就违背了beginBackgroundTaskWithExpirationHandler与endBackgroundTask成对调用的原因。因为前一个后台任务超时的block回调的时候，其实是end了后一个taskId对应的后台任务，并且把taskId赋值为UIBackgroundTaskInvalid。而后一个后台任务超时的block回调的时候，taskId已经变成了null，对其进行end调用已经无效了，所以相当于没有成对调用begin和end，导致的结果就是：后一个后台任务超时的时候，app被系统强制kill。</p>
-<p>所以每一次创建的后台任务都要有一个独立的变量来维护其taskId，如果只有一个后台任务，但是有重入的可能，那么应该在willEnterForeground回调中，把前一个后台任务进行endBackgroundTask操作，这样就不存在taskId被覆盖的问题了。或者是每次didEnterBackground的时候，检查taskId == UIBackgroundTaskInvalid，若不满足该条件，说明taskId已经引用了一个正在进行的后台任务，还没有完成，由于这个后台任务重进前台又切换回后台的情况下，backgroundTimeRemaining会被重置为180秒，所以在这种需求下，关闭前一个任务再重新建议一个相同的后台任务没有必要，所以应该直接</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(backgroundUpdateTask != <span class="built_in">UIBackgroundTaskInvalid</span>)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>4、后台任务expiration后，app被系统kill的问题</p>
-<p>按照文档里的说法，只要begin与end在真正expiration之前成对调用，就不会导致系统强制kill app，而是app从后台执行状态切换到suspend状态，但实际测试中，每次expiration之后，app都会被kill掉，根据是app从launch页面重新进入。但我在willTerminate通知里的回调中加了一个local notification，并没有触发这个本地通知。(从app switcher强制退出应用的时候会触发本地通知，说明本地通知有效)。只能认为是app从后台状态切换到suspend状态后，立刻被系统kill掉了，但不知道为什么会这样。</p>
-<p>5、参考另一个文章中的实现，可以在任务结束后不被kill</p>
-<p>参考</p>
-<p><a href="http://www.cnblogs.com/lyanet/archive/2013/03/26/2983079.html" target="_blank" rel="noopener">http://www.cnblogs.com/lyanet/archive/2013/03/26/2983079.html</a></p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//程序进入后台后延长活动时间，一般180s内，添加这段代码是为了避免App推入后台，线程暂停，NSTime停止计时（验证码）。</span></span><br><span class="line">    <span class="built_in">UIApplication</span>* app = [<span class="built_in">UIApplication</span> sharedApplication];</span><br><span class="line">    __block <span class="built_in">UIBackgroundTaskIdentifier</span> bgTask;</span><br><span class="line">    bgTask = [app beginBackgroundTaskWithExpirationHandler:^&#123;</span><br><span class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</span><br><span class="line"></span><br><span class="line">    [[<span class="built_in">UIApplication</span> sharedApplication] endBackgroundTask:bgTask];</span><br><span class="line">        bgTask = <span class="built_in">UIBackgroundTaskInvalid</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
-<p>beginBackgroundTaskWithExpirationHandler 和 endBackgroundTask 是成对出现。</p>
-<p>beginBackgroundTaskWithName:expirationHandler:方法标识了一个后台任务的开始，并用过超时处理的回调来结束此任务。那么，超时时间具体是多少？可以通过UIApplication的只读属性backgroundTimeRemaining来获取当前后台任务执行的剩余时间，它不是具体的数字（大约180s内），而是iOS根据当前系统环境综合考量后估算出来的。然后执行expirationHandler回调完成一个后台任务的执行周期。</p>
-<p>当开启后台任务后，结束前block回调，回调中就要设置关闭后台任务的代码，比如缓存数据等等。并且调用endBackgroundTask。关闭后台任务，否则系统会任务后台任务超时仍未完成，系统直接kill app。导致再次打开挂起的App发现，应用得重新启动。</p>
-<p>之前的问题就因为没有调用endBackgroundTask 导致App提前kill。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/12/iOS后台任务使用启蒙/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-关于缓存的TIPS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/10/关于缓存的TIPS/">关于HTTP缓存的TIPS</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/10/关于缓存的TIPS/" class="archive-article-date">
-  	<time datetime="2018-05-10T12:09:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="无法加载最新图片"><a href="#无法加载最新图片" class="headerlink" title="无法加载最新图片"></a>无法加载最新图片</h3><p>工作中上传后重新加载头像的时候，发现头像并没有改变。这个问题以前也遇到过，这次不能忍了必须查个水落石出。<br>SDWebImage options设置为：SDWebImageRefreshCached，但是并没有效果。<br>汇总资料后：<br>使用</p>
-<pre><code>
-curl url --head
-
-例如：
-curl http://123.126.109.38:18081/AreaAppFile/nurse_head_thumb/402887bb62f58c250162f5bf4a840006.jpg --head
-
-返回：
-curl http://123.126.109.38:18081/AreaAppFile/nurse_head_thumb/402887bb62f58c250162f5bf4a840006.jpg --head
-HTTP/1.1 200 OK
-Server: Apache-Coyote/1.1
-Accept-Ranges: bytes
-ETag: W/"48681-1525950947149"
-Last-Modified: Thu, 10 May 2018 11:15:47 GMT
-Content-Type: image/jpeg
-Content-Length: 48681
-Date: Thu, 10 May 2018 11:16:31 GMT
-
-对比抖音头像链接：
-curl https://p1.pstatp.com/aweme/100x100/729c00380329e728f710.jpeg --head
-HTTP/1.1 200 OK
-Expires: Thu, 18 Apr 2019 06:10:07 GMT
-Date: Wed, 18 Apr 2018 06:10:07 GMT
-Server: nginx
-Content-Type: image/jpeg
-Content-Length: 2689
-Accept-Ranges: bytes
-Cache-Control: max-age=31536000
-Last-Modified: Tue, 27 Mar 2018 15:18:20 GMT
-X-Mosaic-Namespace: aweme-online
-X-Response-Date: Tue, 27 Mar 2018 15:22:24 GMT
-X-Xxoo-Time: Tue, 27 Mar 2018 15:22:24 GMT
-Access-Control-Allow-Origin: *
-Age: 1
-X-Via: 1.1 lf163:4 (Cdn Cache Server V2.0), 1.1 menxiazai39:3 (Cdn Cache Server V2.0), 1.1 fangwangtong49:4 (Cdn Cache Server V2.0)
-Connection: keep-alive
-X-Dscp-Value: 0
-</code></pre>
-> 对比发现没有Cache-Control: 字段
-
-#### 好奇Cache-Control:如何实现图片验证，资料如下
-
-客户端从服务器请求数据经历如下基本步骤: 
-1. 如果请求命中本地缓存则从本地缓存中获取一个对应资源的"copy"； 
-2. 检查这个"copy"是否fresh,是则直接返回，否则继续向服务器转发请求。 
-3. 服务器接收到请求，然后判断资源是否变更，是则返回新内容，否则返回304，未变更。
-4. 客户端更新本地缓存。 
-
-* no-cache的作用是：强制客户端跳过步骤2，直接向服务器发送请求。也就是说每次请求都必须向服务器发送。 
-* must-revalidate:作用与no-cache相同，但更严格，强制意味更明显。但这只是理论上的描述，根据我在ff6上的测试，它几乎不起作用：只要请求的频率加快到一定程度，服务器就接收不到请求。
-* no-store:缓存将不存储response,包括header和body。测试结果表明，除每次请求都必发送到服务器外，响应代码均是200，且request并没有发送"If-Modified-Since"和"If-None-Match"头，这意味着缓存的确没有存储response。
-
-以上三者都是要求客户端每次请求都必须到服务器进行revalidate，此功能还可以通过max-age实现： 
-<pre><code>
-Cache-Control:max-age=0  
-</code></pre>
-
-<p>测试结果证明了这一点，每次都请求了服务器，且状态码是304。 </p>
-<p>明天让服务端增加该值，再试试看。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/10/关于缓存的TIPS/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS语言本地化或国际化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/24/iOS语言本地化或国际化/">iOS语言本地化或国际化</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/24/iOS语言本地化或国际化/" class="archive-article-date">
-  	<time datetime="2018-04-23T16:39:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="iOS语言本地化-国际化"><a href="#iOS语言本地化-国际化" class="headerlink" title="iOS语言本地化/国际化"></a>iOS语言本地化/国际化</h1><blockquote>
-<p></p><h3>开场白<h3><p></p>
-<p></p><h6>语言本地化，又叫做语言国际化。是指根据用户操作系统的语言设置，自动将应用程序的语言设置为和用户操作系统语言一致的语言。往往一些应用程序需要提供给多个国家的人群使用，或者一个国家有多种语言，这就要求应用程序所展示的文字、图片等信息，能够让讲不同语言的用户读懂、看懂。进而提出为同一个应用程序适配多种语言，也即是国际化。<h6><p></p>
-</h6></h6></h3></h3></blockquote>
-<ul>
-<li>配置需要国际化的语言</li>
-<li>App名称本地化</li>
-<li>代码中字符串本地化</li>
-<li>多人开发情况下的字符串本地化</li>
-<li>图片本地化</li>
-<li>查看/切换本地语言</li>
-<li>storyboard/xib本地化</li>
-</ul>
-<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqmzrxtc2zj21ka10agte.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqmzsk894jj225s1cq12w.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqmzsr6pbtj225s1cqwpo.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn0qrp4roj21lw1cq15z.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn0qrmfiyj20nc0a6wg1.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn0qrq4cuj21lw1cqgzf.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn0qrq7eqj21lw1cqqh0.jpg" alt=""></p>
-<blockquote>
-<p>info.plist 中修改Bundle name即可设置各种语言下的App名字</p>
-</blockquote>
-<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn11z8qgaj22121cq4d1.jpg" alt=""></p>
-<blockquote>
-<p>main.storyboard 中的文本修改</p>
-</blockquote>
-<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1tvvsboj22121cq4g3.jpg" alt=""></p>
-<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1uu2qo7j21a417kmzf.jpg" alt=""></p>
-<h3 id="动态设置文本"><a href="#动态设置文本" class="headerlink" title="动态设置文本"></a>动态设置文本</h3><p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1fsbdrfj214k0t879m.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1fsck4mj213k0s0tcu.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1fscioxj22121cqgyo.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1fscrnaj22121cqdt8.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1kcfelbj22121cqws8.jpg" alt=""></p>
-<blockquote>
-<p>然后我们只需要在Localizable.strings下对应的文件中，分别以Key-Value的形式，为代码中每一个需要本地化的字符串赋值，如下图：</p>
-</blockquote>
-<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1vnabruj22121cq193.jpg" alt=""></p>
-<blockquote>
-<p>代码中使用方法  [NSLocalizedString(&lt;#T##key: String##String#&gt;, comment: &lt;#T##String#&gt;)]</p>
-</blockquote>
-<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn2buk2zhj21ng18o7e5.jpg" alt=""></p>
-<blockquote>
-<p>注意 文件名必须是 Localizable.strings 不然无法识别，上面截图有误 <img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn298sjihj22121cqne2.jpg" alt=""></p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/24/iOS语言本地化或国际化/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-CocoaPods报错问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/20/CocoaPods报错问题/">CocoaPods报错问题</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/20/CocoaPods报错问题/" class="archive-article-date">
-  	<time datetime="2018-04-20T01:55:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="CocoaPods报错问题"><a href="#CocoaPods报错问题" class="headerlink" title="CocoaPods报错问题"></a>CocoaPods报错问题</h2><pre><code>
-
-[!] The `PuHuaHospital [Release]` target overrides the `GCC_PREPROCESSOR_DEFINITIONS` build setting defined in `Pods/Target Support Files/Pods-PuHuaHospital/Pods-PuHuaHospital.release.xcconfig'. This can lead to problems with the CocoaPods installation
-- Use the `$(inherited)` flag, or
-- Remove the build settings from the target.
-
-</code></pre>
-
-
-<p>解决办法：<br>在Build Settings<br>Header Search Paths<br>Other Linker Flags<br>Preprocessor Macros<br>在这三个地方都加上$(inherited)，然后重新pod install就可以了。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/20/CocoaPods报错问题/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-NSDateFormatter优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/11/NSDateFormatter优化/">NSDateFormatter优化</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/11/NSDateFormatter优化/" class="archive-article-date">
-  	<time datetime="2018-04-11T03:22:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><em>*</em> 为什么要优化NSDateFormatter？</p>
-<p>今天逛论坛看到NSDateFormatte很耗性能，一查发现确有其事。</p>
-<p>下面是官方描述</p>
-<blockquote>
-<p>Creating a date formatter is not a cheap operation. If you are likely to use a formatter frequently, it is typically more efficient to cache a single instance than to create and dispose of multiple instances. One approach is to use a static variable</p>
-</blockquote>
-<p>优化方式有哪些？<br>a.延迟转换<br>即只有在UI需要使用转换结果时在进行转换。</p>
-<p>b.Cache in Memory<br>根据NSDateFormatter线程安全性，不同的iOS系统版本内存缓存如下：</p>
-<ul>
-<li>prior to iOS 7</li>
-</ul>
-<p>如果直接采用静态变量进行存储，那么可能就会存在线程安全问题，在iOS 7之前，NSDateFormatter是非线程安全的，因此可能就会有两条或以上的线程同时访问同一个日期格式化对象，从而导致App崩溃。</p>
-<pre><code>
-+ (NSDateFormatter *)cachedDateFormatter {
-
-NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary];
-
-NSDateFormatter *dateFormatter = [threadDictionary objectForKey:@"cachedDateFormatter"];
-
-if (!dateFormatter) {
-
-dateFormatter = [[NSDateFormatter alloc] init];
-
-[dateFormatter setLocale:[NSLocale currentLocale]];
-
-[dateFormatter setDateFormat: @"YYYY-MM-dd HH:mm:ss"];
-
-[threadDictionary setObject:dateFormatter forKey:@"cachedDateFormatter"];
-
-}
-
-return dateFormatter;
-
-}
-</code></pre>
-
-<ul>
-<li>iOS 7 or later</li>
-</ul>
-<p>在iOS 7、macOS 10.9及以上系统版本，NSDateFormatter都是线程安全的，因此我们无需担心日期格式化对象在使用过程中被另外一条线程给修改，为了提高性能，我们还可以在上述代码块中进行简化（除去冗余部分）。</p>
-<pre><code>
-static NSDateFormatter *cachedDateFormatter = nil;
-
-+ (NSDateFormatter *)cachedDateFormatter {
-
-// If the date formatters aren't already set up, create them and cache them for reuse.
-
-if (!dateFormatter) {
-
-dateFormatter = [[NSDateFormatter alloc] init];
-
-[dateFormatter setLocale:[NSLocale currentLocale]];
-
-[dateFormatter setDateFormat: @"YYYY-MM-dd HH:mm:ss"];
-
-}
-
-return dateFormatter;
-
-}
-</code></pre>
-
-<p>如果缓存了日期格式化或者是其他依赖于current locale的对象，那么我们应该监听NSCurrentLocaleDidChangeNotification通知，当current locale变化时及时更新被缓存的日期格式化对象。</p>
-<blockquote>
-<p>In theory you could use an auto-updating locale (autoupdatingCurrentLocale) to create a locale that automatically accounts for changes in the user’s locale settings. In practice this currently does not work with date formatters.</p>
-</blockquote>
-<h3 id="Apple-Threading-Programming-Guide"><a href="#Apple-Threading-Programming-Guide" class="headerlink" title="Apple Threading Programming Guide"></a>Apple Threading Programming Guide</h3><p>c.利用标准C语言库<br>如果时间日期格式是固定的，我们可以采用C语言中的strptime函数，这样更加简单高效。</p>
-<pre><code>
-- (NSDate *) easyDateFormatter{
-
-time_t t;
-
-struct tm tm;
-
-char *iso8601 = "2016-09-18";
-
-strptime(iso8601, "%Y-%m-%d", &tm);
-
-tm.tm_isdst = -1;
-
-tm.tm_hour = 0;//当tm结构体中的tm.tm_hour为负数，会导致mktime(&tm)计算错误
-
-/**
-
-//NSString *iso8601String = @"2016-09-18T17:30:08+08:00";
-
-//%Y-%m-%d [iso8601String cStringUsingEncoding:NSUTF8StringEncoding]
-
-{
-
-tm_sec = 0
-
-tm_min = 0
-
-tm_hour = 0
-
-tm_mday = 18
-
-tm_mon = 9
-
-tm_year = 116
-
-tm_wday = 2
-
-tm_yday = 291
-
-tm_isdst = 0
-
-tm_gmtoff = 28800
-
-tm_zone = 0x00007fd9b600c31c "CST"
-
-}
-
-ISO8601时间格式：2004-05-03T17:30:08+08:00 参考Wikipedia
-
-*/
-
-t = mktime(&tm);
-
-//http://pubs.opengroup.org/onlinepubs/9699919799/functions/mktime.html
-
-//secondsFromGMT: The current difference in seconds between the receiver and Greenwich Mean Time.
-
-return [NSDate dateWithTimeIntervalSince1970:t + [[NSTimeZone localTimeZone] secondsFromGMT]];
-
-}
-</code></pre>
-
-<p>相关资料：<br>Date Formate Patterns :</p>
-<p><img src="http://ww1.sinaimg.cn/large/68e28bf3ly1fq8kh40yd1j20yg0bhwgi.jpg" alt=""></p>
-<p><a href="http://www.gnu.org/software/libc/" target="_blank" rel="noopener">Standard C library</a></p>
-<p><a href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank" rel="noopener">ISO_8601</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/11/NSDateFormatter优化/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Keychain-浅析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/11/Keychain-浅析/">Keychain 浅析</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/11/Keychain-浅析/" class="archive-article-date">
-  	<time datetime="2018-01-11T05:51:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="什么是Keychain"><a href="#什么是Keychain" class="headerlink" title="什么是Keychain?"></a>什么是Keychain?</h3><p>根据苹果的介绍，iOS设备中的Keychain是一个安全的存储容器，可以用来为不同应用保存敏感信息比如用户名，密码，网络密码，认证令牌。苹果自己用keychain来保存Wi-Fi网络密码，VPN凭证等等。它是一个在所有app之外的sqlite数据库。</p>
-<p>如果我们手动把自己的私密信息加密，然后通过写文件保存在本地，再从本地取出不仅麻烦，而且私密信息也会随着App的删除而丢失。iOS的Keychain能完美的解决这些问题。并且从iOS 3.0开始，Keychain还支持跨程序分享。这样就极大的方便了用户。省去了很多要记忆密码的烦恼。</p>
-<h3 id="Structure-of-a-Keychain"><a href="#Structure-of-a-Keychain" class="headerlink" title="Structure of a Keychain"></a>Structure of a Keychain</h3><p>Keychain内部可以保存很多的信息。每条信息作为一个单独的keychain item，keychain item一般为一个字典，每条keychain item包含一条data和很多attributes。举个例子，一个用户账户就是一条item，用户名可以作为一个attribute , 密码就是data。 keychain虽然是可以保存15000条item,每条50个attributes，但是苹果工程师建议最好别放那么多，存几千条密码，几千字节没什么问题。</p>
-<p>Keychain 可以包含任意数量的 keychain item。每一个 keychain item 包含数据和一组属性。对于一个需要保护的 keychain item，比如密码或者私钥（用于加密或者解密的string字节）数据是加密的，会被 keychain 保护起来的；对于无需保护的 keychain item，例如，证书，数据未被加密。</p>
-<p>跟keychain item有关系的取决于item的类型；应用程序中最常用的是网络密码（Internet passwrods）和普通的密码。正如你所想的，网络密码像安全域（security domain）、协议、和路径等一些属性。在OSX中，当keychain被锁的时候加密的item没办法访问，如果你想要该问被锁的item，就会弹出一个对话框，需要你输入对应keychain的密码。当然，未有密码的keychain你可以随时访问。但在iOS中，你只可以访问你自已的keychain items;</p>
-<pre><code>
-extern CFTypeRef kSecClassGenericPassword
-extern CFTypeRef kSecClassInternetPassword
-extern CFTypeRef kSecClassCertificate
-extern CFTypeRef kSecClassKey
-extern CFTypeRef kSecClassIdentity OSX_AVAILABLE_STARTING(MAC_10_7, __IPHONE_2_0);
-</code></pre>
-
-<h3 id="Keychain的特点"><a href="#Keychain的特点" class="headerlink" title="Keychain的特点"></a>Keychain的特点</h3><ul>
-<li>数据并不存放在App的Sanbox中，即使删除了App，资料依然保存在keychain中。如果重新安装了app，还可以从keychain获取数据。</li>
-<li>keychain的数据可以用过group方式，让程序可以在App间共享。不过得要相同TeamID</li>
-<li>keychain的数据是经过加密的</li>
-</ul>
-<h3 id="Keychain的使用"><a href="#Keychain的使用" class="headerlink" title="Keychain的使用"></a>Keychain的使用</h3><p>大多数iOS应用需要用到Keychain， 都用来添加一个密码，修改一个已存在Keychain item或者取回密码。Keychain提供了以下的操作</p>
-<ul>
-<li>SecItemAdd 添加一个item</li>
-<li>SecItemUpdate 更新已存在的item</li>
-<li>SecItemCopyMatching 搜索一个已存在的item</li>
-<li>SecItemDelete 删除一个keychain item</li>
-</ul>
-<h5 id="根据特定的Service创建一个用于操作KeyChain的Dictionary"><a href="#根据特定的Service创建一个用于操作KeyChain的Dictionary" class="headerlink" title="根据特定的Service创建一个用于操作KeyChain的Dictionary"></a>根据特定的Service创建一个用于操作KeyChain的Dictionary</h5><pre><code>
-
-+ (NSMutableDictionary *)keyChainQueryDictionaryWithService:(NSString *)service{
-NSMutableDictionary *keyChainQueryDictaionary = [[NSMutableDictionary alloc]init];
-[keyChainQueryDictaionary setObject:(id)kSecClassGenericPassword forKey:(id)kSecClass];
-[keyChainQueryDictaionary setObject:service forKey:(id)kSecAttrService];
-[keyChainQueryDictaionary setObject:service forKey:(id)kSecAttrAccount];
-return keyChainQueryDictaionary;
-}
-
-</code></pre>
-
-<h5 id="添加数据"><a href="#添加数据" class="headerlink" title="添加数据"></a>添加数据</h5><pre><code>
-
-+ (BOOL)addData:(id)data forService:(NSString *)service{
-NSMutableDictionary *keychainQuery = [self keyChainQueryDictionaryWithService:service];
-SecItemDelete((CFDictionaryRef)keychainQuery);
-[keychainQuery setObject:[NSKeyedArchiver archivedDataWithRootObject:data] forKey:(id)kSecValueData];
-OSStatus status= SecItemAdd((CFDictionaryRef)keychainQuery, NULL);
-if (status == noErr) {
-return YES;
-}
-return NO;
-}
-
-</code></pre>
-
-<h5 id="搜索数据"><a href="#搜索数据" class="headerlink" title="搜索数据"></a>搜索数据</h5><pre><code>
-+ (id)queryDataWithService:(NSString *)service {
-id result;
-NSMutableDictionary *keyChainQuery = [self keyChainQueryDictionaryWithService:service];
-[keyChainQuery setObject:(id)kCFBooleanTrue forKey:(id)kSecReturnData];
-[keyChainQuery setObject:(id)kSecMatchLimitOne forKey:(id)kSecMatchLimit];
-CFDataRef keyData = NULL;
-if (SecItemCopyMatching((CFDictionaryRef)keyChainQuery, (CFTypeRef *)&keyData) == noErr) {
-@try {
-result = [NSKeyedUnarchiver  unarchiveObjectWithData:(__bridge NSData *)keyData];
-}
-@catch (NSException *exception) {
-NSLog(@"不存在数据");
-}
-@finally {
-
-}
-}
-if (keyData) {
-CFRelease(keyData);
-}
-return result;
-}
-
-</code></pre>
-
-<h5 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h5><pre><code>
-+ (BOOL)updateData:(id)data forService:(NSString *)service{
-NSMutableDictionary *searchDictionary = [self keyChainQueryDictionaryWithService:service];
-
-if (!searchDictionary) {
-return NO;
-}
-
-NSMutableDictionary *updateDictionary = [[NSMutableDictionary alloc] init];
-[updateDictionary setObject:[NSKeyedArchiver archivedDataWithRootObject:data] forKey:(id)kSecValueData];
-OSStatus status = SecItemUpdate((CFDictionaryRef)searchDictionary,
-(CFDictionaryRef)updateDictionary);
-if (status == errSecSuccess) {
-return YES;
-}
-return NO;
-}
-
-</code></pre>
-
-<h5 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h5><pre><code>
-+ (BOOL)deleteDataWithService:(NSString *)service{
-NSMutableDictionary *keyChainDictionary = [self keyChainQueryDictionaryWithService:service];
-OSStatus status = SecItemDelete((CFDictionaryRef)keyChainDictionary);
-if (status == noErr) {
-return YES;
-}
-return NO;
-}
-
-</code></pre>
-
-<h3 id="Keychain-共享数据"><a href="#Keychain-共享数据" class="headerlink" title="Keychain 共享数据"></a>Keychain 共享数据</h3><p>在工程中 Target -&gt; Capabilities -&gt; Keychain Groups。打开这个选项。</p>
-<p>Keychain通过provisioning profile来区分不同的应用，provisioning文件内含有应用的bundle id和添加的access groups。不同的应用是完全无法访问其他应用保存在Keychain的信息，除非指定了同样的access group。指定了同样的group名称后，不同的应用间就可以分享保存在Keychain内的信息。</p>
-<h3 id="Keychain-Access-Group的使用方法："><a href="#Keychain-Access-Group的使用方法：" class="headerlink" title="Keychain Access Group的使用方法："></a>Keychain Access Group的使用方法：</h3><ol>
-<li><p>首先要在Capabilities下打开工程的Keychain Sharing按钮。然后需要分享Keychain的不同应用添 加相同的Group名称。Xcode6以后Group可以随便命名，不需要加AppIdentifierPrefix前缀，并且Xcode会在以entitlements结尾的文件内自动添加所有Group名称，然后在每一个Group前自动加上$(AppIdentifierPrefix)前缀。虽然文档内提到还需要添加一个包含group的.plist文件，其实它和.entitlements文件是同样的作用，所以不需要重复添加。 但是每个不同的应用第一条Group最好以自己的bundleID命名，因为如果entitlements文件内已经有Keychain Access Groups数组后item的Group属性默认就为数组内的第一条Grop。</p>
-</li>
-<li><p>需要支持跨设备分享的Keychain item添加一条AccessGroup属性,不过代码里Group名称一定要加上AppIdentifierPrefix前缀。 [searchDictionary setObject:@“AppIdentifierPrefix.UC.testWriteKeychainSuit” forKey:(id)kSecAttrAccessGroup];如果要在app内部存私有的信息，group置为自己的bundleID即可，如果entitlements文件内没有指定Keychain Access Groups数组。那group也可以置为nil，这样默认也会以自己的bundleID作为Group。<br>3.</p>
-<h3 id="Keychain的安全性"><a href="#Keychain的安全性" class="headerlink" title="Keychain的安全性"></a>Keychain的安全性</h3></li>
-</ol>
-<p>Keychain内部的数据会自动加密。如果设备没有越狱并且不暴力破解，keychain确实很安全。但是越狱后的设备，keychain就很危险了。</p>
-<p>通过上面的一些信息我们已经知道访问keychain里面的数据需要和app一样的证书或者获得access group的名称。设备越狱后相当于对苹果做签名检查的地方打了个补丁，伪造一个证书的app也能正常使用，并且加上Keychain Dumper这些工具获取Keychain内的信息会非常容易。</p>
-<h3 id="使用keychain需要注意的问题"><a href="#使用keychain需要注意的问题" class="headerlink" title="使用keychain需要注意的问题"></a>使用keychain需要注意的问题</h3><ol>
-<li>当我们不支持Keychain Access Group，并且没有entitlement文件时，keychain默认以bundle id为group。如果我们在版本更新的时候改变了bundle id，那么新版本就访问不了旧版本的keychain信息了。解决办法是从一开始我们就打开KeychainSharing，添加Keychain Access Group，并且指定每条keychain Item的group，私有的信息就指定app的bundle id为它的group。</li>
-<li>代码内Access group名称一定要有AppIdentifierPrefix前缀。</li>
-<li>Keychain是基于数据库存储，不允许添加重复的条目。所以每条item都必须指定对应的唯一标识符也就是那些主要的key，如果Key指定不正确，可能会出现添加后查找不到的问题。</li>
-<li>kSecAttrSynchronizable也会作为主要的key之一。它的value值默认为No，如果之前添加的item此条属性为YES，在搜索，更新，删除的时候必须添加此条属性才能查找到之前添加的item。</li>
-<li>Kechain item字典内添加自定义key时会出现参数不合法的错误。</li>
-</ol>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>keychain 是一个很有用的工具，我们可以在保存密码或者证书的时候使用keychain，并且支持不同应用分享Keychain内的信息，或者支持iCloud备份跨设备分享，但是越狱版应用还是不建议使用</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/11/Keychain-浅析/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-精装修验房注意事项汇总" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/20/精装修验房注意事项汇总/">精装修验房注意事项汇总</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/20/精装修验房注意事项汇总/" class="archive-article-date">
-  	<time datetime="2017-12-20T06:04:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1、精装修房验房的要点和诀窍有哪些？"><a href="#1、精装修房验房的要点和诀窍有哪些？" class="headerlink" title="1、精装修房验房的要点和诀窍有哪些？"></a>1、精装修房验房的要点和诀窍有哪些？</h2><p><a href="https://www.zhihu.com/question/20594846" target="_blank" rel="noopener"><font color="blue" size="3" face="微软雅黑">点击跳转 ➨  精装修房验房的要点和诀窍有哪些？</font></a></p>
-<h2 id="2、19种精装房验房方法-教你学会如何验房"><a href="#2、19种精装房验房方法-教你学会如何验房" class="headerlink" title="2、19种精装房验房方法 教你学会如何验房"></a>2、19种精装房验房方法 教你学会如何验房</h2><p><a href="https://jingyan.baidu.com/article/1709ad80a9d3fe4634c4f00c.html" target="_blank" rel="noopener"><font color="blue" size="3"> 点击跳转 ➨  19种精装房验房方法 教你学会如何验房</font></a></p>
-<h2 id="3、精装修验房流程及标准（文档）"><a href="#3、精装修验房流程及标准（文档）" class="headerlink" title="3、精装修验房流程及标准（文档）"></a>3、精装修验房流程及标准（文档）</h2><p><a href="https://wenku.baidu.com/view/2b585b711611cc7931b765ce0508763231127407.html" target="_blank" rel="noopener"><font color="blue" size="3"> 点击跳转 ➨  精装修验房流程及标准<font></font></font></a></p>
-<h2 id="4、图示"><a href="#4、图示" class="headerlink" title="4、图示"></a>4、图示</h2><p><a href="http://sh.leju.com/scan/mfnds03/" target="_blank" rel="noopener"><font color="blue" size="3"> 点击跳转 ➨  精装修验房</font></a></p>
-<h2 id="5、“精装修”收房时如何验房？看过以后不吃亏！-较全"><a href="#5、“精装修”收房时如何验房？看过以后不吃亏！-较全" class="headerlink" title="5、“精装修”收房时如何验房？看过以后不吃亏！(较全)"></a>5、“精装修”收房时如何验房？看过以后不吃亏！(较全)</h2><p><a href="http://www.jia360.com/new/20900.html" target="_blank" rel="noopener"><font color="blue" size="3"> 点击跳转 ➨ 精装修”收房时如何验房？看过以后不吃亏！</font></a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/20/精装修验房注意事项汇总/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -1264,8 +350,8 @@ return NO;
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

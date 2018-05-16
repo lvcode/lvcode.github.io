@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="https://lvcode.github.io">
   <title>iOS后台任务使用启蒙 | LvCode&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="故事是这样开始的，刚开始我一直想找可以延长App后台存活方法的，后来找到如下代码   //程序进入后台后继续运行10分钟 UIApplication*   app = [UIApplication sharedApplication]; __block    UIBackgroundTaskIdentifier bgTask; bgTask = [app beginBackgroundTaskW">
+  <meta name="description" content="故事是这样开始的，刚开始我一直想找可以延长App后台存活方法的，后来找到如下代码  1234567891011121314151617//程序进入后台后继续运行10分钟    UIApplication*   app = [UIApplication sharedApplication];    __block    UIBackgroundTaskIdentifier bgTask;    b">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS后台任务使用启蒙">
 <meta property="og:url" content="https://lvcode.github.io/2018/05/12/iOS后台任务使用启蒙/index.html">
 <meta property="og:site_name" content="LvCode&#39;s Blog">
-<meta property="og:description" content="故事是这样开始的，刚开始我一直想找可以延长App后台存活方法的，后来找到如下代码   //程序进入后台后继续运行10分钟 UIApplication*   app = [UIApplication sharedApplication]; __block    UIBackgroundTaskIdentifier bgTask; bgTask = [app beginBackgroundTaskW">
+<meta property="og:description" content="故事是这样开始的，刚开始我一直想找可以延长App后台存活方法的，后来找到如下代码  1234567891011121314151617//程序进入后台后继续运行10分钟    UIApplication*   app = [UIApplication sharedApplication];    __block    UIBackgroundTaskIdentifier bgTask;    b">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-11T16:41:52.051Z">
+<meta property="og:updated_time" content="2018-05-16T02:17:48.520Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS后台任务使用启蒙">
-<meta name="twitter:description" content="故事是这样开始的，刚开始我一直想找可以延长App后台存活方法的，后来找到如下代码   //程序进入后台后继续运行10分钟 UIApplication*   app = [UIApplication sharedApplication]; __block    UIBackgroundTaskIdentifier bgTask; bgTask = [app beginBackgroundTaskW">
+<meta name="twitter:description" content="故事是这样开始的，刚开始我一直想找可以延长App后台存活方法的，后来找到如下代码  1234567891011121314151617//程序进入后台后继续运行10分钟    UIApplication*   app = [UIApplication sharedApplication];    __block    UIBackgroundTaskIdentifier bgTask;    b">
   
     <link rel="alternative" href="/atom.xml" title="LvCode&#39;s Blog" type="application/atom+xml">
   
@@ -177,76 +177,9 @@
         <blockquote>
 <p>故事是这样开始的，刚开始我一直想找可以延长App后台存活方法的，后来找到如下代码</p>
 </blockquote>
-<pre><code>
-//程序进入后台后继续运行10分钟
-UIApplication*   app = [UIApplication sharedApplication];
-__block    UIBackgroundTaskIdentifier bgTask;
-bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
-dispatch_async(dispatch_get_main_queue(), ^{
-if (bgTask != UIBackgroundTaskInvalid)
-{
-bgTask = UIBackgroundTaskInvalid;
-}
-});
-}];
-dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-dispatch_async(dispatch_get_main_queue(), ^{
-if (bgTask != UIBackgroundTaskInvalid)
-{
-bgTask = UIBackgroundTaskInvalid;
-}
-});
-});
-</code></pre>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//程序进入后台后继续运行10分钟</span></span><br><span class="line">    <span class="built_in">UIApplication</span>*   app = [<span class="built_in">UIApplication</span> sharedApplication];</span><br><span class="line">    __block    <span class="built_in">UIBackgroundTaskIdentifier</span> bgTask;</span><br><span class="line">    bgTask = [app beginBackgroundTaskWithExpirationHandler:^&#123;</span><br><span class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        <span class="keyword">if</span> (bgTask != <span class="built_in">UIBackgroundTaskInvalid</span>) &#123;</span><br><span class="line">            bgTask = <span class="built_in">UIBackgroundTaskInvalid</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>), ^&#123;</span><br><span class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">    <span class="keyword">if</span> (bgTask != <span class="built_in">UIBackgroundTaskInvalid</span>) &#123;</span><br><span class="line">        bgTask = <span class="built_in">UIBackgroundTaskInvalid</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>使用中发现，App会在3分钟左右强制kill。经查询发现写法有问题。</p>
-<pre><code>
-UIBackgroundTaskIdentifier backgroundUpdateTask;
-
-long aa;
-
-NSTimer *_timer;
-
-- (void) didEnterBackground:(NSNotification *)notif{
-
-aa = 0;
-
-[self startTask];
-
-}
-
-- (void) startTask {
-
-_timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(go:) userInfo:nil repeats:YES];
-
-backgroundUpdateTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-DDLogInfo(@"bgTask expiration=============");
-[_timer invalidate];
-
-[[UIApplication sharedApplication] endBackgroundTask:backgroundUpdateTask];
-
-backgroundUpdateTask = UIBackgroundTaskInvalid;
-
-}];
-
-}
-
--(void)go:(NSTimer *)tim {
-
-DDLogInfo(@"%@==%ld,%g ",[NSDate date],aa,[UIApplication sharedApplication].backgroundTimeRemaining);
-
-aa++;
-
-if (aa%10 == 0 || [UIApplication sharedApplication].backgroundTimeRemaining == 0) {
-
-[LocalNotificationManager postLocalNotificationAlertBody:s];
-
-}
-
-}
-
-</code></pre>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">    <span class="built_in">UIBackgroundTaskIdentifier</span> backgroundUpdateTask;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">long</span> aa;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSTimer</span> *_timer;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>) didEnterBackground:(<span class="built_in">NSNotification</span> *)notif&#123;</span><br><span class="line"></span><br><span class="line">    aa = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    [<span class="keyword">self</span> startTask];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>) startTask &#123;</span><br><span class="line"></span><br><span class="line">    _timer = [<span class="built_in">NSTimer</span> scheduledTimerWithTimeInterval:<span class="number">1</span> target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(go:) userInfo:<span class="literal">nil</span> repeats:<span class="literal">YES</span>];</span><br><span class="line"></span><br><span class="line">    backgroundUpdateTask = [[<span class="built_in">UIApplication</span> sharedApplication] beginBackgroundTaskWithExpirationHandler:^&#123;</span><br><span class="line">    DDLogInfo(<span class="string">@"bgTask expiration============="</span>);</span><br><span class="line">    [_timer invalidate];</span><br><span class="line"></span><br><span class="line">    [[<span class="built_in">UIApplication</span> sharedApplication] endBackgroundTask:backgroundUpdateTask];</span><br><span class="line"></span><br><span class="line">    backgroundUpdateTask = <span class="built_in">UIBackgroundTaskInvalid</span>;</span><br><span class="line"></span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)go:(<span class="built_in">NSTimer</span> *)tim &#123;</span><br><span class="line"></span><br><span class="line">    DDLogInfo(<span class="string">@"%@==%ld,%g "</span>,[<span class="built_in">NSDate</span> date],aa,[<span class="built_in">UIApplication</span> sharedApplication].backgroundTimeRemaining);</span><br><span class="line"></span><br><span class="line">    aa++;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (aa%<span class="number">10</span> == <span class="number">0</span> || [<span class="built_in">UIApplication</span> sharedApplication].backgroundTimeRemaining == <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">        [LocalNotificationManager postLocalNotificationAlertBody:s];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>文档上说有10分钟的执行时间，但从打印的backgroundTimeRemaining时间来看，只有180秒。</p>
 <p>注意：测试此功能不能用Xcode直接debug运行，因为在调试器链接到app的进行的情况下，app是不会在后台被挂起的，也就是说即使backgroundTimeRemaining =0了，timer里的代码依然能够继续执行。</p>
 <p>所以要测试运行态的情况，要么用文件日志(总是要导出比较麻烦)，要么用本地通知来查看。</p>
@@ -257,39 +190,13 @@ if (aa%10 == 0 || [UIApplication sharedApplication].backgroundTimeRemaining == 0
 <p>3、beginBackgroundTaskWithExpirationHandler多次被调用的情况</p>
 <p>didEnterBackground每次调用都会触发beginBackgroundTaskWithExpirationHandler来创建新的后台任务，并用backgroundUpdateTask保存任务id，但如果第一次的任务还没有endBackgroundTask之前，应用回到前台，然后再次进入后台，就会重新创建一个新的后台任务，并且backgroundUpdateTask之前保存的id会被覆盖，这就违背了beginBackgroundTaskWithExpirationHandler与endBackgroundTask成对调用的原因。因为前一个后台任务超时的block回调的时候，其实是end了后一个taskId对应的后台任务，并且把taskId赋值为UIBackgroundTaskInvalid。而后一个后台任务超时的block回调的时候，taskId已经变成了null，对其进行end调用已经无效了，所以相当于没有成对调用begin和end，导致的结果就是：后一个后台任务超时的时候，app被系统强制kill。</p>
 <p>所以每一次创建的后台任务都要有一个独立的变量来维护其taskId，如果只有一个后台任务，但是有重入的可能，那么应该在willEnterForeground回调中，把前一个后台任务进行endBackgroundTask操作，这样就不存在taskId被覆盖的问题了。或者是每次didEnterBackground的时候，检查taskId == UIBackgroundTaskInvalid，若不满足该条件，说明taskId已经引用了一个正在进行的后台任务，还没有完成，由于这个后台任务重进前台又切换回后台的情况下，backgroundTimeRemaining会被重置为180秒，所以在这种需求下，关闭前一个任务再重新建议一个相同的后台任务没有必要，所以应该直接</p>
-<pre><code>
-if(backgroundUpdateTask != UIBackgroundTaskInvalid){
-
-return;
-
-}
-</code></pre>
-4、后台任务expiration后，app被系统kill的问题
-
-按照文档里的说法，只要begin与end在真正expiration之前成对调用，就不会导致系统强制kill app，而是app从后台执行状态切换到suspend状态，但实际测试中，每次expiration之后，app都会被kill掉，根据是app从launch页面重新进入。但我在willTerminate通知里的回调中加了一个local notification，并没有触发这个本地通知。(从app switcher强制退出应用的时候会触发本地通知，说明本地通知有效)。只能认为是app从后台状态切换到suspend状态后，立刻被系统kill掉了，但不知道为什么会这样。
-
-5、参考另一个文章中的实现，可以在任务结束后不被kill
-
-参考
-
-[http://www.cnblogs.com/lyanet/archive/2013/03/26/2983079.html](http://www.cnblogs.com/lyanet/archive/2013/03/26/2983079.html)
-
-
-
-<pre><code>
-//程序进入后台后延长活动时间，一般180s内，添加这段代码是为了避免App推入后台，线程暂停，NSTime停止计时（验证码）。
-UIApplication* app = [UIApplication sharedApplication];
-__block UIBackgroundTaskIdentifier bgTask;
-bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
-dispatch_async(dispatch_get_main_queue(), ^{
-
-[[UIApplication sharedApplication] endBackgroundTask:bgTask];
-bgTask = UIBackgroundTaskInvalid;
-});
-}];
-
-</code></pre>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(backgroundUpdateTask != <span class="built_in">UIBackgroundTaskInvalid</span>)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4、后台任务expiration后，app被系统kill的问题</p>
+<p>按照文档里的说法，只要begin与end在真正expiration之前成对调用，就不会导致系统强制kill app，而是app从后台执行状态切换到suspend状态，但实际测试中，每次expiration之后，app都会被kill掉，根据是app从launch页面重新进入。但我在willTerminate通知里的回调中加了一个local notification，并没有触发这个本地通知。(从app switcher强制退出应用的时候会触发本地通知，说明本地通知有效)。只能认为是app从后台状态切换到suspend状态后，立刻被系统kill掉了，但不知道为什么会这样。</p>
+<p>5、参考另一个文章中的实现，可以在任务结束后不被kill</p>
+<p>参考</p>
+<p><a href="http://www.cnblogs.com/lyanet/archive/2013/03/26/2983079.html" target="_blank" rel="noopener">http://www.cnblogs.com/lyanet/archive/2013/03/26/2983079.html</a></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//程序进入后台后延长活动时间，一般180s内，添加这段代码是为了避免App推入后台，线程暂停，NSTime停止计时（验证码）。</span></span><br><span class="line">    <span class="built_in">UIApplication</span>* app = [<span class="built_in">UIApplication</span> sharedApplication];</span><br><span class="line">    __block <span class="built_in">UIBackgroundTaskIdentifier</span> bgTask;</span><br><span class="line">    bgTask = [app beginBackgroundTaskWithExpirationHandler:^&#123;</span><br><span class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</span><br><span class="line"></span><br><span class="line">    [[<span class="built_in">UIApplication</span> sharedApplication] endBackgroundTask:bgTask];</span><br><span class="line">        bgTask = <span class="built_in">UIBackgroundTaskInvalid</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
 <p>beginBackgroundTaskWithExpirationHandler 和 endBackgroundTask 是成对出现。</p>
 <p>beginBackgroundTaskWithName:expirationHandler:方法标识了一个后台任务的开始，并用过超时处理的回调来结束此任务。那么，超时时间具体是多少？可以通过UIApplication的只读属性backgroundTimeRemaining来获取当前后台任务执行的剩余时间，它不是具体的数字（大约180s内），而是iOS根据当前系统环境综合考量后估算出来的。然后执行expirationHandler回调完成一个后台任务的执行周期。</p>
 <p>当开启后台任务后，结束前block回调，回调中就要设置关闭后台任务的代码，比如缓存数据等等。并且调用endBackgroundTask。关闭后台任务，否则系统会任务后台任务超时仍未完成，系统直接kill app。导致再次打开挂起的App发现，应用得重新启动。</p>
@@ -386,6 +293,15 @@ bgTask = UIBackgroundTaskInvalid;
 
   
 <nav id="article-nav">
+  
+    <a href="/2018/05/15/博客知识点汇总/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          博客知识点汇总
+        
+      </div>
+    </a>
   
   
     <a href="/2018/05/10/关于缓存的TIPS/" id="article-nav-older" class="article-nav-link-wrap">

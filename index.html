@@ -155,6 +155,110 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-VFL简介" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/17/VFL简介/">VFL简介</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/17/VFL简介/" class="archive-article-date">
+  	<time datetime="2018-05-17T05:06:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">功能</th>
+<th style="text-align:center">表达式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">水平方向</td>
+<td style="text-align:center">H:</td>
+</tr>
+<tr>
+<td style="text-align:left">垂直方向</td>
+<td style="text-align:center">V:</td>
+</tr>
+<tr>
+<td style="text-align:left">Views</td>
+<td style="text-align:center">[view]</td>
+</tr>
+<tr>
+<td style="text-align:left">SuperView</td>
+<td style="text-align:center">&#124;</td>
+</tr>
+<tr>
+<td style="text-align:left">关系符号</td>
+<td style="text-align:center">&gt;=,==,&lt;=</td>
+</tr>
+<tr>
+<td style="text-align:left">间距</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:left">优先级</td>
+<td style="text-align:center">@value</td>
+</tr>
+</tbody>
+</table>
+<h4 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h4><p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fre9nw660rj20o40xmaea.jpg" alt=""></p>
+<h4 id="show-code"><a href="#show-code" class="headerlink" title="show code"></a>show code</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line"></span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    <span class="keyword">self</span>.view.backgroundColor = [<span class="built_in">UIColor</span> whiteColor];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    [<span class="keyword">self</span>.view addSubview:<span class="keyword">self</span>.redView];</span><br><span class="line">    [<span class="keyword">self</span>.view addSubview:<span class="keyword">self</span>.yellowView];</span><br><span class="line">    <span class="keyword">self</span>.redView.translatesAutoresizingMaskIntoConstraints = <span class="literal">NO</span>;</span><br><span class="line">    <span class="keyword">self</span>.yellowView.translatesAutoresizingMaskIntoConstraints = <span class="literal">NO</span>;</span><br><span class="line">    <span class="built_in">NSDictionary</span> *views = <span class="built_in">NSDictionaryOfVariableBindings</span>(_redView,_yellowView);</span><br><span class="line">    <span class="built_in">NSDictionary</span> *metres = @&#123;<span class="string">@"redWith"</span>:@<span class="number">100</span>,<span class="string">@"leftArglin"</span>:@<span class="number">80</span>,<span class="string">@"rightArglin"</span>:@<span class="number">50</span>,<span class="string">@"yOffset"</span>:@<span class="number">100</span>&#125;;</span><br><span class="line">    <span class="built_in">NSArray</span> *HContrains = [<span class="built_in">NSLayoutConstraint</span> constraintsWithVisualFormat:<span class="string">@"H:|-leftArglin-[_redView(redWith)]-30-[_yellowView(redWith)]-rightArglin-|"</span> options:<span class="number">0</span> metrics:metres views:views];</span><br><span class="line">    <span class="built_in">NSArray</span> *VContrains = [<span class="built_in">NSLayoutConstraint</span> constraintsWithVisualFormat:<span class="string">@"V:|-yOffset-[_redView(redWith)]"</span> options:<span class="number">0</span> metrics:metres views:views];</span><br><span class="line">    <span class="built_in">NSArray</span> *VContrainsT = [<span class="built_in">NSLayoutConstraint</span> constraintsWithVisualFormat:<span class="string">@"V:|-yOffset-[_yellowView(_redView)]"</span> options:<span class="number">0</span> metrics:metres views:views];</span><br><span class="line">    [<span class="keyword">self</span>.view addConstraints:HContrains];</span><br><span class="line">    [<span class="keyword">self</span>.view addConstraints:VContrains];</span><br><span class="line">    [<span class="keyword">self</span>.view addConstraints:VContrainsT];</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="built_in">UIView</span> *)redView &#123;</span><br><span class="line">    <span class="keyword">if</span> (!_redView) &#123;</span><br><span class="line">        _redView = [[<span class="built_in">UIView</span> alloc]init];</span><br><span class="line">        _redView.backgroundColor = [<span class="built_in">UIColor</span> redColor];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _redView;</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="built_in">UIView</span> *)yellowView &#123;</span><br><span class="line">    <span class="keyword">if</span> (!_yellowView) &#123;</span><br><span class="line">        _yellowView = [[<span class="built_in">UIView</span> alloc]init];</span><br><span class="line">        _yellowView.backgroundColor = [<span class="built_in">UIColor</span> yellowColor];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _yellowView;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="图示："><a href="#图示：" class="headerlink" title="图示："></a>图示：</h5><div style="text-align:center; width:50%; height:50%;"><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fre9sbr1cuj20ku112q3h.jpg" style="vertical-align:middle;" width="50%" height="50%"><br></div>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/17/VFL简介/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-转载：FDStackView" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -186,7 +290,7 @@
 <li>在低系统版本运行UIStackView的时候使用我们的FDStackView;</li>
 <li>使FDStackView获得Interface Builder的支持。<br>解决了以上三个问题后，那么这个项目基本上也就算是完成了，第一个是工作量最大的工程，它又可以拆分为以下几个技术点：<br>● alignment和distribution的约束如何添加和管理；<br>● spacing和distribution的关系及约束的创建；<br>● 子视图的隐藏显示如何处理；<br>● 子视图的intrinsicContentSize发生变化时如何处理。<br>首先我们假设在第一个难点已经解决的前提下去攻克其他的难点，毕竟有其他开源方案的存在，说明这个不是不可行的。<br>至于第二个难点，UIStackView在低系统版本编译时会报找不到符号的error，那么解决的思路就是在低系统版本将UIStackView的符号写进去，然后在runtime将符号与我们的FDStackView做关联，从而使低系统版本也能够运行UIStackView，而实际上在起作用的是我们的FDStackView。这里使用到的黑魔法就是汇编语言，网上已经有大神给出了类似的解决方案，对其进行优化和修改之后应该就能满足我们的需求。<br>最后一个难点就是使FDStackView获得Interface Builder的支持，因为我们是IB的重度使用者，一个不能在IB上使用的控件一定不是一个好控件。所以一定要让FDStackView能够在IB上使用，有一个方案就是直接使用UIView然后把他的Class指定为FDStackView，将Axis、Alignmen和Distribution等属性通过IBInspectable使其可以在IB中编辑和设置，但是这样一个是IBInspectable在IB中的显示效果很烂，说实话就是不好用，再一个就是用了UIView没有办法像UIStackView那样在IB中可以直接预览布局效果，这就是很差的一种体验了。最好的方案就是在IB中仍然使用UIStackView，使其在IB中有最佳的体验，然后借助上一难点的解决方案，在低系统版本中使用FDStackView代替UIStackView。这样就会带来两个其他问题：</li>
 <li>IB的构建版本是根据Project的部署版本来的，如果项目不是支持iOS9的话那么会报这样一个error:”UIStackView before iOS 9.0”；</li>
-<li>如何使IB构建出来的FDStackView获得在IB中给UIStackView所设置的各种属性。 这两个问题，第一个只需要将IB的构建版本设置为iOS9及以后即可，目前来看是没有问题的，但是还不知道其他的控件被IB搞成iOS9的版本，在低系统版本上会不会有问题，这个还需要后续的验证。第二个问题，由于使用IB创建的UIKit控件都会由initWithCoder:进行初始化，因此弄清楚NSCoder的decode过程就能将IB设置的属性赋值给所创建的对象了。<br>解决完以上两个难点，就可以回过头来研究第一个了，就是创建一个和UIStackView一模一样的FDStackView。这里我们对UIStackView进行了详细的研究，包括dump出所有UIStackView的相关私有类，各个类的方法，实例变量等。还需要添加符号断点来跟踪各个方法的调用顺序及各个实例变量的值得变化情况。同时还需要分析各个状态下UIStackView的约束constraints的情况，包括约束的个数，连接的方式，及约束所添加到的视图等。经过以上的各种分析之后，我们又通过在IB中借助UIView手动连接约束的方式，连出每一个UIStackView所对应的状态。经过这一番调查与研究我们已经大概摸清的UIStackView的工作原理与实现方式。<br>与此同时我们还发现了两个UIStackView的bug，本以为在Xcode7正式发布之后会得到修复，可是遗憾的是从我们开始研究的时候的beta5到后来的beta6、GM和正式版这两个bug依然存在，后面我会介绍一下这两个bug。<br>Implementation<br>下面介绍一下具体的实现细节，同样还是从第二个点说起，最终起关键作用的代码是这些：<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// ----------------------------------------------------</span></span><br><span class="line"><span class="comment">// Runtime injection start.</span></span><br><span class="line"><span class="comment">// Assemble codes below are based on:</span></span><br><span class="line"><span class="comment">// https://github.com/0xced/NSUUID/blob/master/NSUUID.m</span></span><br><span class="line"><span class="comment">// ----------------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark - Runtime Injection</span></span><br><span class="line"></span><br><span class="line">__<span class="keyword">asm</span>(</span><br><span class="line">    <span class="string">".section        __DATA,__objc_classrefs,regular,no_dead_strip\n"</span></span><br><span class="line"><span class="meta">#if  TARGET_RT_64_BIT</span></span><br><span class="line">    <span class="string">".align          3\n"</span></span><br><span class="line">    <span class="string">"L_OBJC_CLASS_UIStackView:\n"</span></span><br><span class="line">    <span class="string">".quad           _OBJC_CLASS_$_UIStackView\n"</span></span><br><span class="line"><span class="meta">#else</span></span><br><span class="line">    <span class="string">".align          2\n"</span></span><br><span class="line">    <span class="string">"_OBJC_CLASS_UIStackView:\n"</span></span><br><span class="line">    <span class="string">".long           _OBJC_CLASS_$_UIStackView\n"</span></span><br><span class="line"><span class="meta">#endif</span></span><br><span class="line">    <span class="string">".weak_reference _OBJC_CLASS_$_UIStackView\n"</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line"><span class="comment">// Constructors are called after all classes have been loaded.</span></span><br><span class="line">__attribute__((constructor)) <span class="keyword">static</span> <span class="keyword">void</span> FDStackViewPatchEntry(<span class="keyword">void</span>) &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</span><br><span class="line">    <span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</span><br><span class="line">        <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// &gt;= iOS9.</span></span><br><span class="line">            <span class="keyword">if</span> (objc_getClass(<span class="string">"UIStackView"</span>)) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            Class *stackViewClassLocation = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#if TARGET_CPU_ARM</span></span><br><span class="line">            __<span class="keyword">asm</span>(<span class="string">"movw %0, :lower16:(_OBJC_CLASS_UIStackView-(LPC0+4))\n"</span></span><br><span class="line">                <span class="string">"movt %0, :upper16:(_OBJC_CLASS_UIStackView-(LPC0+4))\n"</span></span><br><span class="line">                <span class="string">"LPC0: add %0, pc"</span> : <span class="string">"=r"</span>(stackViewClassLocation));</span><br><span class="line"><span class="meta">#elif TARGET_CPU_ARM64</span></span><br><span class="line">            __<span class="keyword">asm</span>(<span class="string">"adrp %0, L_OBJC_CLASS_UIStackView@PAGE\n"</span></span><br><span class="line">                <span class="string">"add  %0, %0, L_OBJC_CLASS_UIStackView@PAGEOFF"</span> : <span class="string">"=r"</span>(stackViewClassLocation));</span><br><span class="line"><span class="meta">#elif TARGET_CPU_X86_64</span></span><br><span class="line">            __<span class="keyword">asm</span>(<span class="string">"leaq L_OBJC_CLASS_UIStackView(%%rip), %0"</span> : <span class="string">"=r"</span>(stackViewClassLocation));</span><br><span class="line"><span class="meta">#elif TARGET_CPU_X86</span></span><br><span class="line">            <span class="keyword">void</span> *pc = <span class="literal">NULL</span>;</span><br><span class="line">            __<span class="keyword">asm</span>(<span class="string">"calll L0\n"</span></span><br><span class="line">            <span class="string">"L0: popl %0\n"</span></span><br><span class="line">            <span class="string">"leal _OBJC_CLASS_UIStackView-L0(%0), %1"</span> : <span class="string">"=r"</span>(pc), <span class="string">"=r"</span>(stackViewClassLocation));</span><br><span class="line"><span class="meta">#else</span></span><br><span class="line"><span class="meta">#error Unsupported CPU</span></span><br><span class="line"><span class="meta">#endif</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (stackViewClassLocation &amp;&amp; !*stackViewClassLocation) &#123;</span><br><span class="line">                Class <span class="keyword">class</span> = objc_allocateClassPair(FDStackView.class, <span class="string">"UIStackView"</span>, <span class="number">0</span>);</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">class</span>) &#123;</span><br><span class="line">                    objc_registerClassPair(<span class="keyword">class</span>);</span><br><span class="line">                    *stackViewClassLocation = <span class="keyword">class</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>如何使IB构建出来的FDStackView获得在IB中给UIStackView所设置的各种属性。 这两个问题，第一个只需要将IB的构建版本设置为iOS9及以后即可，目前来看是没有问题的，但是还不知道其他的控件被IB搞成iOS9的版本，在低系统版本上会不会有问题，这个还需要后续的验证。第二个问题，由于使用IB创建的UIKit控件都会由initWithCoder:进行初始化，因此弄清楚NSCoder的decode过程就能将IB设置的属性赋值给所创建的对象了。<br>解决完以上两个难点，就可以回过头来研究第一个了，就是创建一个和UIStackView一模一样的FDStackView。这里我们对UIStackView进行了详细的研究，包括dump出所有UIStackView的相关私有类，各个类的方法，实例变量等。还需要添加符号断点来跟踪各个方法的调用顺序及各个实例变量的值得变化情况。同时还需要分析各个状态下UIStackView的约束constraints的情况，包括约束的个数，连接的方式，及约束所添加到的视图等。经过以上的各种分析之后，我们又通过在IB中借助UIView手动连接约束的方式，连出每一个UIStackView所对应的状态。经过这一番调查与研究我们已经大概摸清的UIStackView的工作原理与实现方式。<br>与此同时我们还发现了两个UIStackView的bug，本以为在Xcode7正式发布之后会得到修复，可是遗憾的是从我们开始研究的时候的beta5到后来的beta6、GM和正式版这两个bug依然存在，后面我会介绍一下这两个bug。<br>Implementation<br>下面介绍一下具体的实现细节，同样还是从第二个点说起，最终起关键作用的代码是这些：<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// ----------------------------------------------------</span></span><br><span class="line"><span class="comment">// Runtime injection start.</span></span><br><span class="line"><span class="comment">// Assemble codes below are based on:</span></span><br><span class="line"><span class="comment">// https://github.com/0xced/NSUUID/blob/master/NSUUID.m</span></span><br><span class="line"><span class="comment">// ----------------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark - Runtime Injection</span></span><br><span class="line"></span><br><span class="line">__<span class="keyword">asm</span>(</span><br><span class="line">    <span class="string">".section        __DATA,__objc_classrefs,regular,no_dead_strip\n"</span></span><br><span class="line"><span class="meta">#if  TARGET_RT_64_BIT</span></span><br><span class="line">    <span class="string">".align          3\n"</span></span><br><span class="line">    <span class="string">"L_OBJC_CLASS_UIStackView:\n"</span></span><br><span class="line">    <span class="string">".quad           _OBJC_CLASS_$_UIStackView\n"</span></span><br><span class="line"><span class="meta">#else</span></span><br><span class="line">    <span class="string">".align          2\n"</span></span><br><span class="line">    <span class="string">"_OBJC_CLASS_UIStackView:\n"</span></span><br><span class="line">    <span class="string">".long           _OBJC_CLASS_$_UIStackView\n"</span></span><br><span class="line"><span class="meta">#endif</span></span><br><span class="line">    <span class="string">".weak_reference _OBJC_CLASS_$_UIStackView\n"</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line"><span class="comment">// Constructors are called after all classes have been loaded.</span></span><br><span class="line">__attribute__((constructor)) <span class="keyword">static</span> <span class="keyword">void</span> FDStackViewPatchEntry(<span class="keyword">void</span>) &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</span><br><span class="line">    <span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</span><br><span class="line">        <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// &gt;= iOS9.</span></span><br><span class="line">            <span class="keyword">if</span> (objc_getClass(<span class="string">"UIStackView"</span>)) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            Class *stackViewClassLocation = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#if TARGET_CPU_ARM</span></span><br><span class="line">            __<span class="keyword">asm</span>(<span class="string">"movw %0, :lower16:(_OBJC_CLASS_UIStackView-(LPC0+4))\n"</span></span><br><span class="line">                <span class="string">"movt %0, :upper16:(_OBJC_CLASS_UIStackView-(LPC0+4))\n"</span></span><br><span class="line">                <span class="string">"LPC0: add %0, pc"</span> : <span class="string">"=r"</span>(stackViewClassLocation));</span><br><span class="line"><span class="meta">#elif TARGET_CPU_ARM64</span></span><br><span class="line">            __<span class="keyword">asm</span>(<span class="string">"adrp %0, L_OBJC_CLASS_UIStackView@PAGE\n"</span></span><br><span class="line">                <span class="string">"add  %0, %0, L_OBJC_CLASS_UIStackView@PAGEOFF"</span> : <span class="string">"=r"</span>(stackViewClassLocation));</span><br><span class="line"><span class="meta">#elif TARGET_CPU_X86_64</span></span><br><span class="line">            __<span class="keyword">asm</span>(<span class="string">"leaq L_OBJC_CLASS_UIStackView(%%rip), %0"</span> : <span class="string">"=r"</span>(stackViewClassLocation));</span><br><span class="line"><span class="meta">#elif TARGET_CPU_X86</span></span><br><span class="line">            <span class="keyword">void</span> *pc = <span class="literal">NULL</span>;</span><br><span class="line">            __<span class="keyword">asm</span>(<span class="string">"calll L0\n"</span></span><br><span class="line">            <span class="string">"L0: popl %0\n"</span></span><br><span class="line">            <span class="string">"leal _OBJC_CLASS_UIStackView-L0(%0), %1"</span> : <span class="string">"=r"</span>(pc), <span class="string">"=r"</span>(stackViewClassLocation));</span><br><span class="line"><span class="meta">#else</span></span><br><span class="line"><span class="meta">#error Unsupported CPU</span></span><br><span class="line"><span class="meta">#endif</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (stackViewClassLocation &amp;&amp; !*stackViewClassLocation) &#123;</span><br><span class="line">            <span class="comment">//动态添加类动态添加 UIStackView 让他继承 FDStackView</span></span><br><span class="line">                Class <span class="keyword">class</span> = objc_allocateClassPair(FDStackView.class, <span class="string">"UIStackView"</span>, <span class="number">0</span>);</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">class</span>) &#123;</span><br><span class="line">                    objc_registerClassPair(<span class="keyword">class</span>);</span><br><span class="line">                    *stackViewClassLocation = <span class="keyword">class</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>首先说一下__asm:</p>
@@ -1142,73 +1246,6 @@ return NO;
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/01/11/Keychain-浅析/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-精装修验房注意事项汇总" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/20/精装修验房注意事项汇总/">精装修验房注意事项汇总</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/20/精装修验房注意事项汇总/" class="archive-article-date">
-  	<time datetime="2017-12-20T06:04:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1、精装修房验房的要点和诀窍有哪些？"><a href="#1、精装修房验房的要点和诀窍有哪些？" class="headerlink" title="1、精装修房验房的要点和诀窍有哪些？"></a>1、精装修房验房的要点和诀窍有哪些？</h2><p><a href="https://www.zhihu.com/question/20594846" target="_blank" rel="noopener"><font color="blue" size="3" face="微软雅黑">点击跳转 ➨  精装修房验房的要点和诀窍有哪些？</font></a></p>
-<h2 id="2、19种精装房验房方法-教你学会如何验房"><a href="#2、19种精装房验房方法-教你学会如何验房" class="headerlink" title="2、19种精装房验房方法 教你学会如何验房"></a>2、19种精装房验房方法 教你学会如何验房</h2><p><a href="https://jingyan.baidu.com/article/1709ad80a9d3fe4634c4f00c.html" target="_blank" rel="noopener"><font color="blue" size="3"> 点击跳转 ➨  19种精装房验房方法 教你学会如何验房</font></a></p>
-<h2 id="3、精装修验房流程及标准（文档）"><a href="#3、精装修验房流程及标准（文档）" class="headerlink" title="3、精装修验房流程及标准（文档）"></a>3、精装修验房流程及标准（文档）</h2><p><a href="https://wenku.baidu.com/view/2b585b711611cc7931b765ce0508763231127407.html" target="_blank" rel="noopener"><font color="blue" size="3"> 点击跳转 ➨  精装修验房流程及标准<font></font></font></a></p>
-<h2 id="4、图示"><a href="#4、图示" class="headerlink" title="4、图示"></a>4、图示</h2><p><a href="http://sh.leju.com/scan/mfnds03/" target="_blank" rel="noopener"><font color="blue" size="3"> 点击跳转 ➨  精装修验房</font></a></p>
-<h2 id="5、“精装修”收房时如何验房？看过以后不吃亏！-较全"><a href="#5、“精装修”收房时如何验房？看过以后不吃亏！-较全" class="headerlink" title="5、“精装修”收房时如何验房？看过以后不吃亏！(较全)"></a>5、“精装修”收房时如何验房？看过以后不吃亏！(较全)</h2><p><a href="http://www.jia360.com/new/20900.html" target="_blank" rel="noopener"><font color="blue" size="3"> 点击跳转 ➨ 精装修”收房时如何验房？看过以后不吃亏！</font></a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/20/精装修验房注意事项汇总/">展开全文 >></a>
         </p>
       
 

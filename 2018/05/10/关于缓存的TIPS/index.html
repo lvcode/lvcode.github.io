@@ -9,6 +9,7 @@
   <title>关于HTTP缓存的TIPS | LvCode&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="无法加载最新图片工作中上传后重新加载头像的时候，发现头像并没有改变。这个问题以前也遇到过，这次不能忍了必须查个水落石出。SDWebImage options设置为：SDWebImageRefreshCached，但是并没有效果。汇总资料后：使用  curl url --head  例如： curl http://123.126.109.38:18081/AreaAppFile/nurse_head">
+<meta name="keywords" content="ios,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于HTTP缓存的TIPS">
 <meta property="og:url" content="https://lvcode.github.io/2018/05/10/关于缓存的TIPS/index.html">
@@ -47,11 +48,13 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="" class="js-avatar">
+			<img src="/public/img/scrollbar_arrow.png" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">Lv Qiang</a></h1>
 		</hgroup>
+		
+		<p class="header-subtitle">一只在路上的iOS程序猿</p>
 		
 
 		<nav class="header-menu">
@@ -105,11 +108,13 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="" class="js-avatar">
+				<img src="/public/img/scrollbar_arrow.png" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">Lv Qiang</h1>
 			</hgroup>
+			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>一只在路上的iOS程序猿<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -236,27 +241,6 @@ Cache-Control:max-age=0
 
       
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
       
     </div>
     <div class="article-info article-info-index">

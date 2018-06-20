@@ -8,16 +8,17 @@
   <link rel="dns-prefetch" href="https://lvcode.github.io">
   <title>LvCode&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一只在路上的iOS程序猿">
+  <meta name="description" content="太原理工大学09级,就职于步长制药。擅长iOS开发技能，欢迎大家指点迷津！">
+<meta name="keywords" content="ios,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer">
 <meta property="og:type" content="website">
 <meta property="og:title" content="LvCode&#39;s Blog">
 <meta property="og:url" content="https://lvcode.github.io/page/2/index.html">
 <meta property="og:site_name" content="LvCode&#39;s Blog">
-<meta property="og:description" content="一只在路上的iOS程序猿">
+<meta property="og:description" content="太原理工大学09级,就职于步长制药。擅长iOS开发技能，欢迎大家指点迷津！">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LvCode&#39;s Blog">
-<meta name="twitter:description" content="一只在路上的iOS程序猿">
+<meta name="twitter:description" content="太原理工大学09级,就职于步长制药。擅长iOS开发技能，欢迎大家指点迷津！">
   
     <link rel="alternative" href="/atom.xml" title="LvCode&#39;s Blog" type="application/atom+xml">
   
@@ -46,11 +47,13 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="" class="js-avatar">
+			<img src="/public/img/scrollbar_arrow.png" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">Lv Qiang</a></h1>
 		</hgroup>
+		
+		<p class="header-subtitle">一只在路上的iOS程序猿</p>
 		
 
 		<nav class="header-menu">
@@ -104,11 +107,13 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="" class="js-avatar">
+				<img src="/public/img/scrollbar_arrow.png" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">Lv Qiang</h1>
 			</hgroup>
+			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>一只在路上的iOS程序猿<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -154,6 +159,196 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-Keychain-浅析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/11/Keychain-浅析/">Keychain 浅析</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/11/Keychain-浅析/" class="archive-article-date">
+  	<time datetime="2018-01-11T05:51:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="什么是Keychain"><a href="#什么是Keychain" class="headerlink" title="什么是Keychain?"></a>什么是Keychain?</h3><p>根据苹果的介绍，iOS设备中的Keychain是一个安全的存储容器，可以用来为不同应用保存敏感信息比如用户名，密码，网络密码，认证令牌。苹果自己用keychain来保存Wi-Fi网络密码，VPN凭证等等。它是一个在所有app之外的sqlite数据库。</p>
+<p>如果我们手动把自己的私密信息加密，然后通过写文件保存在本地，再从本地取出不仅麻烦，而且私密信息也会随着App的删除而丢失。iOS的Keychain能完美的解决这些问题。并且从iOS 3.0开始，Keychain还支持跨程序分享。这样就极大的方便了用户。省去了很多要记忆密码的烦恼。</p>
+<h3 id="Structure-of-a-Keychain"><a href="#Structure-of-a-Keychain" class="headerlink" title="Structure of a Keychain"></a>Structure of a Keychain</h3><p>Keychain内部可以保存很多的信息。每条信息作为一个单独的keychain item，keychain item一般为一个字典，每条keychain item包含一条data和很多attributes。举个例子，一个用户账户就是一条item，用户名可以作为一个attribute , 密码就是data。 keychain虽然是可以保存15000条item,每条50个attributes，但是苹果工程师建议最好别放那么多，存几千条密码，几千字节没什么问题。</p>
+<p>Keychain 可以包含任意数量的 keychain item。每一个 keychain item 包含数据和一组属性。对于一个需要保护的 keychain item，比如密码或者私钥（用于加密或者解密的string字节）数据是加密的，会被 keychain 保护起来的；对于无需保护的 keychain item，例如，证书，数据未被加密。</p>
+<p>跟keychain item有关系的取决于item的类型；应用程序中最常用的是网络密码（Internet passwrods）和普通的密码。正如你所想的，网络密码像安全域（security domain）、协议、和路径等一些属性。在OSX中，当keychain被锁的时候加密的item没办法访问，如果你想要该问被锁的item，就会弹出一个对话框，需要你输入对应keychain的密码。当然，未有密码的keychain你可以随时访问。但在iOS中，你只可以访问你自已的keychain items;</p>
+<pre><code>
+extern CFTypeRef kSecClassGenericPassword
+extern CFTypeRef kSecClassInternetPassword
+extern CFTypeRef kSecClassCertificate
+extern CFTypeRef kSecClassKey
+extern CFTypeRef kSecClassIdentity OSX_AVAILABLE_STARTING(MAC_10_7, __IPHONE_2_0);
+</code></pre>
+
+<h3 id="Keychain的特点"><a href="#Keychain的特点" class="headerlink" title="Keychain的特点"></a>Keychain的特点</h3><ul>
+<li>数据并不存放在App的Sanbox中，即使删除了App，资料依然保存在keychain中。如果重新安装了app，还可以从keychain获取数据。</li>
+<li>keychain的数据可以用过group方式，让程序可以在App间共享。不过得要相同TeamID</li>
+<li>keychain的数据是经过加密的</li>
+</ul>
+<h3 id="Keychain的使用"><a href="#Keychain的使用" class="headerlink" title="Keychain的使用"></a>Keychain的使用</h3><p>大多数iOS应用需要用到Keychain， 都用来添加一个密码，修改一个已存在Keychain item或者取回密码。Keychain提供了以下的操作</p>
+<ul>
+<li>SecItemAdd 添加一个item</li>
+<li>SecItemUpdate 更新已存在的item</li>
+<li>SecItemCopyMatching 搜索一个已存在的item</li>
+<li>SecItemDelete 删除一个keychain item</li>
+</ul>
+<h5 id="根据特定的Service创建一个用于操作KeyChain的Dictionary"><a href="#根据特定的Service创建一个用于操作KeyChain的Dictionary" class="headerlink" title="根据特定的Service创建一个用于操作KeyChain的Dictionary"></a>根据特定的Service创建一个用于操作KeyChain的Dictionary</h5><pre><code>
+
++ (NSMutableDictionary *)keyChainQueryDictionaryWithService:(NSString *)service{
+NSMutableDictionary *keyChainQueryDictaionary = [[NSMutableDictionary alloc]init];
+[keyChainQueryDictaionary setObject:(id)kSecClassGenericPassword forKey:(id)kSecClass];
+[keyChainQueryDictaionary setObject:service forKey:(id)kSecAttrService];
+[keyChainQueryDictaionary setObject:service forKey:(id)kSecAttrAccount];
+return keyChainQueryDictaionary;
+}
+
+</code></pre>
+
+<h5 id="添加数据"><a href="#添加数据" class="headerlink" title="添加数据"></a>添加数据</h5><pre><code>
+
++ (BOOL)addData:(id)data forService:(NSString *)service{
+NSMutableDictionary *keychainQuery = [self keyChainQueryDictionaryWithService:service];
+SecItemDelete((CFDictionaryRef)keychainQuery);
+[keychainQuery setObject:[NSKeyedArchiver archivedDataWithRootObject:data] forKey:(id)kSecValueData];
+OSStatus status= SecItemAdd((CFDictionaryRef)keychainQuery, NULL);
+if (status == noErr) {
+return YES;
+}
+return NO;
+}
+
+</code></pre>
+
+<h5 id="搜索数据"><a href="#搜索数据" class="headerlink" title="搜索数据"></a>搜索数据</h5><pre><code>
++ (id)queryDataWithService:(NSString *)service {
+id result;
+NSMutableDictionary *keyChainQuery = [self keyChainQueryDictionaryWithService:service];
+[keyChainQuery setObject:(id)kCFBooleanTrue forKey:(id)kSecReturnData];
+[keyChainQuery setObject:(id)kSecMatchLimitOne forKey:(id)kSecMatchLimit];
+CFDataRef keyData = NULL;
+if (SecItemCopyMatching((CFDictionaryRef)keyChainQuery, (CFTypeRef *)&keyData) == noErr) {
+@try {
+result = [NSKeyedUnarchiver  unarchiveObjectWithData:(__bridge NSData *)keyData];
+}
+@catch (NSException *exception) {
+NSLog(@"不存在数据");
+}
+@finally {
+
+}
+}
+if (keyData) {
+CFRelease(keyData);
+}
+return result;
+}
+
+</code></pre>
+
+<h5 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h5><pre><code>
++ (BOOL)updateData:(id)data forService:(NSString *)service{
+NSMutableDictionary *searchDictionary = [self keyChainQueryDictionaryWithService:service];
+
+if (!searchDictionary) {
+return NO;
+}
+
+NSMutableDictionary *updateDictionary = [[NSMutableDictionary alloc] init];
+[updateDictionary setObject:[NSKeyedArchiver archivedDataWithRootObject:data] forKey:(id)kSecValueData];
+OSStatus status = SecItemUpdate((CFDictionaryRef)searchDictionary,
+(CFDictionaryRef)updateDictionary);
+if (status == errSecSuccess) {
+return YES;
+}
+return NO;
+}
+
+</code></pre>
+
+<h5 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h5><pre><code>
++ (BOOL)deleteDataWithService:(NSString *)service{
+NSMutableDictionary *keyChainDictionary = [self keyChainQueryDictionaryWithService:service];
+OSStatus status = SecItemDelete((CFDictionaryRef)keyChainDictionary);
+if (status == noErr) {
+return YES;
+}
+return NO;
+}
+
+</code></pre>
+
+<h3 id="Keychain-共享数据"><a href="#Keychain-共享数据" class="headerlink" title="Keychain 共享数据"></a>Keychain 共享数据</h3><p>在工程中 Target -&gt; Capabilities -&gt; Keychain Groups。打开这个选项。</p>
+<p>Keychain通过provisioning profile来区分不同的应用，provisioning文件内含有应用的bundle id和添加的access groups。不同的应用是完全无法访问其他应用保存在Keychain的信息，除非指定了同样的access group。指定了同样的group名称后，不同的应用间就可以分享保存在Keychain内的信息。</p>
+<h3 id="Keychain-Access-Group的使用方法："><a href="#Keychain-Access-Group的使用方法：" class="headerlink" title="Keychain Access Group的使用方法："></a>Keychain Access Group的使用方法：</h3><ol>
+<li><p>首先要在Capabilities下打开工程的Keychain Sharing按钮。然后需要分享Keychain的不同应用添 加相同的Group名称。Xcode6以后Group可以随便命名，不需要加AppIdentifierPrefix前缀，并且Xcode会在以entitlements结尾的文件内自动添加所有Group名称，然后在每一个Group前自动加上$(AppIdentifierPrefix)前缀。虽然文档内提到还需要添加一个包含group的.plist文件，其实它和.entitlements文件是同样的作用，所以不需要重复添加。 但是每个不同的应用第一条Group最好以自己的bundleID命名，因为如果entitlements文件内已经有Keychain Access Groups数组后item的Group属性默认就为数组内的第一条Grop。</p>
+</li>
+<li><p>需要支持跨设备分享的Keychain item添加一条AccessGroup属性,不过代码里Group名称一定要加上AppIdentifierPrefix前缀。 [searchDictionary setObject:@“AppIdentifierPrefix.UC.testWriteKeychainSuit” forKey:(id)kSecAttrAccessGroup];如果要在app内部存私有的信息，group置为自己的bundleID即可，如果entitlements文件内没有指定Keychain Access Groups数组。那group也可以置为nil，这样默认也会以自己的bundleID作为Group。<br>3.</p>
+<h3 id="Keychain的安全性"><a href="#Keychain的安全性" class="headerlink" title="Keychain的安全性"></a>Keychain的安全性</h3></li>
+</ol>
+<p>Keychain内部的数据会自动加密。如果设备没有越狱并且不暴力破解，keychain确实很安全。但是越狱后的设备，keychain就很危险了。</p>
+<p>通过上面的一些信息我们已经知道访问keychain里面的数据需要和app一样的证书或者获得access group的名称。设备越狱后相当于对苹果做签名检查的地方打了个补丁，伪造一个证书的app也能正常使用，并且加上Keychain Dumper这些工具获取Keychain内的信息会非常容易。</p>
+<h3 id="使用keychain需要注意的问题"><a href="#使用keychain需要注意的问题" class="headerlink" title="使用keychain需要注意的问题"></a>使用keychain需要注意的问题</h3><ol>
+<li>当我们不支持Keychain Access Group，并且没有entitlement文件时，keychain默认以bundle id为group。如果我们在版本更新的时候改变了bundle id，那么新版本就访问不了旧版本的keychain信息了。解决办法是从一开始我们就打开KeychainSharing，添加Keychain Access Group，并且指定每条keychain Item的group，私有的信息就指定app的bundle id为它的group。</li>
+<li>代码内Access group名称一定要有AppIdentifierPrefix前缀。</li>
+<li>Keychain是基于数据库存储，不允许添加重复的条目。所以每条item都必须指定对应的唯一标识符也就是那些主要的key，如果Key指定不正确，可能会出现添加后查找不到的问题。</li>
+<li>kSecAttrSynchronizable也会作为主要的key之一。它的value值默认为No，如果之前添加的item此条属性为YES，在搜索，更新，删除的时候必须添加此条属性才能查找到之前添加的item。</li>
+<li>Kechain item字典内添加自定义key时会出现参数不合法的错误。</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>keychain 是一个很有用的工具，我们可以在保存密码或者证书的时候使用keychain，并且支持不同应用分享Keychain内的信息，或者支持iCloud备份跨设备分享，但是越狱版应用还是不建议使用</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/11/Keychain-浅析/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-精装修验房注意事项汇总" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -793,7 +988,7 @@
         <h3 id="TabBar遮挡问题"><a href="#TabBar遮挡问题" class="headerlink" title="TabBar遮挡问题"></a>TabBar遮挡问题</h3><p>AutoLayout适配UI时，使用UITabBarViewController时发现，tableView 无法在和UINavgationController下自动让出显示View，tableView 被遮挡住了。<br>解决办法：</p>
 <p>OC代码：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span>.edgesForExtendedLayout = <span class="built_in">UIRectEdgeNone</span>;</span><br></pre></td></tr></table></figure></p>
 <p>Swift代码:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.<span class="type">EdgesForExtendedLayout</span> = <span class="type">UIRectEdge</span>.<span class="type">None</span>;</span><br></pre></td></tr></table></figure></p>
-<p>iOS7后，苹果实行全屏幕适配，导航栏半透明化，可以通过 translucent 修改。<br>UIScrollView 控件automaticallyAdjustsScrollViewInsets 默认YES，是自动控制内边距，避免tableView等被导航栏遮盖<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ([<span class="keyword">self</span> respondsToSelector:<span class="keyword">@selector</span>(setAutomaticallyAdjustsScrollViewInsets:)]) &#123;</span><br><span class="line">    <span class="keyword">self</span>.automaticallyAdjustsScrollViewInsets = <span class="literal">NO</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>iOS7后，苹果实行全屏幕适配，导航栏半透明化，可以通过 translucent 修改。<br>UIScrollView 控件automaticallyAdjustsScrollViewInsets 默认YES，系统会自动设置scrollview及其字累对象的contentInset属性，使scrollView上的内容不被navgationBar、tabBar、等内容遮挡。对于一个scrollView来说，它所在的VC是否显示navigationBar、tabBar，对scrollView的布局有一定的影响，如果从（0，0）开始布局scrollView，那么当他所在的VC欧navigationbar时，该scrollView就会被navigationBar遮挡，如果从（0，64）开始布局scrollView，那么他所在的VC没有navigationBar时，该scrollView会有64个点的白色区域，勾选该选项就可以从（0，0）开始布局，不用关心该页面是否会显示navigationBar，系统会自动把添加到这个VC的scrollView的contentInset调整为合适的值：<br>scrollView.contentInset.top +=64;<br>是自动控制内边距，避免tableView等被导航栏遮盖<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ([<span class="keyword">self</span> respondsToSelector:<span class="keyword">@selector</span>(setAutomaticallyAdjustsScrollViewInsets:)]) &#123;</span><br><span class="line">    <span class="keyword">self</span>.automaticallyAdjustsScrollViewInsets = <span class="literal">NO</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
 
@@ -1147,115 +1342,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2016/02/27/基础知识点汇总/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-KVC、KVO" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/06/KVC、KVO/">KVC、KVO</a>
-    </h1>
-  
-
-        
-        <a href="/2016/02/06/KVC、KVO/" class="archive-article-date">
-  	<time datetime="2016-02-06T06:22:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>由于ObjC主要基于Smalltalk进行设计，因此它有很多类似于Ruby、Python的动态特性，例如动态类型、动态加载、动态绑定等。今天我们着重介绍ObjC中的键值编码（KVC）、键值监听（KVO）特性：</p>
-<ol>
-<li>键值编码KVC</li>
-<li>键值监听KVO</li>
-</ol>
-<h1 id="键值编码KVC"><a href="#键值编码KVC" class="headerlink" title="键值编码KVC"></a>键值编码KVC</h1><p>我们知道C#中可以通过反射读写一个对象的属性，有时候这种方式特别方便。因为你可以利用字符串的方式动态控制一个对象。其实对于ObjC的语言特性，你根本不必进行任何操作就可以进行属性的动态读写，这种方式就是 Key Value Coding （简称KVC）。<br>KVC的操作方法由NSKeyValueCoding协议提供，而NSObject就实现了这个协议，也就是说ObjC汇总几乎所有对象都支持KVC操作，常用的KVC操作方法如下：</p>
-<ul>
-<li>动态设置：setValue：属性值forKey：属性名（用于简单路径）、setValue：属性值forKey’Path：属性路径（用于符合路径，例如Person有一个 Account类型的属性，那么person.account就是一个符合属性 ）</li>
-<li>动态读取：valueForKey:属性名、valueForKeyPath：属性名（用于复合路径）<br>下面通过一个例子来理解KVC</li>
-</ul>
-<p>Account.h</p>
-<figure class="highlight obj-c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Account</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="meta">#pragma mark - 属性</span></span><br><span class="line"><span class="meta">#pragma mark 余额</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>) <span class="keyword">float</span> balance;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-<p>Account.m</p>
-<figure class="highlight obj-c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">"Account.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Account</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-<p>Person.h</p>
-<figure class="highlight obj-c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">@class</span> <span class="title">Account</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Person</span> : <span class="title">NSObject</span></span>&#123;</span><br><span class="line"><span class="keyword">@private</span></span><br><span class="line"><span class="keyword">int</span> _age;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#pragma mark - 属性</span></span><br><span class="line"><span class="meta">#pragma mark 姓名</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">copy</span>) <span class="built_in">NSString</span> *name;</span><br><span class="line"><span class="meta">#pragma mark 账户</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">retain</span>) Account *account;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark - 公共方法</span></span><br><span class="line"><span class="meta">#pragma mark 显示人员信息</span></span><br><span class="line">-(<span class="keyword">void</span>)showMessage;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-<p>Person.m</p>
-<figure class="highlight obj-c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">"Person.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Person</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark - 公共方法</span></span><br><span class="line"><span class="meta">#pragma mark 显示人员信息</span></span><br><span class="line">-(<span class="keyword">void</span>)showMessage&#123;</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"name=%@,age=%d"</span>,_name,_age);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-<p>main.m</p>
-<figure class="highlight obj-c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"Person.h"</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"Account.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[]) &#123;</span><br><span class="line"><span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line"></span><br><span class="line">Person *person1=[[Person alloc]init];</span><br><span class="line">[person1 setValue:<span class="string">@"Kenshin"</span> forKey:<span class="string">@"name"</span>];</span><br><span class="line">[person1 setValue:@<span class="number">28</span> forKey:<span class="string">@"age"</span>];<span class="comment">//注意即使一个私有变量仍然可以访问</span></span><br><span class="line"></span><br><span class="line">[person1 showMessage];</span><br><span class="line"><span class="comment">//结果：name=Kenshin,age=28</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"person1's name is :%@,age is :%@"</span>,person1.name,[person1 valueForKey:<span class="string">@"age"</span>]);</span><br><span class="line"><span class="comment">//结果：person1's name is :Kenshin,age is :28</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Account *account1=[[Account alloc]init];</span><br><span class="line">person1.account=account1;<span class="comment">//注意这一步一定要先给account属性赋值，否则下面按路径赋值无法成功，因为account为nil，当然这一步骤也可以写成:[person1 setValue:account1 forKeyPath:@"account"];</span></span><br><span class="line"></span><br><span class="line">[person1 setValue:@<span class="number">100000000.0</span> forKeyPath:<span class="string">@"account.balance"</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"person1's balance is :%.2f"</span>,[[person1 valueForKeyPath:<span class="string">@"account.balance"</span>] floatValue]);</span><br><span class="line"><span class="comment">//结果：person1's balance is :100000000.00</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>KVC使用起来比较简单，但是它如何查找一个属性进行读取呢？具体查找规则（假设现在要利用KVC对a进行读取）：</p>
-<ul>
-<li>如果是动态设置属性，则优先考虑调用setA方法，如果没有该方法则优先考虑搜索成员变量_a,如果仍然不存在则搜索成员变量a，如果最后仍然没搜索到则会调用这个类的setValue:forUndefinedKey：方法(注意搜索过程中不管这些方法、成员变量是私有的还是公共的都能正确设置)；</li>
-<li>如果是动态读取属性，则优先考虑调用a方法（属性a的getter方法），如果没有搜索到则会优先搜索成员变量_a，如果仍然不存在则搜索成员变量a，如果最后仍然没搜索到则会调用这个类的valueforUndefinedKey:方法(注意搜索过程中不管这些方法、成员变量是私有的还是公共的都能正确读取)；</li>
-</ul>
-<h1 id="键值监听KVO"><a href="#键值监听KVO" class="headerlink" title="键值监听KVO"></a>键值监听KVO</h1><p>我们知道在WPF、Silverlight中都有一种双向绑定机制，如果数据模型修改了之后会立即反映到UI视图上，类似的还有如今比较流行的基于MVVM设计模式的前端框架，例如Knockout.js。其实在ObjC中原生就支持这种机制，它叫做Key Value Observing（简称KVO）。KVO其实是一种观察者模式，利用它可以很容易实现视图组件和数据模型的分离，当数据模型的属性值改变之后作为监听器的视图组件就会被激发，激发时就会回调监听器自身。在ObjC中要实现KVO则必须实现NSKeyValueObServing协议，不过幸运的是NSObject已经实现了该协议，因此几乎所有的ObjC对象都可以使用KVO。</p>
-<p>在ObjC中使用KVO操作常用的方法如下：</p>
-<ul>
-<li>注册指定Key路径的监听器： addObserver: forKeyPath: options:  context:</li>
-<li>删除指定Key路径的监听器： removeObserver: forKeyPath、removeObserver: forKeyPath: context:</li>
-<li>回调监听： observeValueForKeyPath: ofObject: change: context:</li>
-</ul>
-<p>KVO的使用步骤也比较简单：</p>
-<ol>
-<li>通过addObserver: forKeyPath: options: context:为被监听对象（它通常是数据模型）注册监听器</li>
-<li>重写监听器的observeValueForKeyPath: ofObject: change: context:方法</li>
-</ol>
-<p>Account.h</p>
-<figure class="highlight obj-c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Account</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="meta">#pragma mark - 属性</span></span><br><span class="line"><span class="meta">#pragma mark 余额</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>) <span class="keyword">float</span> balance;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-<p>Account.m</p>
-<figure class="highlight obj-c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">"Account.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Account</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-<p>Person.h</p>
-<figure class="highlight obj-c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">@class</span> <span class="title">Account</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Person</span> : <span class="title">NSObject</span></span>&#123;</span><br><span class="line"><span class="keyword">@private</span></span><br><span class="line"><span class="keyword">int</span> _age;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#pragma mark - 属性</span></span><br><span class="line"><span class="meta">#pragma mark 姓名</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">copy</span>) <span class="built_in">NSString</span> *name;</span><br><span class="line"><span class="meta">#pragma mark 账户</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">retain</span>) Account *account;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark - 公共方法</span></span><br><span class="line"><span class="meta">#pragma mark 显示人员信息</span></span><br><span class="line">-(<span class="keyword">void</span>)showMessage;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-<p>Person.m</p>
-<figure class="highlight obj-c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">"Person.h"</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"Account.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Person</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark - 公共方法</span></span><br><span class="line"><span class="meta">#pragma mark 显示人员信息</span></span><br><span class="line">-(<span class="keyword">void</span>)showMessage&#123;</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"name=%@,age=%d"</span>,_name,_age);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark 设置人员账户</span></span><br><span class="line">-(<span class="keyword">void</span>)setAccount:(Account *)account&#123;</span><br><span class="line">_account=account;</span><br><span class="line"><span class="comment">//添加对Account的监听</span></span><br><span class="line">[<span class="keyword">self</span>.account addObserver:<span class="keyword">self</span> forKeyPath:<span class="string">@"balance"</span> options:<span class="built_in">NSKeyValueObservingOptionNew</span> context:<span class="literal">nil</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark - 覆盖方法</span></span><br><span class="line"><span class="meta">#pragma mark 重写observeValueForKeyPath方法，当账户余额变化后此处获得通知</span></span><br><span class="line">-(<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath ofObject:(<span class="keyword">id</span>)object change:(<span class="built_in">NSDictionary</span> *)change context:(<span class="keyword">void</span> *)context&#123;</span><br><span class="line"><span class="keyword">if</span>([keyPath isEqualToString:<span class="string">@"balance"</span>])&#123;<span class="comment">//这里只处理balance属性</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"keyPath=%@,object=%@,newValue=%.2f,context=%@"</span>,keyPath,object,[[change objectForKey:<span class="string">@"new"</span>] floatValue],context);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#pragma mark 重写销毁方法</span></span><br><span class="line">-(<span class="keyword">void</span>)dealloc&#123;</span><br><span class="line">[<span class="keyword">self</span>.account removeObserver:<span class="keyword">self</span> forKeyPath:<span class="string">@"balance"</span>];<span class="comment">//移除监听</span></span><br><span class="line"><span class="comment">//[super dealloc];//注意启用了ARC，此处不需要调用</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-<p>main.m<br><figure class="highlight obj-c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"Person.h"</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"Account.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[]) &#123;</span><br><span class="line"><span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line"></span><br><span class="line">Person *person1=[[Person alloc]init];</span><br><span class="line">person1.name=<span class="string">@"Kenshin"</span>;</span><br><span class="line">Account *account1=[[Account alloc]init];</span><br><span class="line">account1.balance=<span class="number">100000000.0</span>;</span><br><span class="line">person1.account=account1;</span><br><span class="line"></span><br><span class="line">account1.balance=<span class="number">200000000.0</span>;<span class="comment">//注意执行到这一步会触发监听器回调函数observeValueForKeyPath: ofObject: change: context:</span></span><br><span class="line"><span class="comment">//结果：keyPath=balance,object=&lt;Account: 0x100103aa0&gt;,newValue=200000000.00,context=(null)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在上面的代码中我们在给人员分配账户时给账户的balance属性添加了监听，并且在监听回调方法中输出了监听到的信息，同时在对象销毁时移除监听，这就构成了一个典型的KVO应用。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/02/06/KVC、KVO/">展开全文 >></a>
         </p>
       
 

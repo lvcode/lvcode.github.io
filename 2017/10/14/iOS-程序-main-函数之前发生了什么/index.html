@@ -9,6 +9,7 @@
   <title>iOS 程序 main 函数之前发生了什么 | LvCode&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="我是前言一个 iOS App 的 main 函数位于 main.m 中，这是我们熟知的程序入口。但对 objc 了解更多之后发现，程序在进入我们的 main 函数前已经执行了很多代码，比如熟知的 + load 方法等。本文将跟随程序执行顺序，刨根问底，从 dyld 到 runtime ，看看 main 函数之前都发生了什么。 从dyld开始动态链接库iOS 中用到的所有系统 framework 都">
+<meta name="keywords" content="ios,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS 程序 main 函数之前发生了什么">
 <meta property="og:url" content="https://lvcode.github.io/2017/10/14/iOS-程序-main-函数之前发生了什么/index.html">
@@ -53,11 +54,13 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="" class="js-avatar">
+			<img src="/public/img/scrollbar_arrow.png" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">Lv Qiang</a></h1>
 		</hgroup>
+		
+		<p class="header-subtitle">一只在路上的iOS程序猿</p>
 		
 
 		<nav class="header-menu">
@@ -111,11 +114,13 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="" class="js-avatar">
+				<img src="/public/img/scrollbar_arrow.png" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">Lv Qiang</h1>
 			</hgroup>
+			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>一只在路上的iOS程序猿<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -252,27 +257,6 @@
 
       
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
       
     </div>
     <div class="article-info article-info-index">

@@ -9,6 +9,7 @@
   <title>nonatomic的区别 | LvCode&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="在默认情况下，由于编译器所合成的方法会通过锁定机制确保其原子性（atomicity）。如果属性具备nonatomic特质，则不需要同步锁。属性默认是atomic。具备atomic特质的获取方法会通过锁定机制来确保其操作的原子性。也就是说，如果两个线程同时读取一个属性，总能看到有效的属性值。如果不加锁的话（或者说使用nonatomic语义），那么当其中一个线程正在改写某属性值的时候，另外一个线程也许">
+<meta name="keywords" content="ios,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nonatomic的区别">
 <meta property="og:url" content="https://lvcode.github.io/2016/03/06/nonatomic的区别/index.html">
@@ -47,11 +48,13 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="" class="js-avatar">
+			<img src="/public/img/scrollbar_arrow.png" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">Lv Qiang</a></h1>
 		</hgroup>
+		
+		<p class="header-subtitle">一只在路上的iOS程序猿</p>
 		
 
 		<nav class="header-menu">
@@ -105,11 +108,13 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="" class="js-avatar">
+				<img src="/public/img/scrollbar_arrow.png" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">Lv Qiang</h1>
 			</hgroup>
+			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>一只在路上的iOS程序猿<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -207,27 +212,6 @@
 
       
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
       
     </div>
     <div class="article-info article-info-index">

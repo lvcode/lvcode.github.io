@@ -9,13 +9,14 @@
   <title>TabBar遮挡问题 | LvCode&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="TabBar遮挡问题AutoLayout适配UI时，使用UITabBarViewController时发现，tableView 无法在和UINavgationController下自动让出显示View，tableView 被遮挡住了。解决办法： OC代码：1self.edgesForExtendedLayout = UIRectEdgeNone; Swift代码:1this.EdgesForExt">
+<meta name="keywords" content="ios,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TabBar遮挡问题">
 <meta property="og:url" content="https://lvcode.github.io/2016/03/17/TabBar遮挡问题/index.html">
 <meta property="og:site_name" content="LvCode&#39;s Blog">
 <meta property="og:description" content="TabBar遮挡问题AutoLayout适配UI时，使用UITabBarViewController时发现，tableView 无法在和UINavgationController下自动让出显示View，tableView 被遮挡住了。解决办法： OC代码：1self.edgesForExtendedLayout = UIRectEdgeNone; Swift代码:1this.EdgesForExt">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-17T05:04:26.492Z">
+<meta property="og:updated_time" content="2018-05-17T10:19:04.408Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TabBar遮挡问题">
 <meta name="twitter:description" content="TabBar遮挡问题AutoLayout适配UI时，使用UITabBarViewController时发现，tableView 无法在和UINavgationController下自动让出显示View，tableView 被遮挡住了。解决办法： OC代码：1self.edgesForExtendedLayout = UIRectEdgeNone; Swift代码:1this.EdgesForExt">
@@ -47,11 +48,13 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="" class="js-avatar">
+			<img src="/public/img/scrollbar_arrow.png" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">Lv Qiang</a></h1>
 		</hgroup>
+		
+		<p class="header-subtitle">一只在路上的iOS程序猿</p>
 		
 
 		<nav class="header-menu">
@@ -105,11 +108,13 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="" class="js-avatar">
+				<img src="/public/img/scrollbar_arrow.png" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">Lv Qiang</h1>
 			</hgroup>
+			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>一只在路上的iOS程序猿<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -177,31 +182,10 @@
         <h3 id="TabBar遮挡问题"><a href="#TabBar遮挡问题" class="headerlink" title="TabBar遮挡问题"></a>TabBar遮挡问题</h3><p>AutoLayout适配UI时，使用UITabBarViewController时发现，tableView 无法在和UINavgationController下自动让出显示View，tableView 被遮挡住了。<br>解决办法：</p>
 <p>OC代码：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span>.edgesForExtendedLayout = <span class="built_in">UIRectEdgeNone</span>;</span><br></pre></td></tr></table></figure></p>
 <p>Swift代码:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.<span class="type">EdgesForExtendedLayout</span> = <span class="type">UIRectEdge</span>.<span class="type">None</span>;</span><br></pre></td></tr></table></figure></p>
-<p>iOS7后，苹果实行全屏幕适配，导航栏半透明化，可以通过 translucent 修改。<br>UIScrollView 控件automaticallyAdjustsScrollViewInsets 默认YES，是自动控制内边距，避免tableView等被导航栏遮盖<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ([<span class="keyword">self</span> respondsToSelector:<span class="keyword">@selector</span>(setAutomaticallyAdjustsScrollViewInsets:)]) &#123;</span><br><span class="line">    <span class="keyword">self</span>.automaticallyAdjustsScrollViewInsets = <span class="literal">NO</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>iOS7后，苹果实行全屏幕适配，导航栏半透明化，可以通过 translucent 修改。<br>UIScrollView 控件automaticallyAdjustsScrollViewInsets 默认YES，系统会自动设置scrollview及其字累对象的contentInset属性，使scrollView上的内容不被navgationBar、tabBar、等内容遮挡。对于一个scrollView来说，它所在的VC是否显示navigationBar、tabBar，对scrollView的布局有一定的影响，如果从（0，0）开始布局scrollView，那么当他所在的VC欧navigationbar时，该scrollView就会被navigationBar遮挡，如果从（0，64）开始布局scrollView，那么他所在的VC没有navigationBar时，该scrollView会有64个点的白色区域，勾选该选项就可以从（0，0）开始布局，不用关心该页面是否会显示navigationBar，系统会自动把添加到这个VC的scrollView的contentInset调整为合适的值：<br>scrollView.contentInset.top +=64;<br>是自动控制内边距，避免tableView等被导航栏遮盖<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ([<span class="keyword">self</span> respondsToSelector:<span class="keyword">@selector</span>(setAutomaticallyAdjustsScrollViewInsets:)]) &#123;</span><br><span class="line">    <span class="keyword">self</span>.automaticallyAdjustsScrollViewInsets = <span class="literal">NO</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
       
     </div>
     <div class="article-info article-info-index">

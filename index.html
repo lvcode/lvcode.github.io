@@ -160,6 +160,156 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-PushKit和CallKit" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/30/PushKit和CallKit/">PushKit和CallKit</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/30/PushKit和CallKit/" class="archive-article-date">
+  	<time datetime="2018-08-30T03:30:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="PushKit介绍"><a href="#PushKit介绍" class="headerlink" title="PushKit介绍"></a>PushKit介绍</h3><h4 id="PushKit从iOS-8版本开始支持，具体实现如下："><a href="#PushKit从iOS-8版本开始支持，具体实现如下：" class="headerlink" title="PushKit从iOS 8版本开始支持，具体实现如下："></a>PushKit从iOS 8版本开始支持，具体实现如下：</h4><p>1）app需要开启推送，且后台模式勾选Voice over IP；</p>
+<p>2）创建PushKit推送证书，证书创建类型选择VoIP Services Certificate，具体生成过程不再赘述与普通推送证书过程一样；</p>
+<p>3）引用PushKit.framework库；    </p>
+<p>4）注册PushKit推送通知，代码如下:</p>
+<h3 id="CallKit介绍"><a href="#CallKit介绍" class="headerlink" title="CallKit介绍"></a>CallKit介绍</h3><h4 id="CallKit是从iOS-10开始支持，需要引用CallKit-framework库"><a href="#CallKit是从iOS-10开始支持，需要引用CallKit-framework库" class="headerlink" title="CallKit是从iOS 10开始支持，需要引用CallKit.framework库."></a>CallKit是从iOS 10开始支持，需要引用CallKit.framework库.</h4><p>优点：</p>
+<p>1） 提高网络通话的音频权限：避免在通话过程中被传统电话无脑打断，更顺畅！</p>
+<p>2）可以使用系统电话的UI界面：实时语音通话真正地变成了“电话”！</p>
+<p>简单介绍：</p>
+<p>首先得介绍一下CallKit的框架。他分为三大模块：通话管理，CallCenter和来电屏蔽，要实现上述功能我们只需要关注通话管理模块。通话管理模块里主要有两个类：CXProvider和CXCallController。</p>
+<p>CXProvider可以理解为处理系统电话界面有关的逻辑，比如来电呼起系统电话界面或者将用户在系统电话界面上的操作通知给App。 CXCallController则是将用户在App界面上的操作通知给系统。</p>
+<p>CallKit来电场景的介绍：</p>
+<p>网络通话适配CallKit主要包含三个流程：收到来电主动通知CallKit、用户在CallKit界面点击接听、用户在App界面点击挂断。下面将通过三个流程来介绍CXProvider、CXCallController的使用。</p>
+<p><b> App收到来电 </b></p>
+<p><a href="https://doc.yuntongxun.com/file/image/5a698a59b7220cda00a80cb8" target="_blank" rel="noopener"></a></p>
+<p>收到SDK的onIncomingCallReceived回调消息时，其他逻辑不变只需要调用CXProvider的reportNewIncomingCall就可以展示系统电话界面。</p>
+<p><a href="https://doc.yuntongxun.com/file/image/5a698a76b7220cda00a80cc0" target="_blank" rel="noopener"></a></p>
+<p>用户在CallKit界面点击接听，该流程可用于用户对Callkit的所有操作回调：</p>
+<p><a href="hhttps://doc.yuntongxun.com/file/image/5a698a9eb7220cda00a80cce" target="_blank" rel="noopener"></a></p>
+<p>用户点击接听后，我们会受到CXAnswerCallAction的回调，在这里面添加acceptCall接听来电，再调用fulfill，整个流程就完成了。在前面判断如果callid不存在字典中显示失败。</p>
+<p><a href="https://doc.yuntongxun.com/file/image/5a698ab9b7220cda00a80cd7" target="_blank" rel="noopener"></a></p>
+<p><b> 用户在App中挂断电话 </b></p>
+<p><a href="https://doc.yuntongxun.com/file/image/5a698ad4b7220cda00a80cdf" target="_blank" rel="noopener"></a></p>
+<p>这时候我们需要添加一个CXEndCallAction到CXTransaction并调用requestTransaction请求执行：</p>
+<p><a href="https://doc.yuntongxun.com/file/image/5a698ae9b7220cda00a80ce6" target="_blank" rel="noopener"></a></p>
+<p>之后的流程与CallKit界面点击接听类似，收到CXEndCallAction回调，执行挂机逻辑，调用fulfill完成流程。所有用户在app内的操作都以这种方式通知CallKit：</p>
+<p><a href="https://doc.yuntongxun.com/file/image/5a698b03b7220cda00a80ced" target="_blank" rel="noopener"></a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/30/PushKit和CallKit/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-iOS代码混淆" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/01/iOS代码混淆/">iOS代码混淆</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/01/iOS代码混淆/" class="archive-article-date">
+  	<time datetime="2018-07-01T05:14:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/01/iOS代码混淆/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-优秀的第三方库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -857,273 +1007,6 @@ Cache-Control:max-age=0
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/04/24/iOS语言本地化或国际化/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-CocoaPods报错问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/20/CocoaPods报错问题/">CocoaPods报错问题</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/20/CocoaPods报错问题/" class="archive-article-date">
-  	<time datetime="2018-04-20T01:55:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="CocoaPods报错问题"><a href="#CocoaPods报错问题" class="headerlink" title="CocoaPods报错问题"></a>CocoaPods报错问题</h2><pre><code>
-
-[!] The `PuHuaHospital [Release]` target overrides the `GCC_PREPROCESSOR_DEFINITIONS` build setting defined in `Pods/Target Support Files/Pods-PuHuaHospital/Pods-PuHuaHospital.release.xcconfig'. This can lead to problems with the CocoaPods installation
-- Use the `$(inherited)` flag, or
-- Remove the build settings from the target.
-
-</code></pre>
-
-
-<p>解决办法：<br>在Build Settings<br>Header Search Paths<br>Other Linker Flags<br>Preprocessor Macros<br>在这三个地方都加上$(inherited)，然后重新pod install就可以了。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/20/CocoaPods报错问题/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-NSDateFormatter优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/11/NSDateFormatter优化/">NSDateFormatter优化</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/11/NSDateFormatter优化/" class="archive-article-date">
-  	<time datetime="2018-04-11T03:22:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><em>*</em> 为什么要优化NSDateFormatter？</p>
-<p>今天逛论坛看到NSDateFormatte很耗性能，一查发现确有其事。</p>
-<p>下面是官方描述</p>
-<blockquote>
-<p>Creating a date formatter is not a cheap operation. If you are likely to use a formatter frequently, it is typically more efficient to cache a single instance than to create and dispose of multiple instances. One approach is to use a static variable</p>
-</blockquote>
-<p>优化方式有哪些？<br>a.延迟转换<br>即只有在UI需要使用转换结果时在进行转换。</p>
-<p>b.Cache in Memory<br>根据NSDateFormatter线程安全性，不同的iOS系统版本内存缓存如下：</p>
-<ul>
-<li>prior to iOS 7</li>
-</ul>
-<p>如果直接采用静态变量进行存储，那么可能就会存在线程安全问题，在iOS 7之前，NSDateFormatter是非线程安全的，因此可能就会有两条或以上的线程同时访问同一个日期格式化对象，从而导致App崩溃。</p>
-<pre><code>
-+ (NSDateFormatter *)cachedDateFormatter {
-
-NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary];
-
-NSDateFormatter *dateFormatter = [threadDictionary objectForKey:@"cachedDateFormatter"];
-
-if (!dateFormatter) {
-
-dateFormatter = [[NSDateFormatter alloc] init];
-
-[dateFormatter setLocale:[NSLocale currentLocale]];
-
-[dateFormatter setDateFormat: @"YYYY-MM-dd HH:mm:ss"];
-
-[threadDictionary setObject:dateFormatter forKey:@"cachedDateFormatter"];
-
-}
-
-return dateFormatter;
-
-}
-</code></pre>
-
-<ul>
-<li>iOS 7 or later</li>
-</ul>
-<p>在iOS 7、macOS 10.9及以上系统版本，NSDateFormatter都是线程安全的，因此我们无需担心日期格式化对象在使用过程中被另外一条线程给修改，为了提高性能，我们还可以在上述代码块中进行简化（除去冗余部分）。</p>
-<pre><code>
-static NSDateFormatter *cachedDateFormatter = nil;
-
-+ (NSDateFormatter *)cachedDateFormatter {
-
-// If the date formatters aren't already set up, create them and cache them for reuse.
-
-if (!dateFormatter) {
-
-dateFormatter = [[NSDateFormatter alloc] init];
-
-[dateFormatter setLocale:[NSLocale currentLocale]];
-
-[dateFormatter setDateFormat: @"YYYY-MM-dd HH:mm:ss"];
-
-}
-
-return dateFormatter;
-
-}
-</code></pre>
-
-<p>如果缓存了日期格式化或者是其他依赖于current locale的对象，那么我们应该监听NSCurrentLocaleDidChangeNotification通知，当current locale变化时及时更新被缓存的日期格式化对象。</p>
-<blockquote>
-<p>In theory you could use an auto-updating locale (autoupdatingCurrentLocale) to create a locale that automatically accounts for changes in the user’s locale settings. In practice this currently does not work with date formatters.</p>
-</blockquote>
-<h3 id="Apple-Threading-Programming-Guide"><a href="#Apple-Threading-Programming-Guide" class="headerlink" title="Apple Threading Programming Guide"></a>Apple Threading Programming Guide</h3><p>c.利用标准C语言库<br>如果时间日期格式是固定的，我们可以采用C语言中的strptime函数，这样更加简单高效。</p>
-<pre><code>
-- (NSDate *) easyDateFormatter{
-
-time_t t;
-
-struct tm tm;
-
-char *iso8601 = "2016-09-18";
-
-strptime(iso8601, "%Y-%m-%d", &tm);
-
-tm.tm_isdst = -1;
-
-tm.tm_hour = 0;//当tm结构体中的tm.tm_hour为负数，会导致mktime(&tm)计算错误
-
-/**
-
-//NSString *iso8601String = @"2016-09-18T17:30:08+08:00";
-
-//%Y-%m-%d [iso8601String cStringUsingEncoding:NSUTF8StringEncoding]
-
-{
-
-tm_sec = 0
-
-tm_min = 0
-
-tm_hour = 0
-
-tm_mday = 18
-
-tm_mon = 9
-
-tm_year = 116
-
-tm_wday = 2
-
-tm_yday = 291
-
-tm_isdst = 0
-
-tm_gmtoff = 28800
-
-tm_zone = 0x00007fd9b600c31c "CST"
-
-}
-
-ISO8601时间格式：2004-05-03T17:30:08+08:00 参考Wikipedia
-
-*/
-
-t = mktime(&tm);
-
-//http://pubs.opengroup.org/onlinepubs/9699919799/functions/mktime.html
-
-//secondsFromGMT: The current difference in seconds between the receiver and Greenwich Mean Time.
-
-return [NSDate dateWithTimeIntervalSince1970:t + [[NSTimeZone localTimeZone] secondsFromGMT]];
-
-}
-</code></pre>
-
-<p>相关资料：<br>Date Formate Patterns :</p>
-<p><img src="http://ww1.sinaimg.cn/large/68e28bf3ly1fq8kh40yd1j20yg0bhwgi.jpg" alt=""></p>
-<p><a href="http://www.gnu.org/software/libc/" target="_blank" rel="noopener">Standard C library</a></p>
-<p><a href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank" rel="noopener">ISO_8601</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/11/NSDateFormatter优化/">展开全文 >></a>
         </p>
       
 

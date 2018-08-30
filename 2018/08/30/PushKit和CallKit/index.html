@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://lvcode.github.io">
-  <title>Archives: 2018 | LvCode&#39;s Blog</title>
+  <title>PushKit和CallKit | LvCode&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="太原理工大学09级,就职于步长制药。擅长iOS开发技能，欢迎大家指点迷津！">
+  <meta name="description" content="PushKit介绍PushKit从iOS 8版本开始支持，具体实现如下：1）app需要开启推送，且后台模式勾选Voice over IP； 2）创建PushKit推送证书，证书创建类型选择VoIP Services Certificate，具体生成过程不再赘述与普通推送证书过程一样； 3）引用PushKit.framework库；     4）注册PushKit推送通知，代码如下: CallKit">
 <meta name="keywords" content="ios,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LvCode&#39;s Blog">
-<meta property="og:url" content="https://lvcode.github.io/archives/2018/page/2/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PushKit和CallKit">
+<meta property="og:url" content="https://lvcode.github.io/2018/08/30/PushKit和CallKit/index.html">
 <meta property="og:site_name" content="LvCode&#39;s Blog">
-<meta property="og:description" content="太原理工大学09级,就职于步长制药。擅长iOS开发技能，欢迎大家指点迷津！">
+<meta property="og:description" content="PushKit介绍PushKit从iOS 8版本开始支持，具体实现如下：1）app需要开启推送，且后台模式勾选Voice over IP； 2）创建PushKit推送证书，证书创建类型选择VoIP Services Certificate，具体生成过程不再赘述与普通推送证书过程一样； 3）引用PushKit.framework库；     4）注册PushKit推送通知，代码如下: CallKit">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-08-30T03:45:53.331Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LvCode&#39;s Blog">
-<meta name="twitter:description" content="太原理工大学09级,就职于步长制药。擅长iOS开发技能，欢迎大家指点迷津！">
+<meta name="twitter:title" content="PushKit和CallKit">
+<meta name="twitter:description" content="PushKit介绍PushKit从iOS 8版本开始支持，具体实现如下：1）app需要开启推送，且后台模式勾选Voice over IP； 2）创建PushKit推送证书，证书创建类型选择VoIP Services Certificate，具体生成过程不再赘述与普通推送证书过程一样； 3）引用PushKit.framework库；     4）注册PushKit推送通知，代码如下: CallKit">
   
     <link rel="alternative" href="/atom.xml" title="LvCode&#39;s Blog" type="application/atom+xml">
   
@@ -158,106 +159,159 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-PushKit和CallKit" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PushKit和CallKit
+    </h1>
+  
+
+        
+        <a href="/2018/08/30/PushKit和CallKit/" class="archive-article-date">
+  	<time datetime="2018-08-30T03:30:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-30</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="PushKit介绍"><a href="#PushKit介绍" class="headerlink" title="PushKit介绍"></a>PushKit介绍</h3><h4 id="PushKit从iOS-8版本开始支持，具体实现如下："><a href="#PushKit从iOS-8版本开始支持，具体实现如下：" class="headerlink" title="PushKit从iOS 8版本开始支持，具体实现如下："></a>PushKit从iOS 8版本开始支持，具体实现如下：</h4><p>1）app需要开启推送，且后台模式勾选Voice over IP；</p>
+<p>2）创建PushKit推送证书，证书创建类型选择VoIP Services Certificate，具体生成过程不再赘述与普通推送证书过程一样；</p>
+<p>3）引用PushKit.framework库；    </p>
+<p>4）注册PushKit推送通知，代码如下:</p>
+<h3 id="CallKit介绍"><a href="#CallKit介绍" class="headerlink" title="CallKit介绍"></a>CallKit介绍</h3><h4 id="CallKit是从iOS-10开始支持，需要引用CallKit-framework库"><a href="#CallKit是从iOS-10开始支持，需要引用CallKit-framework库" class="headerlink" title="CallKit是从iOS 10开始支持，需要引用CallKit.framework库."></a>CallKit是从iOS 10开始支持，需要引用CallKit.framework库.</h4><p>优点：</p>
+<p>1） 提高网络通话的音频权限：避免在通话过程中被传统电话无脑打断，更顺畅！</p>
+<p>2）可以使用系统电话的UI界面：实时语音通话真正地变成了“电话”！</p>
+<p>简单介绍：</p>
+<p>首先得介绍一下CallKit的框架。他分为三大模块：通话管理，CallCenter和来电屏蔽，要实现上述功能我们只需要关注通话管理模块。通话管理模块里主要有两个类：CXProvider和CXCallController。</p>
+<p>CXProvider可以理解为处理系统电话界面有关的逻辑，比如来电呼起系统电话界面或者将用户在系统电话界面上的操作通知给App。 CXCallController则是将用户在App界面上的操作通知给系统。</p>
+<p>CallKit来电场景的介绍：</p>
+<p>网络通话适配CallKit主要包含三个流程：收到来电主动通知CallKit、用户在CallKit界面点击接听、用户在App界面点击挂断。下面将通过三个流程来介绍CXProvider、CXCallController的使用。</p>
+<p><b> App收到来电 </b></p>
+<p><a href="https://doc.yuntongxun.com/file/image/5a698a59b7220cda00a80cb8" target="_blank" rel="noopener"></a></p>
+<p>收到SDK的onIncomingCallReceived回调消息时，其他逻辑不变只需要调用CXProvider的reportNewIncomingCall就可以展示系统电话界面。</p>
+<p><a href="https://doc.yuntongxun.com/file/image/5a698a76b7220cda00a80cc0" target="_blank" rel="noopener"></a></p>
+<p>用户在CallKit界面点击接听，该流程可用于用户对Callkit的所有操作回调：</p>
+<p><a href="hhttps://doc.yuntongxun.com/file/image/5a698a9eb7220cda00a80cce" target="_blank" rel="noopener"></a></p>
+<p>用户点击接听后，我们会受到CXAnswerCallAction的回调，在这里面添加acceptCall接听来电，再调用fulfill，整个流程就完成了。在前面判断如果callid不存在字典中显示失败。</p>
+<p><a href="https://doc.yuntongxun.com/file/image/5a698ab9b7220cda00a80cd7" target="_blank" rel="noopener"></a></p>
+<p><b> 用户在App中挂断电话 </b></p>
+<p><a href="https://doc.yuntongxun.com/file/image/5a698ad4b7220cda00a80cdf" target="_blank" rel="noopener"></a></p>
+<p>这时候我们需要添加一个CXEndCallAction到CXTransaction并调用requestTransaction请求执行：</p>
+<p><a href="https://doc.yuntongxun.com/file/image/5a698ae9b7220cda00a80ce6" target="_blank" rel="noopener"></a></p>
+<p>之后的流程与CallKit界面点击接听类似，收到CXEndCallAction回调，执行挂机逻辑，调用fulfill完成流程。所有用户在app内的操作都以这种方式通知CallKit：</p>
+<p><a href="https://doc.yuntongxun.com/file/image/5a698b03b7220cda00a80ced" target="_blank" rel="noopener"></a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/20/CocoaPods报错问题/" class="archive-article-date">
-  	<time datetime="2018-04-20T01:55:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/20/CocoaPods报错问题/">CocoaPods报错问题</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://lvcode.github.io/2018/08/30/PushKit和CallKit/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/11/NSDateFormatter优化/" class="archive-article-date">
-  	<time datetime="2018-04-11T03:22:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-11</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/07/01/iOS代码混淆/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS代码混淆</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/11/NSDateFormatter优化/">NSDateFormatter优化</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/11/Keychain-浅析/" class="archive-article-date">
-  	<time datetime="2018-01-11T05:51:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/11/Keychain-浅析/">Keychain 浅析</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2018/">&laquo; Prev</a><a class="page-number" href="/archives/2018/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
 
@@ -281,8 +335,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

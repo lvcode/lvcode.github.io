@@ -16,10 +16,18 @@
 <meta property="og:site_name" content="LvCode&#39;s Blog">
 <meta property="og:description" content="PushKit介绍PushKit从iOS 8版本开始支持，具体实现如下：1）app需要开启推送，且后台模式勾选Voice over IP； 2）创建PushKit推送证书，证书创建类型选择VoIP Services Certificate，具体生成过程不再赘述与普通推送证书过程一样； 3）引用PushKit.framework库；     4）注册PushKit推送通知，代码如下: CallKit">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-30T03:45:53.331Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/68e28bf3ly1furlaa21t5j20fd083q3x.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/68e28bf3ly1furlag8mt5j20fd03j40u.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/68e28bf3ly1furlaqeq7rj20fd084gml.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/68e28bf3ly1furlbsjxd4j20fd03dq3o.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/68e28bf3ly1furlc1npr1j20fd08g76b.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/68e28bf3ly1furlc91xr5j20fd02faby.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/68e28bf3ly1furlcf62bej20fd04jq3w.jpg">
+<meta property="og:updated_time" content="2018-08-30T03:59:28.241Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PushKit和CallKit">
 <meta name="twitter:description" content="PushKit介绍PushKit从iOS 8版本开始支持，具体实现如下：1）app需要开启推送，且后台模式勾选Voice over IP； 2）创建PushKit推送证书，证书创建类型选择VoIP Services Certificate，具体生成过程不再赘述与普通推送证书过程一样； 3）引用PushKit.framework库；     4）注册PushKit推送通知，代码如下: CallKit">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/68e28bf3ly1furlaa21t5j20fd083q3x.jpg">
   
     <link rel="alternative" href="/atom.xml" title="LvCode&#39;s Blog" type="application/atom+xml">
   
@@ -192,19 +200,19 @@
 <p>CallKit来电场景的介绍：</p>
 <p>网络通话适配CallKit主要包含三个流程：收到来电主动通知CallKit、用户在CallKit界面点击接听、用户在App界面点击挂断。下面将通过三个流程来介绍CXProvider、CXCallController的使用。</p>
 <p><b> App收到来电 </b></p>
-<p><a href="https://doc.yuntongxun.com/file/image/5a698a59b7220cda00a80cb8" target="_blank" rel="noopener"></a></p>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1furlaa21t5j20fd083q3x.jpg" alt=""></p>
 <p>收到SDK的onIncomingCallReceived回调消息时，其他逻辑不变只需要调用CXProvider的reportNewIncomingCall就可以展示系统电话界面。</p>
-<p><a href="https://doc.yuntongxun.com/file/image/5a698a76b7220cda00a80cc0" target="_blank" rel="noopener"></a></p>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1furlag8mt5j20fd03j40u.jpg" alt=""></p>
 <p>用户在CallKit界面点击接听，该流程可用于用户对Callkit的所有操作回调：</p>
-<p><a href="hhttps://doc.yuntongxun.com/file/image/5a698a9eb7220cda00a80cce" target="_blank" rel="noopener"></a></p>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1furlaqeq7rj20fd084gml.jpg" alt=""></p>
 <p>用户点击接听后，我们会受到CXAnswerCallAction的回调，在这里面添加acceptCall接听来电，再调用fulfill，整个流程就完成了。在前面判断如果callid不存在字典中显示失败。</p>
-<p><a href="https://doc.yuntongxun.com/file/image/5a698ab9b7220cda00a80cd7" target="_blank" rel="noopener"></a></p>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1furlbsjxd4j20fd03dq3o.jpg" alt=""></p>
 <p><b> 用户在App中挂断电话 </b></p>
-<p><a href="https://doc.yuntongxun.com/file/image/5a698ad4b7220cda00a80cdf" target="_blank" rel="noopener"></a></p>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1furlc1npr1j20fd08g76b.jpg" alt=""></p>
 <p>这时候我们需要添加一个CXEndCallAction到CXTransaction并调用requestTransaction请求执行：</p>
-<p><a href="https://doc.yuntongxun.com/file/image/5a698ae9b7220cda00a80ce6" target="_blank" rel="noopener"></a></p>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1furlc91xr5j20fd02faby.jpg" alt=""></p>
 <p>之后的流程与CallKit界面点击接听类似，收到CXEndCallAction回调，执行挂机逻辑，调用fulfill完成流程。所有用户在app内的操作都以这种方式通知CallKit：</p>
-<p><a href="https://doc.yuntongxun.com/file/image/5a698b03b7220cda00a80ced" target="_blank" rel="noopener"></a></p>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1furlcf62bej20fd04jq3w.jpg" alt=""></p>
 
       
 

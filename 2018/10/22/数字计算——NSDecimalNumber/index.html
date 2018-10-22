@@ -6,19 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://lvcode.github.io">
-  <title>Archives | LvCode&#39;s Blog</title>
+  <title>数字计算——NSDecimalNumber | LvCode&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="太原理工大学09级,就职于步长制药。擅长iOS开发技能，欢迎大家指点迷津！">
+  <meta name="description" content="数字计算——NSDecimalNumberNSDecimalNumber 简介NSDecimalNumber 是一个十进制数字类，继承自NSNumber，苹果针对浮点类型计算精度问题提供出来的计算类，基于十进制的科学计数法来计算，同时可以指定舍入模式，一般用于货币计算。123456789101112131415161718192021222324252627282930/**创建并返回一个十进制对">
 <meta name="keywords" content="ios,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LvCode&#39;s Blog">
-<meta property="og:url" content="https://lvcode.github.io/archives/page/2/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数字计算——NSDecimalNumber">
+<meta property="og:url" content="https://lvcode.github.io/2018/10/22/数字计算——NSDecimalNumber/index.html">
 <meta property="og:site_name" content="LvCode&#39;s Blog">
-<meta property="og:description" content="太原理工大学09级,就职于步长制药。擅长iOS开发技能，欢迎大家指点迷津！">
+<meta property="og:description" content="数字计算——NSDecimalNumberNSDecimalNumber 简介NSDecimalNumber 是一个十进制数字类，继承自NSNumber，苹果针对浮点类型计算精度问题提供出来的计算类，基于十进制的科学计数法来计算，同时可以指定舍入模式，一般用于货币计算。123456789101112131415161718192021222324252627282930/**创建并返回一个十进制对">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/68e28bf3ly1fwh2ts9ogvj20rs0c774c.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/68e28bf3ly1fwh32rapmsj21900jcn4b.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/68e28bf3ly1fwh333uezhj20ps05oq46.jpg">
+<meta property="og:updated_time" content="2018-10-22T08:32:50.640Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LvCode&#39;s Blog">
-<meta name="twitter:description" content="太原理工大学09级,就职于步长制药。擅长iOS开发技能，欢迎大家指点迷津！">
+<meta name="twitter:title" content="数字计算——NSDecimalNumber">
+<meta name="twitter:description" content="数字计算——NSDecimalNumberNSDecimalNumber 简介NSDecimalNumber 是一个十进制数字类，继承自NSNumber，苹果针对浮点类型计算精度问题提供出来的计算类，基于十进制的科学计数法来计算，同时可以指定舍入模式，一般用于货币计算。123456789101112131415161718192021222324252627282930/**创建并返回一个十进制对">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/68e28bf3ly1fwh2ts9ogvj20rs0c774c.jpg">
   
     <link rel="alternative" href="/atom.xml" title="LvCode&#39;s Blog" type="application/atom+xml">
   
@@ -158,315 +163,152 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-数字计算——NSDecimalNumber" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数字计算——NSDecimalNumber
+    </h1>
+  
+
+        
+        <a href="/2018/10/22/数字计算——NSDecimalNumber/" class="archive-article-date">
+  	<time datetime="2018-10-22T07:58:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-22</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="数字计算——NSDecimalNumber"><a href="#数字计算——NSDecimalNumber" class="headerlink" title="数字计算——NSDecimalNumber"></a>数字计算——NSDecimalNumber</h2><h3 id="NSDecimalNumber-简介"><a href="#NSDecimalNumber-简介" class="headerlink" title="NSDecimalNumber 简介"></a>NSDecimalNumber 简介</h3><p>NSDecimalNumber 是一个十进制数字类，继承自NSNumber，苹果针对浮点类型计算精度问题提供出来的计算类，基于十进制的科学计数法来计算，同时可以指定舍入模式，一般用于货币计算。<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">创建并返回一个十进制对象</span></span><br><span class="line"><span class="comment">@param dcm 十进制的结构体</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithDecimal:(<span class="built_in">NSDecimal</span>)dcm;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">@param mantissa 十进制尾数 （如：123）</span></span><br><span class="line"><span class="comment">@param exponent 指数      （如：3）</span></span><br><span class="line"><span class="comment">@param flag 是否为负      （如：YES）</span></span><br><span class="line"><span class="comment">return 十进制数字对象       (如：-123000)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithMantissa:(<span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span>)mantissa</span><br><span class="line">exponent:(<span class="keyword">short</span>)exponent</span><br><span class="line">isNegative:(<span class="built_in">BOOL</span>)flag;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">@param numberValue 数字字符串</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithString:(<span class="keyword">nullable</span> <span class="built_in">NSString</span> *)numberValue;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">@param numberValue 数字字符串,可以根据locale来解析 (如:@"123,456")</span></span><br><span class="line"><span class="comment">@param locale 解析&lt;numberValue&gt;的字典(特别是NSLocaleDecimalSeparator:分割整数跟小数)</span></span><br><span class="line"><span class="comment">(如 @&#123;NSLocaleDecimalSeparator:@","&#125;)</span></span><br><span class="line"><span class="comment">@return 十进制数字对象                           (如：123.456)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithString:(<span class="keyword">nullable</span> <span class="built_in">NSString</span> *)numberValue</span><br><span class="line">locale:(<span class="keyword">nullable</span> <span class="keyword">id</span>)locale;</span><br></pre></td></tr></table></figure></p>
+<h3 id="NSDecimalNumberHandler"><a href="#NSDecimalNumberHandler" class="headerlink" title="NSDecimalNumberHandler"></a>NSDecimalNumberHandler</h3><p>NSDecimalNumber的公共协议处理类，可以设置舍入模式以及计算错误的处理；配合NSDecimalNumber来使用，将这个类的实例当做NSDecimalNumber相应API的参数来控制数字处理的结果。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">初始化方法</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">@param roundingMode 舍入方式</span></span><br><span class="line"><span class="comment">@param scale 小数点后舍入值的位数。</span></span><br><span class="line"><span class="comment">@param exact 精度错误处理；YES:如果出现错误，将引发异常，NO:忽略错误并将控制权放回给调用者。</span></span><br><span class="line"><span class="comment">@param overflow 溢出错误处理；YES:如果出现错误，将引发异常，NO:忽略错误并将控制权放回给调用者。</span></span><br><span class="line"><span class="comment">@param underflow 下溢错误处理；YES:如果出现错误，将引发异常，NO:忽略错误并将控制权放回给调用者。</span></span><br><span class="line"><span class="comment">@param divideByZero 除以0的错误处理；YES:如果出现错误，将引发异常，NO:忽略错误并将控制权放回给调用者。</span></span><br><span class="line"><span class="comment">@return NSDecimalNumberHandler对象</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">+ (<span class="keyword">instancetype</span>)decimalNumberHandlerWithRoundingMode:(<span class="built_in">NSRoundingMode</span>)roundingMode</span><br><span class="line">scale:(<span class="keyword">short</span>)scale</span><br><span class="line">raiseOnExactness:(<span class="built_in">BOOL</span>)exact</span><br><span class="line">raiseOnOverflow:(<span class="built_in">BOOL</span>)overflow</span><br><span class="line">raiseOnUnderflow:(<span class="built_in">BOOL</span>)underflow</span><br><span class="line">raiseOnDivideByZero:(<span class="built_in">BOOL</span>)divideByZero</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">快速构造方法</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">roundingMode:NSRoundPlain</span></span><br><span class="line"><span class="comment">scale:全精度</span></span><br><span class="line"><span class="comment">exact:NO</span></span><br><span class="line"><span class="comment">overflow:NO</span></span><br><span class="line"><span class="comment">underflow:NO</span></span><br><span class="line"><span class="comment">divideByZero:NO</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">+ (<span class="built_in">NSDecimalNumberHandler</span> *)defaultDecimalNumberHandler;</span><br></pre></td></tr></table></figure>
+<h4 id="NSRoundingMode的几种方式："><a href="#NSRoundingMode的几种方式：" class="headerlink" title="NSRoundingMode的几种方式："></a>NSRoundingMode的几种方式：</h4><ul>
+<li>NSRoundPlain:四舍五入</li>
+<li>NSRoundDown:只舍不入</li>
+<li>NSRoundUp：只入不舍</li>
+<li>NSRoundBankers: 在四舍五入的基础上加了一个判断：当最后一位为5的时候，只会舍入成偶数。比如：1.25不会返回1.3而是1.2，因为1.3不是偶数。</li>
+</ul>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fwh2ts9ogvj20rs0c774c.jpg" alt="官方提供"></p>
+<hr>
+<h4 id="加法运算"><a href="#加法运算" class="headerlink" title="加法运算"></a>加法运算</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">@param decimalNumber 相加的十进制对象</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="built_in">NSDecimalNumber</span> *)decimalNumberByAdding:(<span class="built_in">NSDecimalNumber</span> *)decimalNumber;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">@param decimalNumber 相加的十进制对象</span></span><br><span class="line"><span class="comment">@param behavior NSDecimalNumberHandler对象</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="built_in">NSDecimalNumber</span> *)decimalNumberByAdding:(<span class="built_in">NSDecimalNumber</span> *)decimalNumber</span><br><span class="line">withBehavior:(<span class="keyword">nullable</span> <span class="keyword">id</span> &lt;<span class="built_in">NSDecimalNumberBehaviors</span>&gt;)behavior</span><br></pre></td></tr></table></figure>
+<h4 id="减法运算"><a href="#减法运算" class="headerlink" title="减法运算"></a>减法运算</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">@param decimalNumber 相乘的十进制对象</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="built_in">NSDecimalNumber</span> *)decimalNumberByMultiplyingBy:(<span class="built_in">NSDecimalNumber</span> *)decimalNumber;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">@param decimalNumber 相乘的十进制对象</span></span><br><span class="line"><span class="comment">@param behavior NSDecimalNumberHandler对象</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="built_in">NSDecimalNumber</span> *)decimalNumberByMultiplyingBy:(<span class="built_in">NSDecimalNumber</span> *)decimalNumber</span><br><span class="line">withBehavior:(<span class="keyword">nullable</span> <span class="keyword">id</span> &lt;<span class="built_in">NSDecimalNumberBehaviors</span>&gt;)behavior;</span><br></pre></td></tr></table></figure>
+<h4 id="除法运算"><a href="#除法运算" class="headerlink" title="除法运算"></a>除法运算</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">@param decimalNumber 除以的十进制对象</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="built_in">NSDecimalNumber</span> *)decimalNumberByDividingBy:(<span class="built_in">NSDecimalNumber</span> *)decimalNumber;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">@param decimalNumber  除以的十进制对象</span></span><br><span class="line"><span class="comment">@param behavior NSDecimalNumberHandler对象</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="built_in">NSDecimalNumber</span> *)decimalNumberByDividingBy:(<span class="built_in">NSDecimalNumber</span> *)decimalNumber</span><br><span class="line">withBehavior:(<span class="keyword">nullable</span> <span class="keyword">id</span> &lt;<span class="built_in">NSDecimalNumberBehaviors</span>&gt;)behavior;</span><br></pre></td></tr></table></figure>
+<h4 id="次方运算"><a href="#次方运算" class="headerlink" title="次方运算"></a>次方运算</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">@param power 指数</span></span><br><span class="line"><span class="comment">return 调用者的power次方</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="built_in">NSDecimalNumber</span> *)decimalNumberByRaisingToPower:(<span class="built_in">NSUInteger</span>)power;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">@param power 指数</span></span><br><span class="line"><span class="comment">@param behavior NSDecimalNumberHandler对象</span></span><br><span class="line"><span class="comment">return 调用者的power次方</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="built_in">NSDecimalNumber</span> *)decimalNumberByRaisingToPower:(<span class="built_in">NSUInteger</span>)power</span><br><span class="line">withBehavior:(<span class="keyword">nullable</span> <span class="keyword">id</span> &lt;<span class="built_in">NSDecimalNumberBehaviors</span>&gt;)behavior;</span><br></pre></td></tr></table></figure>
+<h4 id="10为底的乘方运算"><a href="#10为底的乘方运算" class="headerlink" title="10为底的乘方运算"></a>10为底的乘方运算</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">调用者乘以10的power次方</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">@param power 10的指数</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="built_in">NSDecimalNumber</span> *)decimalNumberByMultiplyingByPowerOf10:(<span class="keyword">short</span>)power;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">调用者乘以10的power次方</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">@param power 10的指数</span></span><br><span class="line"><span class="comment">@param behavior NSDecimalNumberHandler对象</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="built_in">NSDecimalNumber</span> *)decimalNumberByMultiplyingByPowerOf10:(<span class="keyword">short</span>)power</span><br><span class="line">withBehavior:(<span class="keyword">nullable</span> <span class="keyword">id</span> &lt;<span class="built_in">NSDecimalNumberBehaviors</span>&gt;)behavior;</span><br></pre></td></tr></table></figure>
+<h4 id="舍入运算"><a href="#舍入运算" class="headerlink" title="舍入运算"></a>舍入运算</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">@param decimalNumber NSDecimalNumberHandler对象</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">- (<span class="built_in">NSDecimalNumber</span> *)decimalNumberByRoundingAccordingToBehavior:(<span class="keyword">nullable</span> <span class="keyword">id</span> &lt;<span class="built_in">NSDecimalNumberBehaviors</span>&gt;)behavior;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fwh32rapmsj21900jcn4b.jpg" alt="测试代码"></p>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fwh333uezhj20ps05oq46.jpg" alt="运行结果"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/24/iOS语言本地化或国际化/" class="archive-article-date">
-  	<time datetime="2018-04-23T16:39:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/24/iOS语言本地化或国际化/">iOS语言本地化或国际化</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/20/CocoaPods报错问题/" class="archive-article-date">
-  	<time datetime="2018-04-20T01:55:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/20/CocoaPods报错问题/">CocoaPods报错问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/11/NSDateFormatter优化/" class="archive-article-date">
-  	<time datetime="2018-04-11T03:22:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/11/NSDateFormatter优化/">NSDateFormatter优化</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/11/Keychain-浅析/" class="archive-article-date">
-  	<time datetime="2018-01-11T05:51:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/11/Keychain-浅析/">Keychain 浅析</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/20/精装修验房注意事项汇总/" class="archive-article-date">
-  	<time datetime="2017-12-20T06:04:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/20/精装修验房注意事项汇总/">精装修验房注意事项汇总</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
   </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/18/App-瘦身/" class="archive-article-date">
-  	<time datetime="2017-12-18T05:50:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/18/App-瘦身/">App 瘦身</a>
-    </h1>
-  
+</div>
 
-        <div class="article-info info-on-right">
-          
-          
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://lvcode.github.io/2018/10/22/数字计算——NSDecimalNumber/" alt="微信分享二维码">
+    </div>
+</div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/09/a文件解包、删除重复类/" class="archive-article-date">
-  	<time datetime="2017-12-09T10:57:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/09/a文件解包、删除重复类/">.a文件解包、删除重复类</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/14/iOS-程序-main-函数之前发生了什么/" class="archive-article-date">
-  	<time datetime="2017-10-14T02:35:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/14/iOS-程序-main-函数之前发生了什么/">iOS 程序 main 函数之前发生了什么</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/25/开发技巧Tips/" class="archive-article-date">
-  	<time datetime="2017-01-25T09:27:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/25/开发技巧Tips/">开发技巧Tips</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
+<div class="mask js-mask"></div>
       
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/12/08/设计模式的七大原则/" class="archive-article-date">
-  	<time datetime="2016-12-08T06:47:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/12/08/设计模式的七大原则/">设计模式的七大原则</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/08/30/PushKit和CallKit/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">PushKit和CallKit</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/3/">Next &raquo;</a>
-    </nav>
+  
+
+  
+
   
 
 
@@ -490,8 +332,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

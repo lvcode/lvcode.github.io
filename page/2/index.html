@@ -160,6 +160,103 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-iOS语言本地化或国际化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/24/iOS语言本地化或国际化/">iOS语言本地化或国际化</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/24/iOS语言本地化或国际化/" class="archive-article-date">
+  	<time datetime="2018-04-23T16:39:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="iOS语言本地化-国际化"><a href="#iOS语言本地化-国际化" class="headerlink" title="iOS语言本地化/国际化"></a>iOS语言本地化/国际化</h1><blockquote>
+<p></p><h3>开场白<h3><p></p>
+<p></p><h6>语言本地化，又叫做语言国际化。是指根据用户操作系统的语言设置，自动将应用程序的语言设置为和用户操作系统语言一致的语言。往往一些应用程序需要提供给多个国家的人群使用，或者一个国家有多种语言，这就要求应用程序所展示的文字、图片等信息，能够让讲不同语言的用户读懂、看懂。进而提出为同一个应用程序适配多种语言，也即是国际化。<h6><p></p>
+</h6></h6></h3></h3></blockquote>
+<ul>
+<li>配置需要国际化的语言</li>
+<li>App名称本地化</li>
+<li>代码中字符串本地化</li>
+<li>多人开发情况下的字符串本地化</li>
+<li>图片本地化</li>
+<li>查看/切换本地语言</li>
+<li>storyboard/xib本地化</li>
+</ul>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqmzrxtc2zj21ka10agte.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqmzsk894jj225s1cq12w.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqmzsr6pbtj225s1cqwpo.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn0qrp4roj21lw1cq15z.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn0qrmfiyj20nc0a6wg1.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn0qrq4cuj21lw1cqgzf.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn0qrq7eqj21lw1cqqh0.jpg" alt=""></p>
+<blockquote>
+<p>info.plist 中修改Bundle name即可设置各种语言下的App名字</p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn11z8qgaj22121cq4d1.jpg" alt=""></p>
+<blockquote>
+<p>main.storyboard 中的文本修改</p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1tvvsboj22121cq4g3.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1uu2qo7j21a417kmzf.jpg" alt=""></p>
+<h3 id="动态设置文本"><a href="#动态设置文本" class="headerlink" title="动态设置文本"></a>动态设置文本</h3><p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1fsbdrfj214k0t879m.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1fsck4mj213k0s0tcu.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1fscioxj22121cqgyo.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1fscrnaj22121cqdt8.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1kcfelbj22121cqws8.jpg" alt=""></p>
+<blockquote>
+<p>然后我们只需要在Localizable.strings下对应的文件中，分别以Key-Value的形式，为代码中每一个需要本地化的字符串赋值，如下图：</p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn1vnabruj22121cq193.jpg" alt=""></p>
+<blockquote>
+<p>代码中使用方法  [NSLocalizedString(&lt;#T##key: String##String#&gt;, comment: &lt;#T##String#&gt;)]</p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn2buk2zhj21ng18o7e5.jpg" alt=""></p>
+<blockquote>
+<p>注意 文件名必须是 Localizable.strings 不然无法识别，上面截图有误 <img src="https://ws1.sinaimg.cn/large/68e28bf3ly1fqn298sjihj22121cqne2.jpg" alt=""></p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/24/iOS语言本地化或国际化/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-CocoaPods报错问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1203,72 +1300,6 @@ return NO;
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2016/12/08/设计模式的七大原则/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TabBar遮挡问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/17/TabBar遮挡问题/">TabBar遮挡问题</a>
-    </h1>
-  
-
-        
-        <a href="/2016/03/17/TabBar遮挡问题/" class="archive-article-date">
-  	<time datetime="2016-03-17T04:55:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="TabBar遮挡问题"><a href="#TabBar遮挡问题" class="headerlink" title="TabBar遮挡问题"></a>TabBar遮挡问题</h3><p>AutoLayout适配UI时，使用UITabBarViewController时发现，tableView 无法在和UINavgationController下自动让出显示View，tableView 被遮挡住了。<br>解决办法：</p>
-<p>OC代码：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span>.edgesForExtendedLayout = <span class="built_in">UIRectEdgeNone</span>;</span><br></pre></td></tr></table></figure></p>
-<p>Swift代码:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.<span class="type">EdgesForExtendedLayout</span> = <span class="type">UIRectEdge</span>.<span class="type">None</span>;</span><br></pre></td></tr></table></figure></p>
-<p>iOS7后，苹果实行全屏幕适配，导航栏半透明化，可以通过 translucent 修改。<br>UIScrollView 控件automaticallyAdjustsScrollViewInsets 默认YES，系统会自动设置scrollview及其字累对象的contentInset属性，使scrollView上的内容不被navgationBar、tabBar、等内容遮挡。对于一个scrollView来说，它所在的VC是否显示navigationBar、tabBar，对scrollView的布局有一定的影响，如果从（0，0）开始布局scrollView，那么当他所在的VC欧navigationbar时，该scrollView就会被navigationBar遮挡，如果从（0，64）开始布局scrollView，那么他所在的VC没有navigationBar时，该scrollView会有64个点的白色区域，勾选该选项就可以从（0，0）开始布局，不用关心该页面是否会显示navigationBar，系统会自动把添加到这个VC的scrollView的contentInset调整为合适的值：<br>scrollView.contentInset.top +=64;<br>是自动控制内边距，避免tableView等被导航栏遮盖<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ([<span class="keyword">self</span> respondsToSelector:<span class="keyword">@selector</span>(setAutomaticallyAdjustsScrollViewInsets:)]) &#123;</span><br><span class="line">    <span class="keyword">self</span>.automaticallyAdjustsScrollViewInsets = <span class="literal">NO</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/03/17/TabBar遮挡问题/">展开全文 >></a>
         </p>
       
 

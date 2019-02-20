@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://lvcode.github.io">
-  <title>Archives: 2016/1 | LvCode&#39;s Blog</title>
+  <title>NSScanner | LvCode&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="太原理工大学09级,就职于步长制药。擅长iOS开发技能，欢迎大家指点迷津！">
+  <meta name="description" content="NSScanner 属性  123456@property (readonly, copy) NSString *string;@property NSUInteger scanLocation;@property (nullable, copy) NSCharacterSet *charactersToBeSkipped;@property BOOL caseSensitive;@propert">
 <meta name="keywords" content="ios,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LvCode&#39;s Blog">
-<meta property="og:url" content="https://lvcode.github.io/archives/2016/01/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NSScanner">
+<meta property="og:url" content="https://lvcode.github.io/2019/02/20/NSScanner/index.html">
 <meta property="og:site_name" content="LvCode&#39;s Blog">
-<meta property="og:description" content="太原理工大学09级,就职于步长制药。擅长iOS开发技能，欢迎大家指点迷津！">
+<meta property="og:description" content="NSScanner 属性  123456@property (readonly, copy) NSString *string;@property NSUInteger scanLocation;@property (nullable, copy) NSCharacterSet *charactersToBeSkipped;@property BOOL caseSensitive;@propert">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-02-20T14:27:32.479Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LvCode&#39;s Blog">
-<meta name="twitter:description" content="太原理工大学09级,就职于步长制药。擅长iOS开发技能，欢迎大家指点迷津！">
+<meta name="twitter:title" content="NSScanner">
+<meta name="twitter:description" content="NSScanner 属性  123456@property (readonly, copy) NSString *string;@property NSUInteger scanLocation;@property (nullable, copy) NSCharacterSet *charactersToBeSkipped;@property BOOL caseSensitive;@propert">
   
     <link rel="alternative" href="/atom.xml" title="LvCode&#39;s Blog" type="application/atom+xml">
   
@@ -158,49 +159,172 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-NSScanner" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/01/10/多线程/" class="archive-article-date">
-  	<time datetime="2016-01-10T03:32:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-10</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/10/多线程/">多线程</a>
+    <h1 class="article-title" itemprop="name">
+      NSScanner
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
+        
+        <a href="/2019/02/20/NSScanner/" class="archive-article-date">
+  	<time datetime="2019-02-20T14:26:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="NSScanner"><a href="#NSScanner" class="headerlink" title="NSScanner"></a>NSScanner</h1><blockquote>
+<p>属性</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *string;</span><br><span class="line"><span class="keyword">@property</span> <span class="built_in">NSUInteger</span> scanLocation;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSCharacterSet</span> *charactersToBeSkipped;</span><br><span class="line"><span class="keyword">@property</span> <span class="built_in">BOOL</span> caseSensitive;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">retain</span>) <span class="keyword">id</span> locale;</span><br></pre></td></tr></table></figure>
+<p>NSScanner对象把NSString 对象的的字符解释和转化成 number和string 类型的值。在创建NSScanner对象的时候为它分配字符(string )，当你从NSScanner对象获取内容的时候，它会从头到尾遍历字符串(string)。</p>
+<p>在 NSScanner 对象扫描字符串的时候，你可以通过设置属性charactersToBeSkipped忽略某些字符。在扫描字符串之前，那些位于忽略字符集中的字符将会被跳过。默认的忽略字符是空格和回车字符。<br>可以通过[[scanner string] substringFromIndex:[scanner scanLocation]]获取未扫描的字符串。</p>
+<ul>
+<li>scanLocation,下次扫描开始的位置，如果该值炒出了string的区域，将会引起NSRrangeException,该属性发生错误后重新扫描时非常有用；</li>
+<li>charactersToBeSkipped，在扫描时被跳过的字符集，默认是空格和回车键。被跳过的字符集优先于扫描的字符集：例如一个scanner被跳过的字符集为空格，通过scanInt:去查找字符串中的整形数时，首先做的不是扫描，而是跳过空格，直到找到十进制数据或者其他的字符。在字符被扫描的时候，跳过功能就失效了，如果你扫描的字符和跳过的字符是一样的，结果将是未知的。被跳过的字符是一个唯一值，scanner不会将忽略大小写的功能应用于它，也不会用这些字符做一些组合，如果在扫描字符串的时候你想忽略全部的元音字符，就要将字符集设置成“AEIOUaeiou”；</li>
+<li>caseSensitive，是否区分字符串中大小写的标志。默认为NO，注意：该设置不会应用到被跳过的字符集；</li>
+<li>locale，scanner的locale对它从字符串中区分数值产生影响，它通过locale的十进制分隔符区分浮点型数据的整数和小数部分。一个没有locale的scanner用非定域值。新的scanner若没有设置locale，使用默认locale。</li>
+</ul>
+<blockquote>
+<p>方法</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--返回值是<span class="built_in">NSScanner</span>对象，该对象通过扫描string完成初始化；--&gt;</span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithString:(<span class="built_in">NSString</span> *)string <span class="built_in">NS_DESIGNATED_INITIALIZER</span>;</span><br><span class="line">&lt;!--返回值是扫描string字符串的<span class="built_in">NSScanner</span>对象，该方法通过调用initWithString设置扫描字符串；--&gt;</span><br><span class="line">+ (<span class="keyword">instancetype</span>)scannerWithString:(<span class="built_in">NSString</span> *)string;</span><br><span class="line">&lt;!--localizedScannerWithString，返回值是通过用户默认的locale方式扫描字符串的<span class="built_in">NSScanner</span>对象，该方法也是通过调用initWithString设置扫描字符串。--&gt;</span><br><span class="line">+ (<span class="keyword">id</span>)localizedScannerWithString:(<span class="built_in">NSString</span> *)string;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>扫描方法</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)scanInt:(<span class="keyword">nullable</span> <span class="keyword">int</span> *)result;</span><br><span class="line">- (<span class="built_in">BOOL</span>)scanInteger:(<span class="keyword">nullable</span> <span class="built_in">NSInteger</span> *)result;</span><br><span class="line">- (<span class="built_in">BOOL</span>)scanLongLong:(<span class="keyword">nullable</span> <span class="keyword">long</span> <span class="keyword">long</span> *)result;</span><br><span class="line">- (<span class="built_in">BOOL</span>)scanUnsignedLongLong:(<span class="keyword">nullable</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> *)result;</span><br><span class="line">- (<span class="built_in">BOOL</span>)scanFloat:(<span class="keyword">nullable</span> <span class="keyword">float</span> *)result;</span><br><span class="line">- (<span class="built_in">BOOL</span>)scanDouble:(<span class="keyword">nullable</span> <span class="keyword">double</span> *)result;</span><br><span class="line">- (<span class="built_in">BOOL</span>)scanHexInt:(<span class="keyword">nullable</span> <span class="keyword">unsigned</span> *)result;</span><br><span class="line">- (<span class="built_in">BOOL</span>)scanHexLongLong:(<span class="keyword">nullable</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> *)result;  </span><br><span class="line">- (<span class="built_in">BOOL</span>)scanHexFloat:(<span class="keyword">nullable</span> <span class="keyword">float</span> *)result;                 </span><br><span class="line">- (<span class="built_in">BOOL</span>)scanHexDouble:(<span class="keyword">nullable</span> <span class="keyword">double</span> *)result;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>扫描指定字符串或字符集合,scanCharacterFromSet是指扫描指定字符集合元素组合成的字符串，intoString指的是扫描出来的结果。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)scanString:(<span class="built_in">NSString</span> *)string intoString:(<span class="built_in">NSString</span> * _Nullable * _Nullable)result;</span><br><span class="line">- (<span class="built_in">BOOL</span>)scanCharactersFromSet:(<span class="built_in">NSCharacterSet</span> *)set intoString:(<span class="built_in">NSString</span> * _Nullable * _Nullable)result;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>扫描字符一直到出现指定的字符串和字符集合内容 ,途中扫描的字符串内容会从introStrign参数中返回</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)scanUpToString:(<span class="built_in">NSString</span> *)string intoString:(<span class="built_in">NSString</span> * _Nullable * _Nullable)result;</span><br><span class="line">- (<span class="built_in">BOOL</span>)scanUpToCharactersFromSet:(<span class="built_in">NSCharacterSet</span> *)set intoString:(<span class="built_in">NSString</span> * _Nullable * _Nullable)result;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>注意： scanner方法开始扫描，比如scanInt,scanDouble，如果你想扫描多变，通常需要使用while循环。</p>
 
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://lvcode.github.io/2019/02/20/NSScanner/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/02/20/NSCharacterSet/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          NSCharacterSet
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2018/10/22/数字计算——NSDecimalNumber/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数字计算——NSDecimalNumber</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -223,8 +347,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://lvcode.github.io">
-  <title>Archives: 2016/1 | LvCode&#39;s Blog</title>
+  <title>NSCharacterSet | LvCode&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="太原理工大学09级,就职于步长制药。擅长iOS开发技能，欢迎大家指点迷津！">
+  <meta name="description" content="NSCharacterSet简介12345678910111213141516/** 根据一个给定的字符串获取一个NSCharacterSet对象 */+ (NSCharacterSet *)characterSetWithCharactersInString:(NSString *)aString;// 反向限制@property (readonly, copy) NSCharacterSet">
 <meta name="keywords" content="ios,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LvCode&#39;s Blog">
-<meta property="og:url" content="https://lvcode.github.io/archives/2016/01/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NSCharacterSet">
+<meta property="og:url" content="https://lvcode.github.io/2019/02/20/NSCharacterSet/index.html">
 <meta property="og:site_name" content="LvCode&#39;s Blog">
-<meta property="og:description" content="太原理工大学09级,就职于步长制药。擅长iOS开发技能，欢迎大家指点迷津！">
+<meta property="og:description" content="NSCharacterSet简介12345678910111213141516/** 根据一个给定的字符串获取一个NSCharacterSet对象 */+ (NSCharacterSet *)characterSetWithCharactersInString:(NSString *)aString;// 反向限制@property (readonly, copy) NSCharacterSet">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-02-20T14:28:31.656Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LvCode&#39;s Blog">
-<meta name="twitter:description" content="太原理工大学09级,就职于步长制药。擅长iOS开发技能，欢迎大家指点迷津！">
+<meta name="twitter:title" content="NSCharacterSet">
+<meta name="twitter:description" content="NSCharacterSet简介12345678910111213141516/** 根据一个给定的字符串获取一个NSCharacterSet对象 */+ (NSCharacterSet *)characterSetWithCharactersInString:(NSString *)aString;// 反向限制@property (readonly, copy) NSCharacterSet">
   
     <link rel="alternative" href="/atom.xml" title="LvCode&#39;s Blog" type="application/atom+xml">
   
@@ -158,49 +159,148 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-NSCharacterSet" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/01/10/多线程/" class="archive-article-date">
-  	<time datetime="2016-01-10T03:32:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-10</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/10/多线程/">多线程</a>
+    <h1 class="article-title" itemprop="name">
+      NSCharacterSet
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
+        
+        <a href="/2019/02/20/NSCharacterSet/" class="archive-article-date">
+  	<time datetime="2019-02-20T14:27:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="NSCharacterSet简介"><a href="#NSCharacterSet简介" class="headerlink" title="NSCharacterSet简介"></a>NSCharacterSet简介</h1><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 根据一个给定的字符串获取一个NSCharacterSet对象 */</span></span><br><span class="line">+ (<span class="built_in">NSCharacterSet</span> *)characterSetWithCharactersInString:(<span class="built_in">NSString</span> *)aString;</span><br><span class="line"><span class="comment">// 反向限制</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">copy</span>) <span class="built_in">NSCharacterSet</span> *invertedSet;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 常用类方法集合</span></span><br><span class="line">+ controlCharacterSet</span><br><span class="line">+ whitespaceCharacterSet              <span class="comment">//空格</span></span><br><span class="line">+ whitespaceAndNewlineCharacterSet    <span class="comment">//空格和换行符</span></span><br><span class="line">+ decimalDigitCharacterSet            <span class="comment">//0-9的数字</span></span><br><span class="line">+ letterCharacterSet                  <span class="comment">//所有字母</span></span><br><span class="line">+ lowercaseLetterCharacterSet         <span class="comment">//小写字母</span></span><br><span class="line">+ uppercaseLetterCharacterSet         <span class="comment">//大写字母</span></span><br><span class="line">+ alphanumericCharacterSet            <span class="comment">//所有数字和字母（大小写不分）</span></span><br><span class="line">+ punctuationCharacterSet             <span class="comment">//标点符号</span></span><br><span class="line">+ newlineCharacterSet                 <span class="comment">//换行</span></span><br></pre></td></tr></table></figure>
+<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSCharacterSet</span> *set = [<span class="built_in">NSCharacterSet</span> characterSetWithCharactersInString:<span class="string">@"0123456789"</span>];</span><br><span class="line"><span class="built_in">NSString</span> *str = <span class="string">@"67af34"</span>;</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"set----%@"</span>,[str componentsSeparatedByCharactersInSet:set]);</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSCharacterSet</span> *invertedSet = [set invertedSet];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"invertedSet----%@"</span>,[str componentsSeparatedByCharactersInSet:invertedSet]);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>打印结果<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2019</span><span class="number">-02</span><span class="number">-15</span> <span class="number">10</span>:<span class="number">32</span>:<span class="number">39.850440</span>+<span class="number">0800</span> Tips[<span class="number">60524</span>:<span class="number">1826221</span>] set----(</span><br><span class="line"><span class="string">""</span>,</span><br><span class="line"><span class="string">""</span>,</span><br><span class="line">af,</span><br><span class="line"><span class="string">""</span>,</span><br><span class="line"><span class="string">""</span></span><br><span class="line">)</span><br><span class="line"><span class="number">2019</span><span class="number">-02</span><span class="number">-15</span> <span class="number">10</span>:<span class="number">32</span>:<span class="number">39.850576</span>+<span class="number">0800</span> Tips[<span class="number">60524</span>:<span class="number">1826221</span>] invertedSet----(</span><br><span class="line"><span class="number">67</span>,</span><br><span class="line"><span class="string">""</span>,</span><br><span class="line"><span class="number">34</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="NSMutableCharacterSet"><a href="#NSMutableCharacterSet" class="headerlink" title="NSMutableCharacterSet"></a>NSMutableCharacterSet</h2><blockquote>
+<p>用法同NSCharacterSet，但是 invert 属性没有返回值</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSMutableCharacterSet</span> *set1 = [<span class="built_in">NSMutableCharacterSet</span> characterSetWithCharactersInString:<span class="string">@"Hell"</span>];  </span><br><span class="line"><span class="built_in">NSMutableCharacterSet</span> *set2 = [<span class="built_in">NSMutableCharacterSet</span> characterSetWithCharactersInString:<span class="string">@"ello"</span>]; </span><br><span class="line"><span class="comment">//去掉某些字符  </span></span><br><span class="line">[set2 removeCharactersInString:<span class="string">@"e"</span>]; <span class="comment">//---&gt;l, o  </span></span><br><span class="line"><span class="comment">//加上某些字符  </span></span><br><span class="line">[set2 addCharactersInString:<span class="string">@"e"</span>];    <span class="comment">//---&gt;e, l, o  </span></span><br><span class="line"><span class="comment">//set相加  </span></span><br><span class="line">[set2 formUnionWithCharacterSet:set1]; <span class="comment">//---&gt;H,e,l,o  </span></span><br><span class="line"><span class="comment">//set交集 </span></span><br><span class="line">[set2 formIntersectionWithCharacterSet:set1]; <span class="comment">//---&gt;e,l </span></span><br><span class="line"><span class="comment">//set取反</span></span><br><span class="line">[set2 invert];</span><br></pre></td></tr></table></figure>
+<hr>
+<p>问题：如何限制UITextField输入数字</p>
+<hr>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)textField:(<span class="built_in">UITextField</span> *)textField shouldChangeCharactersInRange:(<span class="built_in">NSRange</span>)range replacementString:(<span class="built_in">NSString</span> *)string &#123;</span><br><span class="line"><span class="built_in">NSCharacterSet</span> *charSet = [[<span class="built_in">NSCharacterSet</span> characterSetWithCharactersInString:<span class="string">@"0123456789"</span>] invertedSet];</span><br><span class="line"><span class="built_in">NSString</span> *filteredStr = [[string componentsSeparatedByCharactersInSet:charSet] componentsJoinedByString:<span class="string">@""</span>];</span><br><span class="line"><span class="keyword">if</span> ([string isEqualToString:filteredStr]) &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Apple 官方方法</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)textField:(<span class="built_in">UITextField</span> *)textField shouldChangeCharactersInRange:(<span class="built_in">NSRange</span>)range</span><br><span class="line">replacementString:(<span class="built_in">NSString</span> *)string &#123;</span><br><span class="line"><span class="keyword">if</span> ([string isEqualToString:<span class="string">@""</span>]) <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line"><span class="keyword">if</span> (textField.tag == SalaryFieldTag) &#123;</span><br><span class="line"><span class="keyword">unichar</span> c = [string characterAtIndex:<span class="number">0</span>];</span><br><span class="line"><span class="keyword">if</span> ([[<span class="built_in">NSCharacterSet</span> decimalDigitCharacterSet] characterIsMember:c]) &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/ManageTextFieldTextViews/ManageTextFieldTextViews.html#//apple_ref/doc/uid/TP40009542-CH10-SW1" target="_blank" rel="noopener">Apple题目地址</a></p>
 
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://lvcode.github.io/2019/02/20/NSCharacterSet/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/02/20/NSScanner/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">NSScanner</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -223,8 +323,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

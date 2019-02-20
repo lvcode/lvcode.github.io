@@ -160,6 +160,146 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-开发技巧Tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/25/开发技巧Tips/">开发技巧Tips</a>
+    </h1>
+  
+
+        
+        <a href="/2017/01/25/开发技巧Tips/" class="archive-article-date">
+  	<time datetime="2017-01-25T09:27:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1、继承自UIScrollView-键盘"><a href="#1、继承自UIScrollView-键盘" class="headerlink" title="1、继承自UIScrollView 键盘"></a>1、继承自UIScrollView 键盘</h3><p>typedef NS_ENUM(NSInteger, UIScrollViewKeyboardDismissMode) {<br>UIScrollViewKeyboardDismissModeNone,<br>UIScrollViewKeyboardDismissModeOnDrag,      // dismisses the keyboard when a drag begins  拖拽时隐藏键盘<br>UIScrollViewKeyboardDismissModeInteractive, // the keyboard follows the dragging touch off screen, and may be pulled upward again to cancel the dismiss  表示键盘可以随着手指下滑而移出屏幕。<br>} NS_ENUM_AVAILABLE_IOS(7_0);</p>
+<h4 id="例："><a href="#例：" class="headerlink" title="例："></a>例：</h4><p>tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;<br>其中keyboardDismissMode是UIScrollView的属性,</p>
+<h3 id="2、按钮图片和文字位置"><a href="#2、按钮图片和文字位置" class="headerlink" title="2、按钮图片和文字位置"></a>2、按钮图片和文字位置</h3><p>默认情况下，是图片在左，文字在右，垂直居中显示，如下图：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">button.titleEdgeInsets = UIEdgeInsetsZero;</span><br><span class="line">button.imageEdgeInsets = UIEdgeInsetsZero;</span><br></pre></td></tr></table></figure></p>
+<p>设置如下布局后，图片和文字都居中显示。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">button.titleEdgeInsets = UIEdgeInsetsMake(0, -button.imageView.frame.size.width, 0, 0);</span><br><span class="line">// button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -button.titleLabel.frame.size.width);</span><br><span class="line">// 由于iOS8中titleLabel的size为0，用上面这样设置有问题，修改一下即可</span><br><span class="line">button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -button.titleLabel.intrinsicContentSize.width);</span><br></pre></td></tr></table></figure></p>
+<p>如果想图片在上，文字在下，水平居中显示，则按下面设置即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">button.titleEdgeInsets = UIEdgeInsetsMake(0, -button.imageView.frame.size.width, -button.imageView.frame.size.height, 0);</span><br><span class="line">// button.imageEdgeInsets = UIEdgeInsetsMake(-button.titleLabel.frame.size.height, 0, 0, -button.titleLabel.frame.size.width);</span><br><span class="line">// 由于iOS8中titleLabel的size为0，用上面这样设置有问题，修改一下即可</span><br><span class="line">button.imageEdgeInsets = UIEdgeInsetsMake(-button.titleLabel.intrinsicContentSize.height, 0, 0, -button.titleLabel.intrinsicContentSize.width);</span><br></pre></td></tr></table></figure></p>
+<p>如果觉得图片和文字离的太近了，稍微分开一点：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CGFloat offset = 40.0f;</span><br><span class="line">button.titleEdgeInsets = UIEdgeInsetsMake(0, -button.imageView.frame.size.width, -button.imageView.frame.size.height-offset/2, 0);</span><br><span class="line">// button.imageEdgeInsets = UIEdgeInsetsMake(-button.titleLabel.frame.size.height-offset/2, 0, 0, -button.titleLabel.frame.size.width);</span><br><span class="line">// 由于iOS8中titleLabel的size为0，用上面这样设置有问题，修改一下即可</span><br><span class="line">button.imageEdgeInsets = UIEdgeInsetsMake(-button.titleLabel.intrinsicContentSize.height-offset/2, 0, 0, -button.titleLabel.intrinsicContentSize.width);</span><br></pre></td></tr></table></figure></p>
+<p>文字左对齐，图片右对齐<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">button.titleEdgeInsets = UIEdgeInsetsMake(0, -button.imageView.frame.size.width - button.frame.size.width + button.titleLabel.intrinsicContentSize.width, 0, 0);</span><br><span class="line">button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -button.titleLabel.frame.size.width - button.frame.size.width + button.imageView.frame.size.width);</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/01/25/开发技巧Tips/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-设计模式的七大原则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/08/设计模式的七大原则/">设计模式的七大原则</a>
+    </h1>
+  
+
+        
+        <a href="/2016/12/08/设计模式的七大原则/" class="archive-article-date">
+  	<time datetime="2016-12-08T06:47:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="设计模式的七大原则"><a href="#设计模式的七大原则" class="headerlink" title="设计模式的七大原则"></a>设计模式的七大原则</h2><ol>
+<li>开闭原则 （open close principle）：开闭原则的意思是：对扩展开放，对修改关闭。</li>
+<li>里氏代换原则（liskov substitution principle）： 里氏代换原则是面向对象设计的基本原则之一。是对开闭原则的补充</li>
+<li>依赖倒转原则（dependence inversion principle）：这个原则是开闭原则的基础，具体内容：针对接口编程</li>
+<li>接口隔离原则（interface segregation principle）：这个原则的意思是：使用多个隔离接口，比使用单个接口要好，它还有另一个意思是：降低类之间的耦合度。由此可见，其实设计模式就是从大型软件架构出发、便于升级和维护的软件设计思想，它强调降低依赖，降低耦合。</li>
+<li>迪米特法则，又称最少知道原则（demeter principle）： 最少知道原则是指：一个实体应该尽少的与其他实体之间发生相互作用，使得系统功能模块相对独立。</li>
+<li>合成复用原则 ：合成复用原则是指：尽量使用合成／聚合的方式，而不是使用继承。</li>
+<li>单一职责原则（SRP：The Single Responsibility Principle）：不要存在多于一个导致类变更的原因，也就是说每个类应该实现单一的职责，否则就应该把类拆分。</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/12/08/设计模式的七大原则/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-TabBar遮挡问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1044,7 +1184,7 @@ name=[_imageNames lastObject];
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 Lv Qiang
+    		&copy; 2019 Lv Qiang
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

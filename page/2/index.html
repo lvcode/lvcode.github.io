@@ -160,6 +160,216 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-iOS后台任务使用启蒙" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/12/iOS后台任务使用启蒙/">iOS后台任务使用启蒙</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/12/iOS后台任务使用启蒙/" class="archive-article-date">
+  	<time datetime="2018-05-11T16:39:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>故事是这样开始的，刚开始我一直想找可以延长App后台存活方法的，后来找到如下代码</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//程序进入后台后继续运行10分钟</span></span><br><span class="line">    <span class="built_in">UIApplication</span>*   app = [<span class="built_in">UIApplication</span> sharedApplication];</span><br><span class="line">    __block    <span class="built_in">UIBackgroundTaskIdentifier</span> bgTask;</span><br><span class="line">    bgTask = [app beginBackgroundTaskWithExpirationHandler:^&#123;</span><br><span class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        <span class="keyword">if</span> (bgTask != <span class="built_in">UIBackgroundTaskInvalid</span>) &#123;</span><br><span class="line">            bgTask = <span class="built_in">UIBackgroundTaskInvalid</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>), ^&#123;</span><br><span class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">    <span class="keyword">if</span> (bgTask != <span class="built_in">UIBackgroundTaskInvalid</span>) &#123;</span><br><span class="line">        bgTask = <span class="built_in">UIBackgroundTaskInvalid</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>使用中发现，App会在3分钟左右强制kill。经查询发现写法有问题。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">    <span class="built_in">UIBackgroundTaskIdentifier</span> backgroundUpdateTask;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">long</span> aa;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSTimer</span> *_timer;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>) didEnterBackground:(<span class="built_in">NSNotification</span> *)notif&#123;</span><br><span class="line"></span><br><span class="line">    aa = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    [<span class="keyword">self</span> startTask];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>) startTask &#123;</span><br><span class="line"></span><br><span class="line">    _timer = [<span class="built_in">NSTimer</span> scheduledTimerWithTimeInterval:<span class="number">1</span> target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(go:) userInfo:<span class="literal">nil</span> repeats:<span class="literal">YES</span>];</span><br><span class="line"></span><br><span class="line">    backgroundUpdateTask = [[<span class="built_in">UIApplication</span> sharedApplication] beginBackgroundTaskWithExpirationHandler:^&#123;</span><br><span class="line">    DDLogInfo(<span class="string">@"bgTask expiration============="</span>);</span><br><span class="line">    [_timer invalidate];</span><br><span class="line"></span><br><span class="line">    [[<span class="built_in">UIApplication</span> sharedApplication] endBackgroundTask:backgroundUpdateTask];</span><br><span class="line"></span><br><span class="line">    backgroundUpdateTask = <span class="built_in">UIBackgroundTaskInvalid</span>;</span><br><span class="line"></span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)go:(<span class="built_in">NSTimer</span> *)tim &#123;</span><br><span class="line"></span><br><span class="line">    DDLogInfo(<span class="string">@"%@==%ld,%g "</span>,[<span class="built_in">NSDate</span> date],aa,[<span class="built_in">UIApplication</span> sharedApplication].backgroundTimeRemaining);</span><br><span class="line"></span><br><span class="line">    aa++;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (aa%<span class="number">10</span> == <span class="number">0</span> || [<span class="built_in">UIApplication</span> sharedApplication].backgroundTimeRemaining == <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">        [LocalNotificationManager postLocalNotificationAlertBody:s];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>文档上说有10分钟的执行时间，但从打印的backgroundTimeRemaining时间来看，只有180秒。</p>
+<p>注意：测试此功能不能用Xcode直接debug运行，因为在调试器链接到app的进行的情况下，app是不会在后台被挂起的，也就是说即使backgroundTimeRemaining =0了，timer里的代码依然能够继续执行。</p>
+<p>所以要测试运行态的情况，要么用文件日志(总是要导出比较麻烦)，要么用本地通知来查看。</p>
+<p>2、是否能递归调用此方法来持续获得执行时间</p>
+<p>在beginBackgroundTaskWithExpirationHandler里最后再递归调用[self startTask];</p>
+<p>经尝试此方法无效，180秒超时后再次申请，会立刻回调超时的block，并且backgroundTimeRemaining时间一直都是0。</p>
+<p>并且由于一直不停的在递归创建和终止后台任务，当Expiration真正到来的时候，一个还有一个创建的任务没有关闭。从而导致违背begin和end成对调用的原则，app被系统强制kill。所以此方法不但不能延长执行时间，还会导致app在180秒后台执行时间到达后，被系统kill的情况。</p>
+<p>3、beginBackgroundTaskWithExpirationHandler多次被调用的情况</p>
+<p>didEnterBackground每次调用都会触发beginBackgroundTaskWithExpirationHandler来创建新的后台任务，并用backgroundUpdateTask保存任务id，但如果第一次的任务还没有endBackgroundTask之前，应用回到前台，然后再次进入后台，就会重新创建一个新的后台任务，并且backgroundUpdateTask之前保存的id会被覆盖，这就违背了beginBackgroundTaskWithExpirationHandler与endBackgroundTask成对调用的原因。因为前一个后台任务超时的block回调的时候，其实是end了后一个taskId对应的后台任务，并且把taskId赋值为UIBackgroundTaskInvalid。而后一个后台任务超时的block回调的时候，taskId已经变成了null，对其进行end调用已经无效了，所以相当于没有成对调用begin和end，导致的结果就是：后一个后台任务超时的时候，app被系统强制kill。</p>
+<p>所以每一次创建的后台任务都要有一个独立的变量来维护其taskId，如果只有一个后台任务，但是有重入的可能，那么应该在willEnterForeground回调中，把前一个后台任务进行endBackgroundTask操作，这样就不存在taskId被覆盖的问题了。或者是每次didEnterBackground的时候，检查taskId == UIBackgroundTaskInvalid，若不满足该条件，说明taskId已经引用了一个正在进行的后台任务，还没有完成，由于这个后台任务重进前台又切换回后台的情况下，backgroundTimeRemaining会被重置为180秒，所以在这种需求下，关闭前一个任务再重新建议一个相同的后台任务没有必要，所以应该直接</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(backgroundUpdateTask != <span class="built_in">UIBackgroundTaskInvalid</span>)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4、后台任务expiration后，app被系统kill的问题</p>
+<p>按照文档里的说法，只要begin与end在真正expiration之前成对调用，就不会导致系统强制kill app，而是app从后台执行状态切换到suspend状态，但实际测试中，每次expiration之后，app都会被kill掉，根据是app从launch页面重新进入。但我在willTerminate通知里的回调中加了一个local notification，并没有触发这个本地通知。(从app switcher强制退出应用的时候会触发本地通知，说明本地通知有效)。只能认为是app从后台状态切换到suspend状态后，立刻被系统kill掉了，但不知道为什么会这样。</p>
+<p>5、参考另一个文章中的实现，可以在任务结束后不被kill</p>
+<p>参考</p>
+<p><a href="http://www.cnblogs.com/lyanet/archive/2013/03/26/2983079.html" target="_blank" rel="noopener">http://www.cnblogs.com/lyanet/archive/2013/03/26/2983079.html</a></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//程序进入后台后延长活动时间，一般180s内，添加这段代码是为了避免App推入后台，线程暂停，NSTime停止计时（验证码）。</span></span><br><span class="line">    <span class="built_in">UIApplication</span>* app = [<span class="built_in">UIApplication</span> sharedApplication];</span><br><span class="line">    __block <span class="built_in">UIBackgroundTaskIdentifier</span> bgTask;</span><br><span class="line">    bgTask = [app beginBackgroundTaskWithExpirationHandler:^&#123;</span><br><span class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</span><br><span class="line"></span><br><span class="line">    [[<span class="built_in">UIApplication</span> sharedApplication] endBackgroundTask:bgTask];</span><br><span class="line">        bgTask = <span class="built_in">UIBackgroundTaskInvalid</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+<p>beginBackgroundTaskWithExpirationHandler 和 endBackgroundTask 是成对出现。</p>
+<p>beginBackgroundTaskWithName:expirationHandler:方法标识了一个后台任务的开始，并用过超时处理的回调来结束此任务。那么，超时时间具体是多少？可以通过UIApplication的只读属性backgroundTimeRemaining来获取当前后台任务执行的剩余时间，它不是具体的数字（大约180s内），而是iOS根据当前系统环境综合考量后估算出来的。然后执行expirationHandler回调完成一个后台任务的执行周期。</p>
+<p>当开启后台任务后，结束前block回调，回调中就要设置关闭后台任务的代码，比如缓存数据等等。并且调用endBackgroundTask。关闭后台任务，否则系统会任务后台任务超时仍未完成，系统直接kill app。导致再次打开挂起的App发现，应用得重新启动。</p>
+<p>之前的问题就因为没有调用endBackgroundTask 导致App提前kill。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/12/iOS后台任务使用启蒙/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-关于缓存的TIPS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/10/关于缓存的TIPS/">关于HTTP缓存的TIPS</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/10/关于缓存的TIPS/" class="archive-article-date">
+  	<time datetime="2018-05-10T12:09:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="无法加载最新图片"><a href="#无法加载最新图片" class="headerlink" title="无法加载最新图片"></a>无法加载最新图片</h3><p>工作中上传后重新加载头像的时候，发现头像并没有改变。这个问题以前也遇到过，这次不能忍了必须查个水落石出。<br>SDWebImage options设置为：SDWebImageRefreshCached，但是并没有效果。<br>汇总资料后：<br>使用</p>
+<pre><code>
+curl url --head
+
+例如：
+curl http://123.126.109.38:18081/AreaAppFile/nurse_head_thumb/402887bb62f58c250162f5bf4a840006.jpg --head
+
+返回：
+curl http://123.126.109.38:18081/AreaAppFile/nurse_head_thumb/402887bb62f58c250162f5bf4a840006.jpg --head
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Accept-Ranges: bytes
+ETag: W/"48681-1525950947149"
+Last-Modified: Thu, 10 May 2018 11:15:47 GMT
+Content-Type: image/jpeg
+Content-Length: 48681
+Date: Thu, 10 May 2018 11:16:31 GMT
+
+对比抖音头像链接：
+curl https://p1.pstatp.com/aweme/100x100/729c00380329e728f710.jpeg --head
+HTTP/1.1 200 OK
+Expires: Thu, 18 Apr 2019 06:10:07 GMT
+Date: Wed, 18 Apr 2018 06:10:07 GMT
+Server: nginx
+Content-Type: image/jpeg
+Content-Length: 2689
+Accept-Ranges: bytes
+Cache-Control: max-age=31536000
+Last-Modified: Tue, 27 Mar 2018 15:18:20 GMT
+X-Mosaic-Namespace: aweme-online
+X-Response-Date: Tue, 27 Mar 2018 15:22:24 GMT
+X-Xxoo-Time: Tue, 27 Mar 2018 15:22:24 GMT
+Access-Control-Allow-Origin: *
+Age: 1
+X-Via: 1.1 lf163:4 (Cdn Cache Server V2.0), 1.1 menxiazai39:3 (Cdn Cache Server V2.0), 1.1 fangwangtong49:4 (Cdn Cache Server V2.0)
+Connection: keep-alive
+X-Dscp-Value: 0
+</code></pre>
+> 对比发现没有Cache-Control: 字段
+
+#### 好奇Cache-Control:如何实现图片验证，资料如下
+
+客户端从服务器请求数据经历如下基本步骤: 
+1. 如果请求命中本地缓存则从本地缓存中获取一个对应资源的"copy"； 
+2. 检查这个"copy"是否fresh,是则直接返回，否则继续向服务器转发请求。 
+3. 服务器接收到请求，然后判断资源是否变更，是则返回新内容，否则返回304，未变更。
+4. 客户端更新本地缓存。 
+
+* no-cache的作用是：强制客户端跳过步骤2，直接向服务器发送请求。也就是说每次请求都必须向服务器发送。 
+* must-revalidate:作用与no-cache相同，但更严格，强制意味更明显。但这只是理论上的描述，根据我在ff6上的测试，它几乎不起作用：只要请求的频率加快到一定程度，服务器就接收不到请求。
+* no-store:缓存将不存储response,包括header和body。测试结果表明，除每次请求都必发送到服务器外，响应代码均是200，且request并没有发送"If-Modified-Since"和"If-None-Match"头，这意味着缓存的确没有存储response。
+
+以上三者都是要求客户端每次请求都必须到服务器进行revalidate，此功能还可以通过max-age实现： 
+<pre><code>
+Cache-Control:max-age=0  
+</code></pre>
+
+<p>测试结果证明了这一点，每次都请求了服务器，且状态码是304。 </p>
+<p>明天让服务端增加该值，再试试看。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/10/关于缓存的TIPS/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-iOS语言本地化或国际化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1189,146 +1399,6 @@ return NO;
 
 
   
-    <article id="post-开发技巧Tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/25/开发技巧Tips/">开发技巧Tips</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/25/开发技巧Tips/" class="archive-article-date">
-  	<time datetime="2017-01-25T09:27:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1、继承自UIScrollView-键盘"><a href="#1、继承自UIScrollView-键盘" class="headerlink" title="1、继承自UIScrollView 键盘"></a>1、继承自UIScrollView 键盘</h3><p>typedef NS_ENUM(NSInteger, UIScrollViewKeyboardDismissMode) {<br>UIScrollViewKeyboardDismissModeNone,<br>UIScrollViewKeyboardDismissModeOnDrag,      // dismisses the keyboard when a drag begins  拖拽时隐藏键盘<br>UIScrollViewKeyboardDismissModeInteractive, // the keyboard follows the dragging touch off screen, and may be pulled upward again to cancel the dismiss  表示键盘可以随着手指下滑而移出屏幕。<br>} NS_ENUM_AVAILABLE_IOS(7_0);</p>
-<h4 id="例："><a href="#例：" class="headerlink" title="例："></a>例：</h4><p>tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;<br>其中keyboardDismissMode是UIScrollView的属性,</p>
-<h3 id="2、按钮图片和文字位置"><a href="#2、按钮图片和文字位置" class="headerlink" title="2、按钮图片和文字位置"></a>2、按钮图片和文字位置</h3><p>默认情况下，是图片在左，文字在右，垂直居中显示，如下图：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">button.titleEdgeInsets = UIEdgeInsetsZero;</span><br><span class="line">button.imageEdgeInsets = UIEdgeInsetsZero;</span><br></pre></td></tr></table></figure></p>
-<p>设置如下布局后，图片和文字都居中显示。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">button.titleEdgeInsets = UIEdgeInsetsMake(0, -button.imageView.frame.size.width, 0, 0);</span><br><span class="line">// button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -button.titleLabel.frame.size.width);</span><br><span class="line">// 由于iOS8中titleLabel的size为0，用上面这样设置有问题，修改一下即可</span><br><span class="line">button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -button.titleLabel.intrinsicContentSize.width);</span><br></pre></td></tr></table></figure></p>
-<p>如果想图片在上，文字在下，水平居中显示，则按下面设置即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">button.titleEdgeInsets = UIEdgeInsetsMake(0, -button.imageView.frame.size.width, -button.imageView.frame.size.height, 0);</span><br><span class="line">// button.imageEdgeInsets = UIEdgeInsetsMake(-button.titleLabel.frame.size.height, 0, 0, -button.titleLabel.frame.size.width);</span><br><span class="line">// 由于iOS8中titleLabel的size为0，用上面这样设置有问题，修改一下即可</span><br><span class="line">button.imageEdgeInsets = UIEdgeInsetsMake(-button.titleLabel.intrinsicContentSize.height, 0, 0, -button.titleLabel.intrinsicContentSize.width);</span><br></pre></td></tr></table></figure></p>
-<p>如果觉得图片和文字离的太近了，稍微分开一点：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CGFloat offset = 40.0f;</span><br><span class="line">button.titleEdgeInsets = UIEdgeInsetsMake(0, -button.imageView.frame.size.width, -button.imageView.frame.size.height-offset/2, 0);</span><br><span class="line">// button.imageEdgeInsets = UIEdgeInsetsMake(-button.titleLabel.frame.size.height-offset/2, 0, 0, -button.titleLabel.frame.size.width);</span><br><span class="line">// 由于iOS8中titleLabel的size为0，用上面这样设置有问题，修改一下即可</span><br><span class="line">button.imageEdgeInsets = UIEdgeInsetsMake(-button.titleLabel.intrinsicContentSize.height-offset/2, 0, 0, -button.titleLabel.intrinsicContentSize.width);</span><br></pre></td></tr></table></figure></p>
-<p>文字左对齐，图片右对齐<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">button.titleEdgeInsets = UIEdgeInsetsMake(0, -button.imageView.frame.size.width - button.frame.size.width + button.titleLabel.intrinsicContentSize.width, 0, 0);</span><br><span class="line">button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -button.titleLabel.frame.size.width - button.frame.size.width + button.imageView.frame.size.width);</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/25/开发技巧Tips/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-设计模式的七大原则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/08/设计模式的七大原则/">设计模式的七大原则</a>
-    </h1>
-  
-
-        
-        <a href="/2016/12/08/设计模式的七大原则/" class="archive-article-date">
-  	<time datetime="2016-12-08T06:47:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="设计模式的七大原则"><a href="#设计模式的七大原则" class="headerlink" title="设计模式的七大原则"></a>设计模式的七大原则</h2><ol>
-<li>开闭原则 （open close principle）：开闭原则的意思是：对扩展开放，对修改关闭。</li>
-<li>里氏代换原则（liskov substitution principle）： 里氏代换原则是面向对象设计的基本原则之一。是对开闭原则的补充</li>
-<li>依赖倒转原则（dependence inversion principle）：这个原则是开闭原则的基础，具体内容：针对接口编程</li>
-<li>接口隔离原则（interface segregation principle）：这个原则的意思是：使用多个隔离接口，比使用单个接口要好，它还有另一个意思是：降低类之间的耦合度。由此可见，其实设计模式就是从大型软件架构出发、便于升级和维护的软件设计思想，它强调降低依赖，降低耦合。</li>
-<li>迪米特法则，又称最少知道原则（demeter principle）： 最少知道原则是指：一个实体应该尽少的与其他实体之间发生相互作用，使得系统功能模块相对独立。</li>
-<li>合成复用原则 ：合成复用原则是指：尽量使用合成／聚合的方式，而不是使用继承。</li>
-<li>单一职责原则（SRP：The Single Responsibility Principle）：不要存在多于一个导致类变更的原因，也就是说每个类应该实现单一的职责，否则就应该把类拆分。</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/12/08/设计模式的七大原则/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1343,7 +1413,7 @@ return NO;
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 Lv Qiang
+    		&copy; 2019 Lv Qiang
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

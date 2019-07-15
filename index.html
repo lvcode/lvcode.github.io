@@ -160,6 +160,79 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="上传app报错-Unable to download a software component-used-）" class="article article-type-上传app报错-Unable to download a software component  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/26/used-）/">上传app报错（Unable to download a software component）</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/26/used-）/" class="archive-article-date">
+  	<time datetime="2019-06-26T15:30:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="上传app报错（Unable-to-download-a-software-component-com-apple-transporter-mediatoolkit-1-13-0）"><a href="#上传app报错（Unable-to-download-a-software-component-com-apple-transporter-mediatoolkit-1-13-0）" class="headerlink" title="上传app报错（Unable to download a software component: com.apple.transporter.mediatoolkit/1.13.0）"></a>上传app报错（Unable to download a software component: com.apple.transporter.mediatoolkit/1.13.0）</h1><p>查询后：<br>第一种：</p>
+<p>报错信息：出现错误：<br>A downloaded software component is corrupted and will not be used.<br>解决方法：<br>打开文件夹：<br><code> /Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/itms/bin/iTMSTransporter </code></p>
+<p>双击iTMSTransporter，会重新下载图中的2个jar文件，正常执行完，重新上传包即可。</p>
+<p>第二种：<br>问题2:Unable to download a software component: com.apple.transporter.mediatoolkit/1.13.0解决：在终端输入以下三行命令，执行完毕后重新打开Application Loader上传就可以了</p>
+<p><pre code=""><br>cd ~<br>mv .itmstransporter/ .old_itmstransporter/<br>“/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/itms/bin/iTMSTransporter”<br></pre></p>
+<p>第三种：</p>
+<p>解决方式：手动下载 jar 包(下载链接)，并放到 ~/.itmstransporter/obr/1.12.0 目录下。</p>
+<p>参考：</p>
+<p>“Authenticating with the iTunes store” 或 “正在通过 iTunes Store进行鉴定”的完美解决办法</p>
+<p>自己解决办法：</p>
+<p>按照提示下载后，复制到： ~/.itmstransporter/obr/1.13.0<br>重启AppLacation Loader</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/26/used-）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-NSCharacterSet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -885,69 +958,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/05/16/UIStackView入门/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-博客知识点汇总" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/15/博客知识点汇总/">博客知识点汇总</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/15/博客知识点汇总/" class="archive-article-date">
-  	<time datetime="2018-05-15T07:31:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="GCD-详解"><a href="#GCD-详解" class="headerlink" title="GCD 详解"></a>GCD 详解</h3><p><a href="https://www.jianshu.com/p/2d57c72016c6" target="_blank" rel="noopener">iOS多线程：『GCD』详尽总结</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/15/博客知识点汇总/">展开全文 >></a>
         </p>
       
 
